@@ -3,8 +3,8 @@ import logo from "./logo.svg";
 import {Counter} from "./features/counter/Counter";
 import "./App.css";
 import {Navigate, NavLink, Route, Routes} from "react-router-dom";
-import {SignIn} from "./components/SignIn";
-import {SignUp} from "./components/SignUp";
+import {Login} from "./components/Login";
+import {Registration} from "./components/Registration";
 import {CheckEmail} from "./components/CheckEmail";
 import {SetNewPassword} from "./components/SetNewPassword";
 import {ForgotPassword} from "./components/ForgotPassword";
@@ -18,7 +18,7 @@ export const App = () => {
     return (
         <div>
 
-            <NavLink to={'/login'}>login</NavLink>
+            <NavLink to={'/'}>login</NavLink>
             <NavLink to={'/register'}>register</NavLink>
             <NavLink to={'/checkEmail'}>checkEmail</NavLink>
             <NavLink to={'/setNewPassword'}>setNewPassword</NavLink>
@@ -30,8 +30,8 @@ export const App = () => {
 
 
     <Routes>
-        <Route path="login" element={<SignIn/>}/>
-        <Route path="register" element={<SignUp/>}/>
+        <Route path="/" element={<Login/>}/>
+        <Route path="register" element={<Registration/>}/>
         <Route path="checkEmail" element={<CheckEmail/>}/>
         <Route path="setNewPassword" element={<SetNewPassword/>}/>
         <Route path="forgotPassword" element={<ForgotPassword/>}/>
