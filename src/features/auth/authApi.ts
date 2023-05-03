@@ -16,18 +16,7 @@ export type RegisterResponseType = {
 	addedUser : UserType
 }
 
-type UserType = {
-	_id: string;
-	email: string;
-	rememberMe: boolean;
-	isAdmin: boolean;
-	name: string;
-	verified: boolean;
-	publicCardPacksCount: number;
-	created: string;
-	updated: string;
-	__v: number;
-}
+type UserType = Omit<LoginResponseType, 'token'|'tokenDeathTime'>
 
 export type LoginResponseType = {
 	_id: string;

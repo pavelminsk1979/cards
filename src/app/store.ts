@@ -17,3 +17,6 @@ export type AppThunk<ReturnType = void> = ThunkAction<
   unknown,
   Action<string>
 >;
+
+/* @ts-ignore */   /* store.getState()  */
+window.store = store
