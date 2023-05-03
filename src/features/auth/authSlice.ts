@@ -1,20 +1,19 @@
-import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
+import {createSlice} from "@reduxjs/toolkit";
 import {authApi, LoginResponseType} from "./authApi";
 import {RegisterType} from "../../components/Registration";
 import {LoginType} from "../../components/Login";
+import {createAppAsyncThunk} from "../../common/utils/createAppAsyncThunk";
 
 
-const register = createAsyncThunk('auth/register', (arg: RegisterType) => {
-    authApi.register(arg)
-        .then((response) => {
-        })
+
+const register = createAppAsyncThunk<void,RegisterType>('auth/register', async (
+    arg: RegisterType) => {
+    const res = await authApi.register(arg)
 })
 
-const login = createAsyncThunk('auth/login', (arg: LoginType) => {
-    return authApi.login(arg)
-        .then((response) => {
-            return {profileData:response.data}
-        })
+const login = createAppAsyncThunk<{profileData:LoginResponseType},LoginType>('auth/login', async (arg: LoginType) => {
+    const response = await authApi.login(arg)
+    return {profileData: response.data}
 })
 
 
@@ -25,9 +24,9 @@ const slice = createSlice({
         ...из санки будут данные диспатчится в setProfile  и таким
         образом попадут в СТОР*/
     },
-    reducers: { },
-    extraReducers : builder => {
-        builder.addCase(login.fulfilled,(state,action)=>{
+    reducers: {},
+    extraReducers: builder => {
+        builder.addCase(login.fulfilled, (state, action) => {
             state.profile = action.payload.profileData
         })
     }
