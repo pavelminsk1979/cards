@@ -1,6 +1,6 @@
 import {instance} from "../../common/api/instansAxios";
 import {RegisterType} from "../../components/Registration";
-import {LoginType} from "../../components/Login";
+
 
 
 export const authApi = {
@@ -10,6 +10,12 @@ export const authApi = {
     login(payload:LoginType) {
         return instance.post<LoginResponseType>('auth/login',payload)
     }
+}
+
+export type LoginType = {
+	email: string
+	password:string
+	rememberMe: boolean
 }
 
 export type RegisterResponseType = {
@@ -25,9 +31,9 @@ export type LoginResponseType = {
 	isAdmin: boolean;
 	name: string;
 	verified: boolean;
-	publicCardPacksCount: number;
-	created: string;
-	updated: string;
+	publicCardPacksCount: number; /*это сколько колод на бэке которые я реализова*/
+	created: string; /*дата когда я создал этот профиль*/
+	updated: string;/* это когда я логинелся */
 	__v: number;
 	token: string;
 	tokenDeathTime: number;

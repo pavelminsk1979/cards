@@ -1,7 +1,6 @@
 import {createSlice} from "@reduxjs/toolkit";
-import {authApi, LoginResponseType} from "./authApi";
+import {authApi, LoginResponseType, LoginType} from "./authApi";
 import {RegisterType} from "../../components/Registration";
-import {LoginType} from "../../components/Login";
 import {createAppAsyncThunk} from "../../common/utils/createAppAsyncThunk";
 
 

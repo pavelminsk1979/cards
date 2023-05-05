@@ -1,9 +1,7 @@
 import React from "react";
-import logo from "./logo.svg";
-import {Counter} from "./features/counter/Counter";
 import "./App.css";
 import {Navigate, NavLink, Route, Routes} from "react-router-dom";
-import {Login} from "./components/Login";
+import {Login} from "./components/Login/Login";
 import {Registration} from "./components/Registration";
 import {CheckEmail} from "./components/CheckEmail";
 import {SetNewPassword} from "./components/SetNewPassword";
@@ -12,6 +10,7 @@ import {Profile} from "./components/Profile";
 import {Packs} from "./components/Packs";
 import {Cards} from "./components/Cards";
 import {Learn} from "./components/Learn";
+
 
 
 export const App = () => {
@@ -49,56 +48,57 @@ export const App = () => {
 }
 
 
-/*function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <Counter />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <span>
-          <span>Learn </span>
-          <a
-            className="App-link"
-            href="https://reactjs.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux-toolkit.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux Toolkit
-          </a>
-          ,<span> and </span>
-          <a
-            className="App-link"
-            href="https://react-redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React Redux
-          </a>
-        </span>
-      </header>
-    </div>
-  );
-}
 
-export default App;*/
+
+
+
+
+/*
+return <Grid container justifyContent={'center'}>
+    <Grid item justifyContent={'center'}>
+        <form onSubmit={formik.handleSubmit}>
+            <FormControl>
+                <FormLabel>
+                    <p>To log in get registered
+                        <a href={'https://social-network.samuraijs.com/'}
+                           target={'_blank'}> here
+                        </a>
+                    </p>
+                    <p>or use common test account credentials:</p>
+                    <p>Email: free@samuraijs.com</p>
+                    <p>Password: free</p>
+                </FormLabel>
+                <FormGroup>
+                    <TextField
+                        {...formik.getFieldProps('email')}
+                        margin="normal"/>
+                    {formik.touched.email &&formik.errors.email&&<div style={{color:'red'}}>{
+                        formik.errors.email}</div>}
+                    <TextField
+                        {...formik.getFieldProps('password')}
+                        type="password"
+                        margin="normal"/>
+                    {formik.touched.password &&formik.errors.password&&<div style={
+                        {color:'red'}}>{formik.errors.password}</div>}
+                    <FormControlLabel label={'Remember me'} control={
+                        <Checkbox
+                            {...formik.getFieldProps('rememberMe')}
+                        />
+                    }/>
+                    <Button type={'submit'} variant={'contained'} color={'primary'}>
+                        Login
+                    </Button>
+                </FormGroup>
+            </FormControl>
+        </form>
+    </Grid>
+</Grid>*/
+
+
+
+
+
+
+
+
+
