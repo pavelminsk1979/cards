@@ -1,7 +1,6 @@
 import React from "react";
-import "./App.css";
 import {Navigate, NavLink, Route, Routes} from "react-router-dom";
-import {Login} from "./components/Login/Login";
+import {Login} from "./features/auth/Login/Login";
 import {Registration} from "./components/Registration";
 import {CheckEmail} from "./components/CheckEmail";
 import {SetNewPassword} from "./components/SetNewPassword";
@@ -10,47 +9,46 @@ import {Profile} from "./components/Profile";
 import {Packs} from "./components/Packs";
 import {Cards} from "./components/Cards";
 import {Learn} from "./components/Learn";
-
+import st from './App.module.css'
+import {AppBar} from "./components/appBar/AppBar";
 
 
 export const App = () => {
     return (
-        <div>
 
-            <NavLink to={'/'}>login</NavLink>
-            <NavLink to={'/register'}>register</NavLink>
-            <NavLink to={'/checkEmail'}>checkEmail</NavLink>
-            <NavLink to={'/setNewPassword'}>setNewPassword</NavLink>
-            <NavLink to={'/forgotPassword'}>forgotPassword</NavLink>
-            <NavLink to={'/profile'}>profile</NavLink>
-            <NavLink to={'/packs'}>packs</NavLink>
-            <NavLink to={'/cards'}>cards</NavLink>
-            <NavLink to={'/learn'}>learn</NavLink>
-
-
-    <Routes>
-        <Route path="/" element={<Login/>}/>
-        <Route path="register" element={<Registration/>}/>
-        <Route path="checkEmail" element={<CheckEmail/>}/>
-        <Route path="setNewPassword" element={<SetNewPassword/>}/>
-        <Route path="forgotPassword" element={<ForgotPassword/>}/>
-        <Route path="profile" element={<Profile/>}/>
-        <Route path="packs" element={<Packs/>}/>
-        <Route path="cards" element={<Cards/>}/>
-        <Route path="learn" element={<Learn/>}/>
+            <div className={st.page}>
+                <AppBar/>
+                <div>
+                    <NavLink to={'/'}>login</NavLink>
+                    <NavLink to={'/register'}>register</NavLink>
+                    <NavLink to={'/checkEmail'}>checkEmail</NavLink>
+                    <NavLink to={'/setNewPassword'}>setNewPassword</NavLink>
+                    <NavLink to={'/forgotPassword'}>forgotPassword</NavLink>
+                    <NavLink to={'/profile'}>profile</NavLink>
+                    <NavLink to={'/packs'}>packs</NavLink>
+                    <NavLink to={'/cards'}>cards</NavLink>
+                    <NavLink to={'/learn'}>learn</NavLink>
+                </div>
 
 
-        <Route path="/404" element={<h2>404: PAGE NOT FOUND</h2>}/>
-        <Route path="*" element={<Navigate to="/404"/>}/>
-    </Routes>
-</div>
-)
+                <Routes>
+                    <Route path="/" element={<Login/>}/>
+                    <Route path="register" element={<Registration/>}/>
+                    <Route path="checkEmail" element={<CheckEmail/>}/>
+                    <Route path="setNewPassword" element={<SetNewPassword/>}/>
+                    <Route path="forgotPassword" element={<ForgotPassword/>}/>
+                    <Route path="profile" element={<Profile/>}/>
+                    <Route path="packs" element={<Packs/>}/>
+                    <Route path="cards" element={<Cards/>}/>
+                    <Route path="learn" element={<Learn/>}/>
+
+
+                    <Route path="/404" element={<h2>404: PAGE NOT FOUND</h2>}/>
+                    <Route path="*" element={<Navigate to="/404"/>}/>
+                </Routes>
+            </div>
+    )
 }
-
-
-
-
-
 
 
 /*
