@@ -1,7 +1,7 @@
 import React from "react";
 import {Navigate, NavLink, Route, Routes} from "react-router-dom";
 import {Login} from "./features/auth/Login/Login";
-import {Registration} from "./components/Registration";
+import {Registration} from "./features/auth/registration/Registration";
 import {CheckEmail} from "./components/CheckEmail";
 import {SetNewPassword} from "./components/SetNewPassword";
 import {ForgotPassword} from "./components/ForgotPassword";

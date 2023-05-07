@@ -2,13 +2,12 @@ import React from "react";
 import {useAppDispatch} from "../../../app/hooks";
 import {authThunk} from "../authSlice";
 import {useFormik} from "formik";
-import Button from "@mui/material/Button";
 import Checkbox from "@mui/material/Checkbox";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import TextField from "@mui/material/TextField";
 import st from "./Login.module.css";
 import {NavLink} from "react-router-dom";
-import {Navigate} from "react-router-dom";
+
 
 
 type FormikErrorType = {
@@ -35,26 +34,24 @@ export const Login = () => {
             }
             if (!values.password) {
                 errors.password = 'Required'
-            } else if (values.password.length <= 3) {
-                errors.password = 'Password must be mure 3 simbols'
+            } else if (values.password.length < 8) {
+                errors.password = 'Password must be more 8 simbols'
             }
             return errors;
         },
         onSubmit: values => {
-            dispatch(authThunk.login(values))
+            dispatch(authThunk.login(values));
             formik.resetForm()
         }
     })
 
-   /* const forgotPasswordHandler = () => {
-        return <Navigate to={'/forgotPassword'}/>
-    }*/
 
     return (
+        <form onSubmit={formik.handleSubmit}>
         <div className={st.common}>
             <div className={st.container}>
                 <div className={st.title}>
-                   Sign in
+                   Sign In
                 </div>
                 <div >
                     <TextField
@@ -63,6 +60,8 @@ export const Login = () => {
                         margin="normal"
                         label="email"
                         variant="standard"/>
+                    {formik.touched.email &&formik.errors.email&&<div style={{color:'red'}}>{
+                        formik.errors.email}</div>}
                 </div>
                 <div>
                     <TextField
@@ -72,6 +71,8 @@ export const Login = () => {
                         variant="standard"
                         type="password"
                         margin="normal"/>
+                    {formik.touched.password &&formik.errors.password&&<div style={
+                        {color:'red'}}>{formik.errors.password}</div>}
                 </div>
                 <div className={st.rememberMe}>
                     <FormControlLabel label={'Remember me'} control={
@@ -85,12 +86,10 @@ export const Login = () => {
 
                 </div>
                 <div>
-                    <button className={st.button}>
+                    <button type={'submit'}
+                        className={st.button}>
                        Sing In
                     </button>
-                 {/*   <Button type={'submit'} variant={'contained'} color={'primary'}>
-                        Login
-                    </Button>*/}
                 </div>
                 <div>
                     Don't have an account
@@ -101,6 +100,7 @@ export const Login = () => {
 
             </div>
         </div>
+        </form>
     )
 }
 

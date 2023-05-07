@@ -1,4 +1,3 @@
-
 .common{
     display: flex;
     justify-content: center;
@@ -7,7 +6,7 @@
 }
 
 .container{
-  width:360px;
+    width:360px;
     height: 500px;
     border: 2px solid lavender;
     border-radius: 10px;
@@ -25,19 +24,6 @@
     color: #4f5158;
 }
 
-.rememberMe {
-    width:78%;
-    color: #3c3d42;
-}
-
-.forgotPassword {
-    font-weight: 600;
-    font-size: 17px;
-    width:50%;
-    color: #630263;
-    align-self: flex-end;
-    text-decoration: none;
-}
 
 .button {
     width: 185px;
@@ -60,7 +46,7 @@
     transition: 0.5s;
 }
 
-.singUp{
+.linkSingIn{
     font-weight: 600;
     font-size: 22px;
     color: #630263;

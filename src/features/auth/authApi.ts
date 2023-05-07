@@ -1,5 +1,5 @@
 import {instance} from "../../common/api/instansAxios";
-import {RegisterType} from "../../components/Registration";
+
 
 
 
@@ -10,6 +10,12 @@ export const authApi = {
     login(payload:LoginType) {
         return instance.post<LoginResponseType>('auth/login',payload)
     }
+}
+
+export type RegisterType = {
+	email:string
+	password:string
+	confirmPassword:string
 }
 
 export type LoginType = {
