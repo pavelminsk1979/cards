@@ -2,15 +2,16 @@ import React from "react";
 import {Navigate, NavLink, Route, Routes} from "react-router-dom";
 import {Login} from "./features/auth/Login/Login";
 import {Registration} from "./features/auth/registration/Registration";
-import {CheckEmail} from "./components/CheckEmail";
-import {SetNewPassword} from "./components/SetNewPassword";
-import {ForgotPassword} from "./components/ForgotPassword";
-import {Profile} from "./components/Profile";
+import {CheckEmail} from "./features/auth/checkEmail/CheckEmail";
+import {CreateNewPassword} from "./features/auth/createNewPassword/CreateNewPassword";
+import {ForgotPassword} from "./features/auth/forgotPassword/ForgotPassword";
+import {Profile} from "./components/profile/Profile";
 import {Packs} from "./components/Packs";
 import {Cards} from "./components/Cards";
 import {Learn} from "./components/Learn";
 import st from './App.module.css'
 import {AppBar} from "./components/appBar/AppBar";
+import {EditProfile} from "./components/editProfile/EditProfile";
 
 
 export const App = () => {
@@ -19,15 +20,16 @@ export const App = () => {
             <div className={st.page}>
                 <AppBar/>
                 <div>
-                    <NavLink to={'/'}>login</NavLink>
-                    <NavLink to={'/register'}>register</NavLink>
+                    {/*<NavLink to={'/'}>login</NavLink>
+                    <NavLink to={'/register'}>register</NavLink>*/}
                     <NavLink to={'/checkEmail'}>checkEmail</NavLink>
                     <NavLink to={'/setNewPassword'}>setNewPassword</NavLink>
-                    <NavLink to={'/forgotPassword'}>forgotPassword</NavLink>
+                    {/*<NavLink to={'/forgotPassword'}>forgotPassword</NavLink>*/}
                     <NavLink to={'/profile'}>profile</NavLink>
                     <NavLink to={'/packs'}>packs</NavLink>
                     <NavLink to={'/cards'}>cards</NavLink>
                     <NavLink to={'/learn'}>learn</NavLink>
+                    <NavLink to={'/editProfile'}>EditProfile</NavLink>
                 </div>
 
 
@@ -35,9 +37,10 @@ export const App = () => {
                     <Route path="/" element={<Login/>}/>
                     <Route path="register" element={<Registration/>}/>
                     <Route path="checkEmail" element={<CheckEmail/>}/>
-                    <Route path="setNewPassword" element={<SetNewPassword/>}/>
+                    <Route path="setNewPassword" element={<CreateNewPassword/>}/>
                     <Route path="forgotPassword" element={<ForgotPassword/>}/>
                     <Route path="profile" element={<Profile/>}/>
+                    <Route path="editProfile" element={<EditProfile/>}/>
                     <Route path="packs" element={<Packs/>}/>
                     <Route path="cards" element={<Cards/>}/>
                     <Route path="learn" element={<Learn/>}/>
