@@ -1,20 +1,29 @@
-
 import React from "react";
 import st from "./Profile.module.css";
-import myFoto from "../../image/myFoto.jpg";
-
+import myFoto from "../../../image/myFoto.jpg";
+import {authThunk} from "../authSlice";
+import {useAppDispatch} from "../../../app/hooks";
+import {useSelector} from "react-redux";
+import {RootState} from "../../../app/store";
+import {LoginResponseType} from "../authApi";
+import {Navigate} from "react-router-dom";
 
 
 export const Profile = () => {
-    /*const dispatch = useAppDispatch();*/
+    const dispatch = useAppDispatch();
+    const logOut = useSelector<RootState, null | LoginResponseType>(
+        state => state.auth.profile)
 
 
-    const onClickHandler = () => {
-        alert('Log Out');
+    const onClickHandler = (payload: {}) => {
+        dispatch(authThunk.logOut(payload))
     }
 
     const fotoMe = {
         backgroundImage: `url(${myFoto})`,
+    }
+    if (logOut === null) {
+        return <Navigate to={'/'}/>
     }
 
     return (
@@ -27,8 +36,8 @@ export const Profile = () => {
                      style={fotoMe}></div>
                 <div className={st.name}>Pavel</div>
 
-                <div className={st.mail} >
-                   pavelminsk@mail.ru
+                <div className={st.mail}>
+                    pavelminsk@mail.ru
                 </div>
 
                 <div>
@@ -41,7 +50,6 @@ export const Profile = () => {
         </div>
     )
 }
-
 
 
 /*

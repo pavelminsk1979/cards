@@ -5,13 +5,13 @@ import {Registration} from "./features/auth/registration/Registration";
 import {CheckEmail} from "./features/auth/checkEmail/CheckEmail";
 import {CreateNewPassword} from "./features/auth/createNewPassword/CreateNewPassword";
 import {ForgotPassword} from "./features/auth/forgotPassword/ForgotPassword";
-import {Profile} from "./components/profile/Profile";
+import {Profile} from "./features/auth/profile/Profile";
 import {Packs} from "./components/Packs";
 import {Cards} from "./components/Cards";
 import {Learn} from "./components/Learn";
 import st from './App.module.css'
 import {AppBar} from "./components/appBar/AppBar";
-import {EditProfile} from "./components/editProfile/EditProfile";
+import {EditProfile} from "./features/auth/editProfile/EditProfile";
 
 
 export const App = () => {

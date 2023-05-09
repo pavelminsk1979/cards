@@ -1,8 +1,14 @@
 import React from "react";
 import st from "./EditProfile.module.css";
-import myFoto from "../../image/myFoto.jpg";
+import myFoto from "../../../image/myFoto.jpg";
 import TextField from "@mui/material/TextField";
 import {useFormik} from "formik";
+import {useSelector} from "react-redux";
+import {RootState} from "../../../app/store";
+import {LoginResponseType} from "../authApi";
+import {useAppDispatch} from "../../../app/hooks";
+import {Navigate} from "react-router-dom";
+import {authThunk} from "../authSlice";
 
 
 type FormikErrorType = {
@@ -10,7 +16,9 @@ type FormikErrorType = {
 }
 
 export const EditProfile = () => {
-    /*const dispatch = useAppDispatch();*/
+    const dispatch = useAppDispatch();
+    const logOut = useSelector<RootState, null | LoginResponseType>(
+        state => state.auth.profile)
 
 
     const formik = useFormik({
@@ -32,12 +40,16 @@ export const EditProfile = () => {
     })
 
 
-    const onClickHandler = () => {
-        alert('Log Out');
+    const onClickHandler = (payload: {}) => {
+        dispatch(authThunk.logOut(payload))
     }
 
     const fotoMe = {
         backgroundImage: `url(${myFoto})`,
+    }
+
+    if (logOut === null) {
+        return <Navigate to={'/'}/>
     }
 
     return (

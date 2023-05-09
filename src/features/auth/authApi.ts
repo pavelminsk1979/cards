@@ -9,7 +9,15 @@ export const authApi = {
     },
     login(payload:LoginType) {
         return instance.post<LoginResponseType>('auth/login',payload)
-    }
+    },
+	logOut(payload:{}){
+		return instance.delete<LogOutType>('auth/me',payload)
+	}
+}
+
+export type LogOutType = {
+	info:string
+	error:string
 }
 
 export type RegisterType = {

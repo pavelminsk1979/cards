@@ -1,5 +1,5 @@
 import {createSlice} from "@reduxjs/toolkit";
-import {authApi, LoginResponseType, LoginType, RegisterType} from "./authApi";
+import {authApi, LoginResponseType, LoginType, LogOutType, RegisterType} from "./authApi";
 import {createAppAsyncThunk} from "../../common/utils/createAppAsyncThunk";
 
 
@@ -14,6 +14,13 @@ const login = createAppAsyncThunk<{profileData:LoginResponseType},LoginType>('au
     return {profileData: response.data}
 })
 
+const logOut = createAppAsyncThunk<{responsLogOut:LogOutType},{}>('auth/logOut',async (arg:{})=>{
+    const response = await authApi.logOut(arg)
+    return{responsLogOut:response.data}
+    }
+
+)
+
 
 const slice = createSlice({
     name: "auth",
@@ -24,14 +31,20 @@ const slice = createSlice({
     },
     reducers: {},
     extraReducers: builder => {
-        builder.addCase(login.fulfilled, (state, action) => {
+        builder
+            .addCase(login.fulfilled, (state, action) => {
             state.profile = action.payload.profileData
         })
+            .addCase(logOut.fulfilled,(state, action)=>{
+                if(action.payload.responsLogOut.info){
+                    state.profile=null
+                }
+            })
     }
 });
 
 export const authReducer = slice.reducer;
 /*не забыть подключить authReducer к стору*/
 
-export const authThunk = {register, login} /* CАНКИ упаковываю в обьект */
+export const authThunk = {register, login,logOut} /* CАНКИ упаковываю в обьект */
 
