@@ -1,4 +1,4 @@
-import {instance, instanceFogot} from "../../common/api/instansAxios";
+import {instance} from "../../common/api/instansAxios";
 
 
 export const authApi = {
@@ -10,9 +10,6 @@ export const authApi = {
     },
     logOut(payload: {}) {
         return instance.delete<CommonResponseType>('auth/me', payload)
-    },
-    me(payload: {}) {
-        return instance.post('auth/me', payload)
     },
     forgot(payload: ForgotType) {
         return instance.post<FogotResponseType>('auth/forgot', payload)

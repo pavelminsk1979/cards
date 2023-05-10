@@ -45,7 +45,8 @@ if(editName!==null){
     })
 
 
-    const onClickHandler = (payload: {}) => {
+    const onClickHandler = () => {
+        const payload={}
         dispatch(authThunk.logOut(payload))
     }
 

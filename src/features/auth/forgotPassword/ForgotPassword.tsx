@@ -25,7 +25,7 @@ export const ForgotPassword = () => {
             email: '',
             from: 'test-front-admin <ai73a@yandex.by>',
             message: `<div style="background-color: lime; padding: 15px">
-password recovery link: 
+Перейдите по ссылке, чтобы продолжить востановление пароля: 
 <a href='http://localhost:3000/setNewPassword/$token$'>link</a></div>`
         },
         validate: (values) => {

@@ -29,7 +29,7 @@ const onClickHandler = () => {
 
                     <div className={st.textLong}>
                        We've sent an Email with instructions to
-                        example@mail.com
+                        pavelminsk1979@mail.ru
                     </div>
 
                     <div>

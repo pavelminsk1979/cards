@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import {Navigate, NavLink, Route, Routes} from "react-router-dom";
 import {Login} from "./features/auth/Login/Login";
 import {Registration} from "./features/auth/registration/Registration";
@@ -12,44 +12,59 @@ import {Learn} from "./components/Learn";
 import st from './App.module.css'
 import {AppBar} from "./components/appBar/AppBar";
 import {EditProfile} from "./features/auth/editProfile/EditProfile";
+import {useAppDispatch} from "./app/hooks";
+import {appThunk} from "./features/app/appSlise";
+import {RootState} from "./app/store";
+import {useSelector} from "react-redux";
 
 
 export const App = () => {
+    const dispatch = useAppDispatch();
+    const isInitialized = useSelector <RootState, boolean>(
+        state => state.app.isInitialized)
+
+    useEffect(()=>{
+        const payload={}
+        dispatch(appThunk.initializeApp(payload))
+    },[ ])
+
+   /* if (isInitialized) {
+        return <Navigate to={'/packs'}/>
+    }*/
     return (
-
-            <div className={st.page}>
-                <AppBar/>
-                <div>
-                    {/*<NavLink to={'/'}>login</NavLink>
+        <div className={st.page}>
+            <AppBar/>
+            <div>
+                {/*<NavLink to={'/'}>login</NavLink>
                     <NavLink to={'/register'}>register</NavLink>*/}
-                    <NavLink to={'/checkEmail'}>checkEmail</NavLink>
-                    <NavLink to={'/setNewPassword'}>setNewPassword</NavLink>
-                    {/*<NavLink to={'/forgotPassword'}>forgotPassword</NavLink>*/}
-                    <NavLink to={'/profile'}>profile</NavLink>
-                    <NavLink to={'/packs'}>packs</NavLink>
-                    <NavLink to={'/cards'}>cards</NavLink>
-                    <NavLink to={'/learn'}>learn</NavLink>
-                    <NavLink to={'/editProfile'}>EditProfile</NavLink>
-                </div>
-
-
-                <Routes>
-                    <Route path="/" element={<Login/>}/>
-                    <Route path="register" element={<Registration/>}/>
-                    <Route path="checkEmail" element={<CheckEmail/>}/>
-                    <Route path="setNewPassword" element={<CreateNewPassword/>}/>
-                    <Route path="forgotPassword" element={<ForgotPassword/>}/>
-                    <Route path="profile" element={<Profile/>}/>
-                    <Route path="editProfile" element={<EditProfile/>}/>
-                    <Route path="packs" element={<Packs/>}/>
-                    <Route path="cards" element={<Cards/>}/>
-                    <Route path="learn" element={<Learn/>}/>
-
-
-                    <Route path="/404" element={<h2>404: PAGE NOT FOUND</h2>}/>
-                    <Route path="*" element={<Navigate to="/404"/>}/>
-                </Routes>
+                <NavLink to={'/checkEmail'}>checkEmail</NavLink>
+                <NavLink to={'/setNewPassword'}>setNewPassword</NavLink>
+                {/*<NavLink to={'/forgotPassword'}>forgotPassword</NavLink>*/}
+                <NavLink to={'/profile'}>profile</NavLink>
+                <NavLink to={'/packs'}>packs</NavLink>
+                <NavLink to={'/cards'}>cards</NavLink>
+                <NavLink to={'/learn'}>learn</NavLink>
+                <NavLink to={'/editProfile'}>EditProfile</NavLink>
             </div>
+
+
+            <Routes>
+                <Route path="/" element={<Login/>}/>
+                <Route path="register" element={<Registration/>}/>
+                <Route path="checkEmail" element={<CheckEmail/>}/>
+                <Route path="setNewPassword" element={<CreateNewPassword/>}/>
+                <Route path="forgotPassword" element={<ForgotPassword/>}/>
+                <Route path="profile" element={<Profile/>}/>
+                <Route path="editProfile" element={<EditProfile/>}/>
+                <Route path="packs" element={<Packs/>}/>
+                <Route path="cards" element={<Cards/>}/>
+                <Route path="learn" element={<Learn/>}/>
+
+
+                <Route path="/404" element={<h2>404: PAGE NOT FOUND</h2>}/>
+                <Route path="*" element={<Navigate to="/404"/>}/>
+            </Routes>
+        </div>
     )
 }
 
