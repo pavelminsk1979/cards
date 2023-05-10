@@ -1,4 +1,3 @@
-
 import React from "react";
 import {useAppDispatch} from "../../../app/hooks";
 import {authThunk} from "../authSlice";
@@ -10,7 +9,6 @@ import st from "./ForgotPassword.module.css";
 import {NavLink} from "react-router-dom";
 
 
-
 type FormikErrorType = {
     email?: string
 }
@@ -20,7 +18,11 @@ export const ForgotPassword = () => {
 
     const formik = useFormik({
         initialValues: {
-            email: ''
+            email: '',
+            from: 'test-front-admin <ai73a@yandex.by>',
+            message: `<div style="background-color: lime; padding: 15px">
+password recovery link: 
+<a href='http://localhost:3000/setNewPassword/$token$'>link</a></div>`
         },
         validate: (values) => {
             const errors: FormikErrorType = {};
@@ -32,8 +34,8 @@ export const ForgotPassword = () => {
             return errors;
         },
         onSubmit: values => {
-            /*alert(JSON.stringify(values));*/
-           /* dispatch(authThunk.login(values));*/
+          /*  alert(JSON.stringify(values));*/
+               dispatch(authThunk.forgotPassword(values));
             formik.resetForm()
         }
     })
@@ -44,16 +46,16 @@ export const ForgotPassword = () => {
             <div className={st.common}>
                 <div className={st.container}>
                     <div className={st.title}>
-                       Forgot your password?
+                        Forgot your password?
                     </div>
-                    <div >
+                    <div>
                         <TextField
-                            sx={{ width: '32ch' }}
+                            sx={{width: '32ch'}}
                             {...formik.getFieldProps('email')}
                             margin="normal"
                             label="email"
                             variant="standard"/>
-                        {formik.touched.email &&formik.errors.email&&<div style={{color:'red'}}>{
+                        {formik.touched.email && formik.errors.email && <div style={{color: 'red'}}>{
                             formik.errors.email}</div>}
                     </div>
                     <div className={st.textLong}>
@@ -63,13 +65,13 @@ export const ForgotPassword = () => {
                     <div>
                         <button type={'submit'}
                                 className={st.button}>
-                          Send instructions
+                            Send instructions
                         </button>
                     </div>
                     <div>
-                       Did you remember your password?
+                        Did you remember your password?
                     </div>
-                    <div >
+                    <div>
                         <NavLink to={'/'} className={st.linkLogging}> Try logging in</NavLink>
                     </div>
                 </div>

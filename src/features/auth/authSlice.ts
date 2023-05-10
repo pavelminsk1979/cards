@@ -1,5 +1,14 @@
+
 import {createSlice} from "@reduxjs/toolkit";
-import {authApi, LoginResponseType, LoginType, LogOutType, RegisterType} from "./authApi";
+import {
+    authApi,
+    CommonResponseType,
+    EditProfileResponseType, EditProfileType,
+    ForgotType,
+    LoginResponseType,
+    LoginType,
+    RegisterType
+} from "./authApi";
 import {createAppAsyncThunk} from "../../common/utils/createAppAsyncThunk";
 
 
@@ -14,12 +23,22 @@ const login = createAppAsyncThunk<{profileData:LoginResponseType},LoginType>('au
     return {profileData: response.data}
 })
 
-const logOut = createAppAsyncThunk<{responsLogOut:LogOutType},{}>('auth/logOut',async (arg:{})=>{
+const logOut = createAppAsyncThunk<{responsLogOut:CommonResponseType},{}>('auth/logOut',async (arg)=>{
     const response = await authApi.logOut(arg)
     return{responsLogOut:response.data}
     }
 
 )
+
+const editProfile = createAppAsyncThunk<{responseEditProfile:EditProfileResponseType},EditProfileType>('auth/editProfile',async (arg)=>{
+    const response = await authApi.editProfile(arg)
+    return {responseEditProfile:response.data}
+})
+
+const forgotPassword = createAppAsyncThunk('auth/forgotPassword',async (arg:ForgotType)=>{
+    const response = await authApi.forgot(arg)
+
+})
 
 
 const slice = createSlice({
@@ -32,6 +51,9 @@ const slice = createSlice({
     reducers: {},
     extraReducers: builder => {
         builder
+            .addCase(editProfile.fulfilled,(state,action)=>{
+                state.profile=action.payload.responseEditProfile.updatedUser
+            })
             .addCase(login.fulfilled, (state, action) => {
             state.profile = action.payload.profileData
         })
@@ -46,5 +68,5 @@ const slice = createSlice({
 export const authReducer = slice.reducer;
 /*не забыть подключить authReducer к стору*/
 
-export const authThunk = {register, login,logOut} /* CАНКИ упаковываю в обьект */
+export const authThunk = {register, login,logOut,forgotPassword,editProfile} /* CАНКИ упаковываю в обьект */
 

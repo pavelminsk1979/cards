@@ -15,8 +15,8 @@ export const Profile = () => {
         state => state.auth.profile)
 
 
-    const onClickHandler = (payload: {}) => {
-        dispatch(authThunk.logOut(payload))
+    const onClickHandler = () => {
+        dispatch(authThunk.logOut({}))
     }
 
     const fotoMe = {

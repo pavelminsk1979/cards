@@ -12,29 +12,34 @@ import {authThunk} from "../authSlice";
 
 
 type FormikErrorType = {
-    NickName?: string
+    name?: string
 }
 
 export const EditProfile = () => {
     const dispatch = useAppDispatch();
     const logOut = useSelector<RootState, null | LoginResponseType>(
         state => state.auth.profile)
+ /*   const editName = useSelector<RootState, null|string>(
+        state=>state.auth.profile.name)*/
 
-
+/*let nameNew=''
+if(editName!==null){
+    nameNew=editName.name
+}*/
     const formik = useFormik({
         initialValues: {
-            NickName: ''
+            name: ''
         },
         validate: (values) => {
             const errors: FormikErrorType = {};
-            if (!values.NickName) {
-                errors.NickName = 'Required';
+            if (!values.name) {
+                errors.name = 'Required';
             }
             return errors;
         },
         onSubmit: values => {
             alert(JSON.stringify(values));
-            /* dispatch(authThunk.login(values));*/
+            dispatch(authThunk.editProfile(values));
             formik.resetForm()
         }
     })
@@ -65,12 +70,12 @@ export const EditProfile = () => {
                         <div>
                             <TextField
                                 sx={{width: '27ch'}}
-                                {...formik.getFieldProps('NickName')}
+                                {...formik.getFieldProps('name')}
                                 margin="normal"
-                                label="NickName"
+                                label="name"
                                 variant="standard"/>
-                            {formik.touched.NickName && formik.errors.NickName && <div style={{color: 'red'}}>{
-                                formik.errors.NickName}</div>}
+                            {formik.touched.name && formik.errors.name && <div style={{color: 'red'}}>{
+                                formik.errors.name}</div>}
                         </div>
                         <div  >
                             <button

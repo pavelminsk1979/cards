@@ -1,4 +1,5 @@
-import {instance} from "../../common/api/instansAxios";
+import {instance, instanceFogot} from "../../common/api/instansAxios";
+
 
 
 
@@ -11,11 +12,38 @@ export const authApi = {
         return instance.post<LoginResponseType>('auth/login',payload)
     },
 	logOut(payload:{}){
-		return instance.delete<LogOutType>('auth/me',payload)
+		return instance.delete<CommonResponseType>('auth/me',payload)
+	},
+	me(payload:{}){
+		return instance.post('auth/me',payload)
+	},
+	forgot(payload:ForgotType){
+		return instanceFogot.post<CommonResponseType>('auth/forgot',payload)
+	},
+	editProfile(payload:EditProfileType){
+		return instance.put('auth/me',payload)
 	}
 }
 
-export type LogOutType = {
+export type EditProfileResponseType = {
+	updatedUser:LoginResponseType
+	error?: string
+	token:string
+	tokenDeathTime:number
+}
+
+export type EditProfileType = {
+	name?: string,
+	avatar?:string
+}
+
+export type ForgotType = {
+	email:string
+	from?:string
+	message:string
+}
+
+export type CommonResponseType = {
 	info:string
 	error:string
 }
@@ -39,6 +67,8 @@ export type RegisterResponseType = {
 type UserType = Omit<LoginResponseType, 'token'|'tokenDeathTime'>
 
 export type LoginResponseType = {
+	error?: string;
+	avatar?: string;
 	_id: string;
 	email: string;
 	rememberMe: boolean;
