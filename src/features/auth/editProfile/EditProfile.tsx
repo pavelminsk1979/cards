@@ -19,8 +19,8 @@ export const EditProfile = () => {
     const dispatch = useAppDispatch();
     const logOut = useSelector<RootState, null | LoginResponseType>(
         state => state.auth.profile)
- /*   const editName = useSelector<RootState, null|string>(
-        state=>state.auth.profile.name)*/
+    const editName = useSelector<RootState, undefined | string>(
+        state=>state.auth.profile?.name)
 
 /*let nameNew=''
 if(editName!==null){
@@ -28,7 +28,7 @@ if(editName!==null){
 }*/
     const formik = useFormik({
         initialValues: {
-            name: ''
+            name: editName
         },
         validate: (values) => {
             const errors: FormikErrorType = {};
