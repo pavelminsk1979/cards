@@ -37,20 +37,24 @@ const editProfile = createAppAsyncThunk<{responseEditProfile:EditProfileResponse
 
 const forgotPassword = createAppAsyncThunk('auth/forgotPassword',async (arg:ForgotType)=>{
     const response = await authApi.forgot(arg)
-
+    return {responseForgotPassword:response.data.success}
 })
 
 
 const slice = createSlice({
     name: "auth",
     initialState: {
-        profile: null as null | LoginResponseType  /*когда происходид логинизация-тогда возвращаются с сервера обьект с данными
+        profile: null as null | LoginResponseType , /*когда происходид логинизация-тогда возвращаются с сервера обьект с данными
         ...из санки будут данные диспатчится в setProfile  и таким
         образом попадут в СТОР*/
+        flagForgotPassword:false
     },
     reducers: {},
     extraReducers: builder => {
         builder
+            .addCase(forgotPassword.fulfilled,(state,action)=>{
+                state.flagForgotPassword=action.payload.responseForgotPassword
+            })
             .addCase(editProfile.fulfilled,(state,action)=>{
                 state.profile=action.payload.responseEditProfile.updatedUser
             })

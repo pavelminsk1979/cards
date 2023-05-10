@@ -6,7 +6,9 @@ import Checkbox from "@mui/material/Checkbox";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import TextField from "@mui/material/TextField";
 import st from "./ForgotPassword.module.css";
-import {NavLink} from "react-router-dom";
+import {Navigate, NavLink} from "react-router-dom";
+import {useSelector} from "react-redux";
+import {RootState} from "../../../app/store";
 
 
 type FormikErrorType = {
@@ -15,6 +17,8 @@ type FormikErrorType = {
 
 export const ForgotPassword = () => {
     const dispatch = useAppDispatch();
+    const flagForgotPassword = useSelector<RootState, boolean>(
+        state=>state.auth.flagForgotPassword)
 
     const formik = useFormik({
         initialValues: {
@@ -39,7 +43,9 @@ password recovery link:
             formik.resetForm()
         }
     })
-
+if(flagForgotPassword){
+     return <Navigate to={'/checkEmail'}/>
+}
 
     return (
         <form onSubmit={formik.handleSubmit}>
