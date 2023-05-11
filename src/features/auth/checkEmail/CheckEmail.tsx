@@ -11,7 +11,7 @@ export const CheckEmail = () => {
 
 
 const onClickHandler = () => {
-    alert('Check Email');
+   /* alert('Check Email');*/
 }
 
     const mailFoto = {
@@ -43,14 +43,3 @@ const onClickHandler = () => {
     )
 }
 
-/*
-import React from "react";
-
-
-export const CheckEmail = () => {
-    return(
-        <div>
-            <h3>CheckEmail</h3>
-        </div>
-    )
-}*/

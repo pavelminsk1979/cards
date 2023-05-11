@@ -3,9 +3,14 @@ import {createSlice} from "@reduxjs/toolkit";
 
 import {appApi} from "./appApi";
 
-const initializeApp = createAppAsyncThunk<any, any>('app/initializeApp', async (arg: {}) => {
-    const response = await appApi.initializeApp(arg)
-    return {valueInitializeApp: response.data}
+const initializeApp = createAppAsyncThunk<any, any>('app/initializeApp', async (arg,thunkAPI) => {
+    try{
+        const response = await appApi.initializeApp(arg)
+        return {valueInitializeApp: response.data}
+    }  catch (e:any){
+        return thunkAPI.rejectWithValue(e)
+    }
+
 })
 
 
@@ -18,11 +23,10 @@ const slice = createSlice({
     extraReducers: builder => {
         builder
             .addCase(initializeApp.fulfilled, (state, action) => {
-                if (action.payload.valueInitializeApp.error === undefined) {
                     state.isInitialized = true
-                } else {
-                    state.isInitialized = false
-                }
+            })
+            .addCase(initializeApp.rejected,(state,action)=>{
+                /*state.isInitialized = false*/
             })
     }
 })

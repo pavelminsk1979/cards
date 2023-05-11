@@ -21,5 +21,4 @@ export type initializeAppType = {
 	token: string;
 	tokenDeathTime: number;
 	avatar: null|string;
-    error?: string;
 }

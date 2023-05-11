@@ -4,7 +4,7 @@ import myFoto from "../../../image/myFoto.jpg";
 import {authThunk} from "../authSlice";
 import {useAppDispatch} from "../../../app/hooks";
 import {useSelector} from "react-redux";
-import {RootState} from "../../../app/store";
+import {RootState} from "../../../store";
 import {LoginResponseType} from "../authApi";
 import {Navigate} from "react-router-dom";
 
@@ -51,15 +51,3 @@ export const Profile = () => {
     )
 }
 
-
-/*
-import React from "react";
-
-
-export const Profile = () => {
-    return(
-        <div>
-            <h3>Profile</h3>
-        </div>
-    )
-}*/

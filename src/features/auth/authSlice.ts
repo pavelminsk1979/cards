@@ -10,6 +10,7 @@ import {
     RegisterType
 } from "./authApi";
 import {createAppAsyncThunk} from "../../common/utils/createAppAsyncThunk";
+import {appThunk} from "../app/appSlise";
 
 
 
@@ -52,6 +53,9 @@ const slice = createSlice({
     reducers: {},
     extraReducers: builder => {
         builder
+            .addCase(appThunk.initializeApp.fulfilled,(state,action)=>{
+                state.profile=action.payload.valueInitializeApp
+        })
             .addCase(forgotPassword.fulfilled,(state,action)=>{
                 state.flagForgotPassword=action.payload.responseForgotPassword
             })

@@ -4,7 +4,7 @@ import myFoto from "../../../image/myFoto.jpg";
 import TextField from "@mui/material/TextField";
 import {useFormik} from "formik";
 import {useSelector} from "react-redux";
-import {RootState} from "../../../app/store";
+import {RootState} from "../../../store";
 import {LoginResponseType} from "../authApi";
 import {useAppDispatch} from "../../../app/hooks";
 import {Navigate} from "react-router-dom";
@@ -22,10 +22,6 @@ export const EditProfile = () => {
     const editName = useSelector<RootState, undefined | string>(
         state=>state.auth.profile?.name)
 
-/*let nameNew=''
-if(editName!==null){
-    nameNew=editName.name
-}*/
     const formik = useFormik({
         initialValues: {
             name: editName

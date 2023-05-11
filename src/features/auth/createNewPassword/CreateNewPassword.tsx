@@ -73,19 +73,3 @@ export const CreateNewPassword = () => {
 }
 
 
-
-
-
-
-
-/*
-import React from "react";
-
-
-export const CreateNewPassword = () => {
-    return(
-        <div>
-            <h3>SetNewPassword</h3>
-        </div>
-    )
-}*/

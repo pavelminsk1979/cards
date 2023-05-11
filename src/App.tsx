@@ -14,7 +14,7 @@ import {AppBar} from "./components/appBar/AppBar";
 import {EditProfile} from "./features/auth/editProfile/EditProfile";
 import {useAppDispatch} from "./app/hooks";
 import {appThunk} from "./features/app/appSlise";
-import {RootState} from "./app/store";
+import {RootState} from "./store";
 import {useSelector} from "react-redux";
 
 
@@ -30,6 +30,9 @@ export const App = () => {
 
    /* if (isInitialized) {
         return <Navigate to={'/packs'}/>
+    }*/
+  /*  if (!isInitialized) {
+        return <Navigate to={'/'}/>
     }*/
     return (
         <div className={st.page}>

@@ -8,7 +8,7 @@ import TextField from "@mui/material/TextField";
 import st from "./ForgotPassword.module.css";
 import {Navigate, NavLink} from "react-router-dom";
 import {useSelector} from "react-redux";
-import {RootState} from "../../../app/store";
+import {RootState} from "../../../store";
 
 
 type FormikErrorType = {
