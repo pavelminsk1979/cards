@@ -22,6 +22,9 @@ const slice = createSlice({
     reducers: {},
     extraReducers: builder => {
         builder
+            .addCase(initializeApp.rejected,(state, action)=>{
+                state.isInitialized = true
+            })
             .addCase(initializeApp.fulfilled, (state, action) => {
                     state.isInitialized = true
             })
