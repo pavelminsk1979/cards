@@ -16,6 +16,7 @@ import {useAppDispatch} from "./app/hooks";
 import {appThunk} from "./features/app/appSlise";
 import {RootState} from "./store";
 import {useSelector} from "react-redux";
+import {Loading} from "./components/loading/Loading";
 
 
 export const App = () => {
@@ -28,18 +29,15 @@ export const App = () => {
         dispatch(appThunk.initializeApp(payload))
     },[ ])
 
-   /* if (isInitialized) {
-        return <Navigate to={'/packs'}/>
-    }*/
-  /*  if (!isInitialized) {
-        return <Navigate to={'/'}/>
-    }*/
+    if (!isInitialized) {
+        return <Loading/>
+    }
     return (
         <div className={st.page}>
             <AppBar/>
             <div>
-                {/*<NavLink to={'/'}>login</NavLink>
-                    <NavLink to={'/register'}>register</NavLink>*/}
+                <NavLink to={'/login'}>login</NavLink>
+                    <NavLink to={'/register'}>register</NavLink>
                 <NavLink to={'/checkEmail'}>checkEmail</NavLink>
                 <NavLink to={'/setNewPassword'}>setNewPassword</NavLink>
                 {/*<NavLink to={'/forgotPassword'}>forgotPassword</NavLink>*/}
@@ -52,7 +50,7 @@ export const App = () => {
 
 
             <Routes>
-                <Route path="/" element={<Login/>}/>
+                <Route path="/login" element={<Login/>}/>
                 <Route path="register" element={<Registration/>}/>
                 <Route path="checkEmail" element={<CheckEmail/>}/>
                 <Route path="setNewPassword" element={<CreateNewPassword/>}/>
@@ -66,52 +64,13 @@ export const App = () => {
 
                 <Route path="/404" element={<h2>404: PAGE NOT FOUND</h2>}/>
                 <Route path="*" element={<Navigate to="/404"/>}/>
+                <Route path="/" element={<Navigate to="/login"/>}/>
             </Routes>
         </div>
     )
 }
 
 
-/*
-return <Grid container justifyContent={'center'}>
-    <Grid item justifyContent={'center'}>
-        <form onSubmit={formik.handleSubmit}>
-            <FormControl>
-                <FormLabel>
-                    <p>To log in get registered
-                        <a href={'https://social-network.samuraijs.com/'}
-                           target={'_blank'}> here
-                        </a>
-                    </p>
-                    <p>or use common test account credentials:</p>
-                    <p>Email: free@samuraijs.com</p>
-                    <p>Password: free</p>
-                </FormLabel>
-                <FormGroup>
-                    <TextField
-                        {...formik.getFieldProps('email')}
-                        margin="normal"/>
-                    {formik.touched.email &&formik.errors.email&&<div style={{color:'red'}}>{
-                        formik.errors.email}</div>}
-                    <TextField
-                        {...formik.getFieldProps('password')}
-                        type="password"
-                        margin="normal"/>
-                    {formik.touched.password &&formik.errors.password&&<div style={
-                        {color:'red'}}>{formik.errors.password}</div>}
-                    <FormControlLabel label={'Remember me'} control={
-                        <Checkbox
-                            {...formik.getFieldProps('rememberMe')}
-                        />
-                    }/>
-                    <Button type={'submit'} variant={'contained'} color={'primary'}>
-                        Login
-                    </Button>
-                </FormGroup>
-            </FormControl>
-        </form>
-    </Grid>
-</Grid>*/
 
 
 

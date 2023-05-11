@@ -51,7 +51,7 @@ export const EditProfile = () => {
     }
 
     if (logOut === null) {
-        return <Navigate to={'/'}/>
+        return <Navigate to={'/login'}/>
     }
 
     return (

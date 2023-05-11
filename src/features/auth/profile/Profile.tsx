@@ -23,7 +23,7 @@ export const Profile = () => {
         backgroundImage: `url(${myFoto})`,
     }
     if (logOut === null) {
-        return <Navigate to={'/'}/>
+        return <Navigate to={'/login'}/>
     }
 
     return (

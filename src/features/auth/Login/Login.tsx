@@ -6,7 +6,9 @@ import Checkbox from "@mui/material/Checkbox";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import TextField from "@mui/material/TextField";
 import st from "./Login.module.css";
-import {NavLink} from "react-router-dom";
+import {Navigate, NavLink} from "react-router-dom";
+import {useSelector} from "react-redux";
+import {RootState} from "../../../store";
 
 
 
@@ -18,6 +20,9 @@ type FormikErrorType = {
 
 export const Login = () => {
     const dispatch = useAppDispatch();
+
+     const isLoggedIn = useSelector <RootState, boolean>(
+     state => state.auth.isLoggedIn)
 
 
     const formik = useFormik({
@@ -45,6 +50,10 @@ export const Login = () => {
             formik.resetForm()
         }
     })
+
+     if ( isLoggedIn ) {
+        return <Navigate to={'/packs'}/>
+     }
 
 
     return (

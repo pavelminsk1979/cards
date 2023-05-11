@@ -100,7 +100,7 @@ export const Registration = () => {
                         Already  have an account?
                     </div>
                     <div >
-                        <NavLink to={'/'} className={st.linkSingIn}> Sing In</NavLink>
+                        <NavLink to={'/login'} className={st.linkSingIn}> Sing In</NavLink>
                     </div>
 
                 </div>

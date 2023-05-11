@@ -45,6 +45,7 @@ const forgotPassword = createAppAsyncThunk('auth/forgotPassword',async (arg:Forg
 const slice = createSlice({
     name: "auth",
     initialState: {
+        isLoggedIn: false,
         profile: null as null | LoginResponseType , /*когда происходид логинизация-тогда возвращаются с сервера обьект с данными
         ...из санки будут данные диспатчится в setProfile  и таким
         образом попадут в СТОР*/
@@ -55,6 +56,7 @@ const slice = createSlice({
         builder
             .addCase(appThunk.initializeApp.fulfilled,(state,action)=>{
                 state.profile=action.payload.valueInitializeApp
+                state.isLoggedIn = true
         })
             .addCase(forgotPassword.fulfilled,(state,action)=>{
                 state.flagForgotPassword=action.payload.responseForgotPassword
@@ -64,10 +66,12 @@ const slice = createSlice({
             })
             .addCase(login.fulfilled, (state, action) => {
             state.profile = action.payload.profileData
+                state.isLoggedIn=true
         })
             .addCase(logOut.fulfilled,(state, action)=>{
                 if(action.payload.responsLogOut.info){
                     state.profile=null
+                    state.isLoggedIn=false
                 }
             })
     }
