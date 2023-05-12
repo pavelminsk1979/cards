@@ -4,6 +4,9 @@ import {authThunk} from "../authSlice";
 import {useFormik} from "formik";
 import TextField from "@mui/material/TextField";
 import st from "./CreateNewPassword.module.css";
+import {useSelector} from "react-redux";
+import {RootState} from "../../../store";
+import {Navigate} from "react-router-dom";
 
 
 
@@ -14,10 +17,13 @@ type FormikErrorType = {
 
 export const CreateNewPassword = () => {
     const dispatch = useAppDispatch();
+    const flagSetNewPassword = useSelector<RootState, boolean>(
+        state=>state.auth.flagSetNewPassword)
 
     const formik = useFormik({
         initialValues: {
-            password: ''
+            password: '',
+            resetPasswordToken: "some-token-from-url"
         },
         validate: (values) => {
             const errors: FormikErrorType = {};
@@ -30,12 +36,14 @@ export const CreateNewPassword = () => {
         },
         onSubmit: values => {
             alert(JSON.stringify(values));
-            /*dispatch(authThunk.login(values));*/
+            dispatch(authThunk.setNewPassword(values));
             formik.resetForm()
         }
     })
 
-
+    if(flagSetNewPassword){
+        return <Navigate to={'/login'}/>
+    }
     return (
         <form onSubmit={formik.handleSubmit}>
             <div className={st.common}>

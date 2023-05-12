@@ -16,6 +16,9 @@ export const authApi = {
     },
     editProfile(payload: EditProfileType) {
         return instance.put('auth/me', payload)
+    },
+    setNewPassword(payload:any){
+        return instance.post<CommonResponseType>('auth/set-new-password',payload)
     }
 }
 export type FogotResponseType = {

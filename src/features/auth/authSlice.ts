@@ -1,4 +1,3 @@
-
 import {createSlice} from "@reduxjs/toolkit";
 import {
     authApi,
@@ -13,32 +12,36 @@ import {createAppAsyncThunk} from "../../common/utils/createAppAsyncThunk";
 import {appThunk} from "../app/appSlise";
 
 
-
-const register = createAppAsyncThunk<void,RegisterType>('auth/register', async (
+const register = createAppAsyncThunk<void, RegisterType>('auth/register', async (
     arg: RegisterType) => {
     const res = await authApi.register(arg)
 })
 
-const login = createAppAsyncThunk<{profileData:LoginResponseType},LoginType>('auth/login', async (arg: LoginType) => {
+const login = createAppAsyncThunk<{ profileData: LoginResponseType }, LoginType>('auth/login', async (arg: LoginType) => {
     const response = await authApi.login(arg)
     return {profileData: response.data}
 })
 
-const logOut = createAppAsyncThunk<{responsLogOut:CommonResponseType},{}>('auth/logOut',async (arg)=>{
-    const response = await authApi.logOut(arg)
-    return{responsLogOut:response.data}
+const logOut = createAppAsyncThunk<{ responsLogOut: CommonResponseType }, {}>('auth/logOut', async (arg) => {
+        const response = await authApi.logOut(arg)
+        return {responsLogOut: response.data}
     }
-
 )
 
-const editProfile = createAppAsyncThunk<{responseEditProfile:EditProfileResponseType},EditProfileType>('auth/editProfile',async (arg)=>{
+const setNewPassword = createAppAsyncThunk<any, any>('auth/setNewPassword',
+    async (arg) => {
+        const response = await authApi.setNewPassword(arg)
+        return {responseSetNewPassword: response.data}
+    })
+
+const editProfile = createAppAsyncThunk<{ responseEditProfile: EditProfileResponseType }, EditProfileType>('auth/editProfile', async (arg) => {
     const response = await authApi.editProfile(arg)
-    return {responseEditProfile:response.data}
+    return {responseEditProfile: response.data}
 })
 
-const forgotPassword = createAppAsyncThunk('auth/forgotPassword',async (arg:ForgotType)=>{
+const forgotPassword = createAppAsyncThunk('auth/forgotPassword', async (arg: ForgotType) => {
     const response = await authApi.forgot(arg)
-    return {responseForgotPassword:response.data.success}
+    return {responseForgotPassword: response.data.success}
 })
 
 
@@ -46,32 +49,37 @@ const slice = createSlice({
     name: "auth",
     initialState: {
         isLoggedIn: false,
-        profile: null as null | LoginResponseType , /*когда происходид логинизация-тогда возвращаются с сервера обьект с данными
+        profile: null as null | LoginResponseType, /*когда происходид логинизация-тогда возвращаются с сервера обьект с данными
         ...из санки будут данные диспатчится в setProfile  и таким
         образом попадут в СТОР*/
-        flagForgotPassword:false
+        flagForgotPassword: false,
+        flagSetNewPassword: false
     },
     reducers: {},
     extraReducers: builder => {
         builder
-            .addCase(appThunk.initializeApp.fulfilled,(state,action)=>{
-                state.profile=action.payload.valueInitializeApp
-                state.isLoggedIn = true
-        })
-            .addCase(forgotPassword.fulfilled,(state,action)=>{
-                state.flagForgotPassword=action.payload.responseForgotPassword
+            .addCase(setNewPassword.fulfilled, (state, action) => {
+                state.flagSetNewPassword = true
             })
-            .addCase(editProfile.fulfilled,(state,action)=>{
-                state.profile=action.payload.responseEditProfile.updatedUser
+            .addCase(appThunk.initializeApp.fulfilled, (state, action) => {
+                state.profile = action.payload.valueInitializeApp
+                state.isLoggedIn = true
+            })
+            .addCase(forgotPassword.fulfilled, (state, action) => {
+                state.flagForgotPassword = action.payload.responseForgotPassword
+            })
+            .addCase(editProfile.fulfilled, (state, action) => {
+                state.profile = action.payload.responseEditProfile.updatedUser
             })
             .addCase(login.fulfilled, (state, action) => {
-            state.profile = action.payload.profileData
-                state.isLoggedIn=true
-        })
-            .addCase(logOut.fulfilled,(state, action)=>{
-                if(action.payload.responsLogOut.info){
-                    state.profile=null
-                    state.isLoggedIn=false
+                state.profile = action.payload.profileData
+                state.isLoggedIn = true
+                state.flagSetNewPassword=false
+            })
+            .addCase(logOut.fulfilled, (state, action) => {
+                if (action.payload.responsLogOut.info) {
+                    state.profile = null
+                    state.isLoggedIn = false
                 }
             })
     }
@@ -80,5 +88,5 @@ const slice = createSlice({
 export const authReducer = slice.reducer;
 /*не забыть подключить authReducer к стору*/
 
-export const authThunk = {register, login,logOut,forgotPassword,editProfile} /* CАНКИ упаковываю в обьект */
+export const authThunk = {register, login, logOut, forgotPassword, editProfile, setNewPassword} /* CАНКИ упаковываю в обьект */
 
