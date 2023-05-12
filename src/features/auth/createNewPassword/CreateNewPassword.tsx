@@ -6,7 +6,7 @@ import TextField from "@mui/material/TextField";
 import st from "./CreateNewPassword.module.css";
 import {useSelector} from "react-redux";
 import {RootState} from "../../../store";
-import {Navigate} from "react-router-dom";
+import {Navigate, useParams} from "react-router-dom";
 
 
 
@@ -19,11 +19,12 @@ export const CreateNewPassword = () => {
     const dispatch = useAppDispatch();
     const flagSetNewPassword = useSelector<RootState, boolean>(
         state=>state.auth.flagSetNewPassword)
-
+const {id} = useParams()
+    console.log(id)
     const formik = useFormik({
         initialValues: {
             password: '',
-            resetPasswordToken: "some-token-from-url"
+            resetPasswordToken:id
         },
         validate: (values) => {
             const errors: FormikErrorType = {};
