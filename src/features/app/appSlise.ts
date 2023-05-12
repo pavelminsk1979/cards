@@ -17,7 +17,7 @@ const initializeApp = createAppAsyncThunk<any, any>('app/initializeApp', async (
 const slice = createSlice({
     name: 'app',
     initialState: {
-        isInitialized: true,
+        isInitialized: false,
     },
     reducers: {},
     extraReducers: builder => {
