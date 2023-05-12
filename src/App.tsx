@@ -53,7 +53,7 @@ export const App = () => {
                 <Route path="/login" element={<Login/>}/>
                 <Route path="register" element={<Registration/>}/>
                 <Route path="checkEmail" element={<CheckEmail/>}/>
-                <Route path="setNewPassword" element={<CreateNewPassword/>}/>
+                <Route path="setNewPassword/:id" element={<CreateNewPassword/>}/>
                 <Route path="forgotPassword" element={<ForgotPassword/>}/>
                 <Route path="profile" element={<Profile/>}/>
                 <Route path="editProfile" element={<EditProfile/>}/>

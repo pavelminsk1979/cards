@@ -26,7 +26,7 @@ export const ForgotPassword = () => {
             from: 'test-front-admin <ai73a@yandex.by>',
             message: `<div style="background-color: lime; padding: 15px">
 Перейдите по ссылке, чтобы продолжить востановление пароля: 
-<a href='https://pavelminsk1979.github.io/cards/#setNewPassword/$token$'>link</a></div>`
+<a href='https://pavelminsk1979.github.io/cards/#/setNewPassword/$token$'>link</a></div>`
         },
         validate: (values) => {
             const errors: FormikErrorType = {};
