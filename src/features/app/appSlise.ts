@@ -17,7 +17,7 @@ const initializeApp = createAppAsyncThunk<any, any>('app/initializeApp', async (
 const slice = createSlice({
     name: 'app',
     initialState: {
-        isInitialized: false,
+        isInitialized: true,
     },
     reducers: {},
     extraReducers: builder => {
@@ -26,7 +26,7 @@ const slice = createSlice({
                     state.isInitialized = true
             })
             .addCase(initializeApp.rejected,(state,action)=>{
-                state.isInitialized = true
+                /*state.isInitialized = true*/
             })
     }
 })
