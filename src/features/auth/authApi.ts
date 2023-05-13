@@ -70,7 +70,6 @@ export type RegisterResponseType = {
 type UserType = Omit<LoginResponseType, 'token' | 'tokenDeathTime'>
 
 export type LoginResponseType = {
-    error?: string;
     avatar?: string;
     _id: string;
     email: string;

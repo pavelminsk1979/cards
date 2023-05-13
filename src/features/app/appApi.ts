@@ -1,12 +1,14 @@
 import {instance} from "../../common/api/instansAxios";
+import {LoginResponseType} from "../auth/authApi";
 
 export const appApi = {
     initializeApp(payload: {}) {
-        return instance.post<initializeAppType>('auth/me', payload)
+        return instance.post<LoginResponseType>('auth/me', payload)
     }
 }
 
 
+/*
 export type initializeAppType = {
 	_id: string;
 	email: string;
@@ -21,4 +23,4 @@ export type initializeAppType = {
 	token: string;
 	tokenDeathTime: number;
 	avatar: null|string;
-}
+}*/

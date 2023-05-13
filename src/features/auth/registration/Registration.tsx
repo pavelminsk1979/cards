@@ -4,7 +4,9 @@ import {authThunk} from "../authSlice";
 import {useFormik} from "formik";
 import TextField from "@mui/material/TextField";
 import st from "./Registration.module.css";
-import {NavLink} from "react-router-dom";
+import {Navigate, NavLink} from "react-router-dom";
+import {useSelector} from "react-redux";
+import {RootState} from "../../../store";
 
 
 
@@ -16,6 +18,9 @@ type FormikErrorType = {
 
 export const Registration = () => {
     const dispatch = useAppDispatch();
+
+    const isLoggedIn = useSelector <RootState, boolean>(
+        state => state.auth.isLoggedIn)
 
     const formik = useFormik({
         initialValues: {
@@ -49,6 +54,9 @@ export const Registration = () => {
         }
     })
 
+    if ( isLoggedIn ) {
+        return <Navigate to={'/packs'}/>
+    }
 
     return (
         <form onSubmit={formik.handleSubmit}>

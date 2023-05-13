@@ -5,16 +5,23 @@ import {
     EditProfileResponseType, EditProfileType,
     ForgotType,
     LoginResponseType,
-    LoginType,
+    LoginType, RegisterResponseType,
     RegisterType
 } from "./authApi";
 import {createAppAsyncThunk} from "../../common/utils/createAppAsyncThunk";
-import {appThunk} from "../app/appSlise";
+import {appActions, appReducer, appThunk} from "../app/appSlise";
 
 
-const register = createAppAsyncThunk<void, RegisterType>('auth/register', async (
-    arg: RegisterType) => {
-    const res = await authApi.register(arg)
+const register = createAppAsyncThunk<{response:RegisterResponseType}, RegisterType>('auth/register', async (arg: RegisterType,thunkAPI) => {
+    try {debugger
+        const res = await authApi.register(arg)
+        return {response:res.data}
+    } catch (e:any) {
+        debugger
+            thunkAPI.dispatch(appActions.setError(
+                e.response?e.response.data.error:e.message))
+            return thunkAPI.rejectWithValue(null)
+    }
 })
 
 const login = createAppAsyncThunk<{ profileData: LoginResponseType }, LoginType>('auth/login', async (arg: LoginType) => {
@@ -28,7 +35,7 @@ const logOut = createAppAsyncThunk<{ responsLogOut: CommonResponseType }, {}>('a
     }
 )
 
-const setNewPassword = createAppAsyncThunk<any, any>('auth/setNewPassword',
+const setNewPassword = createAppAsyncThunk<{responseSetNewPassword:CommonResponseType}, {password: string,}>('auth/setNewPassword',
     async (arg) => {
         const response = await authApi.setNewPassword(arg)
         return {responseSetNewPassword: response.data}

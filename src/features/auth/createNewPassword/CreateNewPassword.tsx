@@ -20,7 +20,6 @@ export const CreateNewPassword = () => {
     const flagSetNewPassword = useSelector<RootState, boolean>(
         state=>state.auth.flagSetNewPassword)
 const {id} = useParams()
-    console.log(id)
     const formik = useFormik({
         initialValues: {
             password: '',
