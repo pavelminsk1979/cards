@@ -1,13 +1,12 @@
 import {createAppAsyncThunk} from "../../common/utils/createAppAsyncThunk";
 import {createSlice} from "@reduxjs/toolkit";
-
 import {appApi} from "./appApi";
 import {LoginResponseType} from "../auth/authApi";
-import {authThunk} from "../auth/authSlice";
 
-const initializeApp = createAppAsyncThunk<{valueInitializeApp:LoginResponseType}, {}>('app/initializeApp', async (arg,thunkAPI) => {
+
+const initializeApp = createAppAsyncThunk<{valueInitializeApp:LoginResponseType}>('app/initializeApp', async (arg,thunkAPI) => {
     try{
-        const response = await appApi.initializeApp(arg)
+        const response = await appApi.initializeApp()
         return {valueInitializeApp: response.data}
     }  catch (e:any){
         const error = e.response.data.error

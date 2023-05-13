@@ -25,8 +25,7 @@ export const App = () => {
         state => state.app.isInitialized)
 
     useEffect(()=>{
-        const payload={}
-        dispatch(appThunk.initializeApp(payload))
+        dispatch(appThunk.initializeApp())
     },[ ])
 
     if (!isInitialized) {
@@ -40,7 +39,6 @@ export const App = () => {
                     <NavLink to={'/register'}>register</NavLink>
                 <NavLink to={'/checkEmail'}>checkEmail</NavLink>
                 <NavLink to={'/setNewPassword'}>setNewPassword</NavLink>
-                {/*<NavLink to={'/forgotPassword'}>forgotPassword</NavLink>*/}
                 <NavLink to={'/profile'}>profile</NavLink>
                 <NavLink to={'/packs'}>packs</NavLink>
                 <NavLink to={'/cards'}>cards</NavLink>

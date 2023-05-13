@@ -9,7 +9,7 @@ import {
     RegisterType
 } from "./authApi";
 import {createAppAsyncThunk} from "../../common/utils/createAppAsyncThunk";
-import {appActions, appReducer, appThunk} from "../app/appSlise";
+import {appActions, appThunk} from "../app/appSlise";
 
 
 const register = createAppAsyncThunk<{response:RegisterResponseType}, RegisterType>('auth/register', async (arg: RegisterType,thunkAPI) => {
@@ -29,8 +29,8 @@ const login = createAppAsyncThunk<{ profileData: LoginResponseType }, LoginType>
     return {profileData: response.data}
 })
 
-const logOut = createAppAsyncThunk<{ responsLogOut: CommonResponseType }, {}>('auth/logOut', async (arg) => {
-        const response = await authApi.logOut(arg)
+const logOut = createAppAsyncThunk<{responsLogOut: CommonResponseType}>('auth/logOut', async (arg) => {
+        const response = await authApi.logOut()
         return {responsLogOut: response.data}
     }
 )
@@ -97,3 +97,4 @@ export const authReducer = slice.reducer;
 
 export const authThunk = {register, login, logOut, forgotPassword, editProfile, setNewPassword} /* CАНКИ упаковываю в обьект */
 
+/*alert(JSON.stringify(values));*/

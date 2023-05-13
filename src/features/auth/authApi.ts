@@ -8,8 +8,8 @@ export const authApi = {
     login(payload: LoginType) {
         return instance.post<LoginResponseType>('auth/login', payload)
     },
-    logOut(payload: {}) {
-        return instance.delete<CommonResponseType>('auth/me', payload)
+    logOut() {
+        return instance.delete<CommonResponseType>('auth/me')
     },
     forgot(payload: ForgotType) {
         return instance.post<FogotResponseType>('auth/forgot', payload)

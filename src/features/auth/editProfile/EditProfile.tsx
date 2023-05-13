@@ -34,7 +34,7 @@ export const EditProfile = () => {
             return errors;
         },
         onSubmit: values => {
-            alert(JSON.stringify(values));
+            /*alert(JSON.stringify(values));*/
             dispatch(authThunk.editProfile(values));
             formik.resetForm()
         }
@@ -42,8 +42,7 @@ export const EditProfile = () => {
 
 
     const onClickHandler = () => {
-        const payload={}
-        dispatch(authThunk.logOut(payload))
+        dispatch(authThunk.logOut())
     }
 
     const fotoMe = {

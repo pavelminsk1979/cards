@@ -16,7 +16,7 @@ export const Profile = () => {
 
 
     const onClickHandler = () => {
-        dispatch(authThunk.logOut({}))
+        dispatch(authThunk.logOut())
     }
 
     const fotoMe = {
