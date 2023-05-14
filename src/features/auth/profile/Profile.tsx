@@ -3,16 +3,14 @@ import st from "./Profile.module.css";
 import myFoto from "../../../image/myFoto.jpg";
 import {authThunk} from "../authSlice";
 import {useSelector} from "react-redux";
-import {RootState} from "../../../store";
-import {LoginResponseType} from "../authApi";
 import {Navigate} from "react-router-dom";
 import {useAppDispatch} from "../../../common/hooks/useAppDispatch";
+import {selectLogOut} from "../authSelectors";
 
 
 export const Profile = () => {
     const dispatch = useAppDispatch();
-    const logOut = useSelector<RootState, null | LoginResponseType>(
-        state => state.auth.profile)
+    const logOut = useSelector(selectLogOut)
 
 
     const onClickHandler = () => {

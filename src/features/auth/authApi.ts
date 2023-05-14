@@ -1,4 +1,4 @@
-import {instance} from "../../common/instanceAxios/instansAxios";
+import {instance} from "common/instanceAxios/instansAxios";
 
 
 export const authApi = {

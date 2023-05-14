@@ -7,6 +7,7 @@ import {useSelector} from "react-redux";
 import {RootState} from "../../../store";
 import {Navigate, useParams} from "react-router-dom";
 import {useAppDispatch} from "../../../common/hooks/useAppDispatch";
+import {selectFlagSetNewPassword} from "../authSelectors";
 
 
 
@@ -17,8 +18,7 @@ type FormikErrorType = {
 
 export const CreateNewPassword = () => {
     const dispatch = useAppDispatch();
-    const flagSetNewPassword = useSelector<RootState, boolean>(
-        state=>state.auth.flagSetNewPassword)
+    const flagSetNewPassword = useSelector(selectFlagSetNewPassword)
 const {id} = useParams()
     const formik = useFormik({
         initialValues: {

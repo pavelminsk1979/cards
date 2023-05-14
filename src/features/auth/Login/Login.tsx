@@ -7,8 +7,8 @@ import TextField from "@mui/material/TextField";
 import st from "./Login.module.css";
 import {Navigate, NavLink} from "react-router-dom";
 import {useSelector} from "react-redux";
-import {RootState} from "../../../store";
 import {useAppDispatch} from "../../../common/hooks/useAppDispatch";
+import {selectIsLoggedIn} from "../authSelectors";
 
 
 
@@ -21,8 +21,7 @@ type FormikErrorType = {
 export const Login = () => {
     const dispatch = useAppDispatch();
 
-     const isLoggedIn = useSelector <RootState, boolean>(
-     state => state.auth.isLoggedIn)
+     const isLoggedIn = useSelector (selectIsLoggedIn)
 
 
     const formik = useFormik({

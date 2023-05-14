@@ -1,11 +1,12 @@
 import {AppDispatch, RootState} from "../../store";
-import {appActions} from "../../features/app/appSlise";
+import {appActions} from "../../app/appSlise";
 import {BaseThunkAPI} from "@reduxjs/toolkit/dist/createAsyncThunk";
 import {AxiosError, isAxiosError} from "axios";
 
 
 export const thunkTryCatch = async (thunkAPI: BaseThunkAPI<RootState, any, AppDispatch, unknown>, logic: Function) => {
     const { dispatch, rejectWithValue } = thunkAPI;
+    dispatch(appActions.setStatusLoading('loading'))
     try {
         return await logic(); /* это типо логика положительного кейса*/
     } catch (e) {
@@ -18,5 +19,7 @@ export const thunkTryCatch = async (thunkAPI: BaseThunkAPI<RootState, any, AppDi
                 { error:`Native error ${err.message}` }));
         }
         return rejectWithValue(null);
+    } finally {
+        dispatch(appActions.setStatusLoading('finishLoading'))
     }
 };

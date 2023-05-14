@@ -4,11 +4,10 @@ import myFoto from "../../../image/myFoto.jpg";
 import TextField from "@mui/material/TextField";
 import {useFormik} from "formik";
 import {useSelector} from "react-redux";
-import {RootState} from "../../../store";
-import {LoginResponseType} from "../authApi";
 import {Navigate} from "react-router-dom";
 import {authThunk} from "../authSlice";
 import {useAppDispatch} from "../../../common/hooks/useAppDispatch";
+import {selectEditName, selectLogOut} from "../authSelectors";
 
 
 type FormikErrorType = {
@@ -17,10 +16,8 @@ type FormikErrorType = {
 
 export const EditProfile = () => {
     const dispatch = useAppDispatch();
-    const logOut = useSelector<RootState, null | LoginResponseType>(
-        state => state.auth.profile)
-    const editName = useSelector<RootState, undefined | string>(
-        state=>state.auth.profile?.name)
+    const logOut = useSelector(selectLogOut)
+    const editName = useSelector(selectEditName)
 
     const formik = useFormik({
         initialValues: {

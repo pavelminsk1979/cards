@@ -7,6 +7,7 @@ import {Navigate, NavLink} from "react-router-dom";
 import {useSelector} from "react-redux";
 import {RootState} from "../../../store";
 import {useAppDispatch} from "../../../common/hooks/useAppDispatch";
+import {selectFlagForgotPassword} from "../authSelectors";
 
 
 type FormikErrorType = {
@@ -15,8 +16,7 @@ type FormikErrorType = {
 
 export const ForgotPassword = () => {
     const dispatch = useAppDispatch();
-    const flagForgotPassword = useSelector<RootState, boolean>(
-        state=>state.auth.flagForgotPassword)
+    const flagForgotPassword = useSelector(selectFlagForgotPassword)
 
     const formik = useFormik({
         initialValues: {

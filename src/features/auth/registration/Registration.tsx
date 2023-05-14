@@ -1,12 +1,13 @@
 import React from "react";
-import {authThunk} from "../authSlice";
+import {authThunk} from "features/auth/authSlice";
 import {useFormik} from "formik";
 import TextField from "@mui/material/TextField";
 import st from "./Registration.module.css";
 import {Navigate, NavLink} from "react-router-dom";
 import {useSelector} from "react-redux";
-import {RootState} from "../../../store";
-import {useAppDispatch} from "../../../common/hooks/useAppDispatch";
+import {useAppDispatch} from "common/hooks/useAppDispatch";
+import {selectIsLoggedIn} from "features/auth/authSelectors";
+
 
 
 
@@ -19,8 +20,7 @@ type FormikErrorType = {
 export const Registration = () => {
     const dispatch = useAppDispatch();
 
-    const isLoggedIn = useSelector <RootState, boolean>(
-        state => state.auth.isLoggedIn)
+    const isLoggedIn = useSelector(selectIsLoggedIn)
 
     const formik = useFormik({
         initialValues: {

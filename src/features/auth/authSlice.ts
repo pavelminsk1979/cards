@@ -5,12 +5,12 @@ import {
     EditProfileResponseType, EditProfileType,
     ForgotType,
     LoginResponseType,
-    LoginType, RegisterResponseType,
+    LoginType,
     RegisterType
 } from "./authApi";
-import {createAppAsyncThunk} from "../../common/utils/createAppAsyncThunk";
-import {appActions, appThunk} from "../app/appSlise";
-import {thunkTryCatch} from "../../common/utils/thunkTryCatch";
+import {createAppAsyncThunk} from "common/utils/createAppAsyncThunk";
+import {appThunk} from "app/appSlise";
+import {thunkTryCatch} from "common/utils/thunkTryCatch";
 
 
 const register = createAppAsyncThunk<void, RegisterType>('auth/register', async (arg: RegisterType, thunkAPI) => {
@@ -27,26 +27,34 @@ const login = createAppAsyncThunk<{ profileData: LoginResponseType }, LoginType>
     })
 })
 
-const logOut = createAppAsyncThunk<{ responsLogOut: CommonResponseType }>('auth/logOut', async (arg) => {
-        const response = await authApi.logOut()
-        return {responsLogOut: response.data}
+const logOut = createAppAsyncThunk<{ responsLogOut: CommonResponseType }>('auth/logOut', async (arg, thunkAPI) => {
+        return thunkTryCatch(thunkAPI, async () => {
+            const response = await authApi.logOut()
+            return {responsLogOut: response.data}
+        })
     }
 )
 
 const setNewPassword = createAppAsyncThunk<{ responseSetNewPassword: CommonResponseType }, { password: string, }>('auth/setNewPassword',
-    async (arg) => {
-        const response = await authApi.setNewPassword(arg)
-        return {responseSetNewPassword: response.data}
+    async (arg, thunkAPI) => {
+        return thunkTryCatch(thunkAPI, async () => {
+            const response = await authApi.setNewPassword(arg)
+            return {responseSetNewPassword: response.data}
+        })
     })
 
-const editProfile = createAppAsyncThunk<{ responseEditProfile: EditProfileResponseType }, EditProfileType>('auth/editProfile', async (arg) => {
-    const response = await authApi.editProfile(arg)
-    return {responseEditProfile: response.data}
+const editProfile = createAppAsyncThunk<{ responseEditProfile: EditProfileResponseType }, EditProfileType>('auth/editProfile', async (arg, thunkAPI) => {
+    return thunkTryCatch(thunkAPI, async () => {
+        const response = await authApi.editProfile(arg)
+        return {responseEditProfile: response.data}
+    })
 })
 
-const forgotPassword = createAppAsyncThunk('auth/forgotPassword', async (arg: ForgotType) => {
-    const response = await authApi.forgot(arg)
-    return {responseForgotPassword: response.data.success}
+const forgotPassword = createAppAsyncThunk('auth/forgotPassword', async (arg: ForgotType, thunkAPI) => {
+    return thunkTryCatch(thunkAPI, async () => {
+        const response = await authApi.forgot(arg)
+        return {responseForgotPassword: response.data.success}
+    })
 })
 
 
@@ -86,7 +94,6 @@ const slice = createSlice({
                 if (action.payload.responsLogOut.info) {
                     state.isLoggedIn = false
                     state.profile = null
-
                 }
             })
     }
