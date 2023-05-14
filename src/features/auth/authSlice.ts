@@ -10,32 +10,30 @@ import {
 } from "./authApi";
 import {createAppAsyncThunk} from "../../common/utils/createAppAsyncThunk";
 import {appActions, appThunk} from "../app/appSlise";
+import {thunkTryCatch} from "../../common/utils/thunkTryCatch";
 
 
-const register = createAppAsyncThunk<{response:RegisterResponseType}, RegisterType>('auth/register', async (arg: RegisterType,thunkAPI) => {
-    try {debugger
-        const res = await authApi.register(arg)
-        return {response:res.data}
-    } catch (e:any) {
-        debugger
-            thunkAPI.dispatch(appActions.setError(
-                e.response?e.response.data.error:e.message))
-            return thunkAPI.rejectWithValue(null)
-    }
+const register = createAppAsyncThunk<void, RegisterType>('auth/register', async (arg: RegisterType, thunkAPI) => {
+    return thunkTryCatch(thunkAPI, async () => {
+        await authApi.register(arg)
+    })
 })
 
-const login = createAppAsyncThunk<{ profileData: LoginResponseType }, LoginType>('auth/login', async (arg: LoginType) => {
-    const response = await authApi.login(arg)
-    return {profileData: response.data}
+
+const login = createAppAsyncThunk<{ profileData: LoginResponseType }, LoginType>('auth/login', async (arg: LoginType, thunkAPI) => {
+    return thunkTryCatch(thunkAPI, async () => {
+        const response = await authApi.login(arg)
+        return {profileData: response.data}
+    })
 })
 
-const logOut = createAppAsyncThunk<{responsLogOut: CommonResponseType}>('auth/logOut', async (arg) => {
+const logOut = createAppAsyncThunk<{ responsLogOut: CommonResponseType }>('auth/logOut', async (arg) => {
         const response = await authApi.logOut()
         return {responsLogOut: response.data}
     }
 )
 
-const setNewPassword = createAppAsyncThunk<{responseSetNewPassword:CommonResponseType}, {password: string,}>('auth/setNewPassword',
+const setNewPassword = createAppAsyncThunk<{ responseSetNewPassword: CommonResponseType }, { password: string, }>('auth/setNewPassword',
     async (arg) => {
         const response = await authApi.setNewPassword(arg)
         return {responseSetNewPassword: response.data}
@@ -81,12 +79,14 @@ const slice = createSlice({
             .addCase(login.fulfilled, (state, action) => {
                 state.profile = action.payload.profileData
                 state.isLoggedIn = true
-                state.flagSetNewPassword=false
+                state.flagSetNewPassword = false
             })
             .addCase(logOut.fulfilled, (state, action) => {
+
                 if (action.payload.responsLogOut.info) {
-                    state.profile = null
                     state.isLoggedIn = false
+                    state.profile = null
+
                 }
             })
     }

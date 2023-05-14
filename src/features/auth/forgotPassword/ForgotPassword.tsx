@@ -1,14 +1,12 @@
 import React from "react";
-import {useAppDispatch} from "../../../app/hooks";
 import {authThunk} from "../authSlice";
 import {useFormik} from "formik";
-import Checkbox from "@mui/material/Checkbox";
-import FormControlLabel from "@mui/material/FormControlLabel";
 import TextField from "@mui/material/TextField";
 import st from "./ForgotPassword.module.css";
 import {Navigate, NavLink} from "react-router-dom";
 import {useSelector} from "react-redux";
 import {RootState} from "../../../store";
+import {useAppDispatch} from "../../../common/hooks/useAppDispatch";
 
 
 type FormikErrorType = {

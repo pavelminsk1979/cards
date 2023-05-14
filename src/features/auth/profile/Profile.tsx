@@ -2,11 +2,11 @@ import React from "react";
 import st from "./Profile.module.css";
 import myFoto from "../../../image/myFoto.jpg";
 import {authThunk} from "../authSlice";
-import {useAppDispatch} from "../../../app/hooks";
 import {useSelector} from "react-redux";
 import {RootState} from "../../../store";
 import {LoginResponseType} from "../authApi";
 import {Navigate} from "react-router-dom";
+import {useAppDispatch} from "../../../common/hooks/useAppDispatch";
 
 
 export const Profile = () => {

@@ -1,13 +1,12 @@
 
 import React from "react";
-import {useAppDispatch} from "../../../app/hooks";
 import st from "./CheckEmail.module.css";
 import mailImage from "../../../image/mail1.png";
 
 
 
 export const CheckEmail = () => {
-    const dispatch = useAppDispatch();
+    /*const dispatch = useAppDispatch();*/
 
 
 const onClickHandler = () => {

@@ -1,5 +1,4 @@
 import React from "react";
-import {useAppDispatch} from "../../../app/hooks";
 import {authThunk} from "../authSlice";
 import {useFormik} from "formik";
 import Checkbox from "@mui/material/Checkbox";
@@ -9,6 +8,7 @@ import st from "./Login.module.css";
 import {Navigate, NavLink} from "react-router-dom";
 import {useSelector} from "react-redux";
 import {RootState} from "../../../store";
+import {useAppDispatch} from "../../../common/hooks/useAppDispatch";
 
 
 

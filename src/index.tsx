@@ -7,6 +7,7 @@ import reportWebVitals from "./reportWebVitals";
 import "./index.css";
 import {HashRouter} from "react-router-dom";
 
+
 const container = document.getElementById("root")!;
 const root = createRoot(container);
 

@@ -12,11 +12,13 @@ import {Learn} from "./components/Learn";
 import st from './App.module.css'
 import {AppBar} from "./components/appBar/AppBar";
 import {EditProfile} from "./features/auth/editProfile/EditProfile";
-import {useAppDispatch} from "./app/hooks";
 import {appThunk} from "./features/app/appSlise";
 import {RootState} from "./store";
 import {useSelector} from "react-redux";
 import {Loading} from "./components/loading/Loading";
+import {GlobalError} from "./common/globalError/GlobalError";
+import 'react-toastify/dist/ReactToastify.css';
+import {useAppDispatch} from "./common/hooks/useAppDispatch";
 
 
 export const App = () => {
@@ -33,6 +35,7 @@ export const App = () => {
     }
     return (
         <div className={st.page}>
+            <GlobalError/>
             <AppBar/>
             <div>
                 <NavLink to={'/login'}>login</NavLink>

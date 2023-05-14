@@ -1,5 +1,4 @@
 import React from "react";
-import {useAppDispatch} from "../../../app/hooks";
 import {authThunk} from "../authSlice";
 import {useFormik} from "formik";
 import TextField from "@mui/material/TextField";
@@ -7,6 +6,7 @@ import st from "./CreateNewPassword.module.css";
 import {useSelector} from "react-redux";
 import {RootState} from "../../../store";
 import {Navigate, useParams} from "react-router-dom";
+import {useAppDispatch} from "../../../common/hooks/useAppDispatch";
 
 
 

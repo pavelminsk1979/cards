@@ -24,8 +24,10 @@ const slice = createSlice({
         isLoading:false
     },
     reducers: {
+
         setError:(state,action)=>{
             state.error= action.payload
+
             /* Вывести ошибку на экран-- текст в action.payload*/
         }
     },

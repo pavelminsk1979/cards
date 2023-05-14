@@ -6,9 +6,9 @@ import {useFormik} from "formik";
 import {useSelector} from "react-redux";
 import {RootState} from "../../../store";
 import {LoginResponseType} from "../authApi";
-import {useAppDispatch} from "../../../app/hooks";
 import {Navigate} from "react-router-dom";
 import {authThunk} from "../authSlice";
+import {useAppDispatch} from "../../../common/hooks/useAppDispatch";
 
 
 type FormikErrorType = {
@@ -35,13 +35,14 @@ export const EditProfile = () => {
         },
         onSubmit: values => {
             /*alert(JSON.stringify(values));*/
-            dispatch(authThunk.editProfile(values));
+           /* dispatch(authThunk.editProfile(values));*//* ПРОВЕРИТЬ ибо этот запрос на сервер устанавливал данные в profile и перекидывала на страницу с карточками даже когда я не был залогинет*/
             formik.resetForm()
         }
     })
 
 
     const onClickHandler = () => {
+
         dispatch(authThunk.logOut())
     }
 
