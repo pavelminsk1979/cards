@@ -1,0 +1,15 @@
+
+.slider {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+    width: 350px;
+    height: 30px;
+}
+
+.slider input {
+    width: 35px;
+    height: 30px;
+    font-size: 20px;
+
+}

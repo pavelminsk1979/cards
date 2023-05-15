@@ -1,5 +1,5 @@
-import {AppDispatch, RootState} from "../../store";
-import {appActions} from "../../app/appSlise";
+import {AppDispatch, RootState} from "store";
+import {appActions} from "app/appSlise";
 import {BaseThunkAPI} from "@reduxjs/toolkit/dist/createAsyncThunk";
 import {AxiosError, isAxiosError} from "axios";
 
