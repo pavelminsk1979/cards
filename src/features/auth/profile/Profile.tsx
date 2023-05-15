@@ -3,8 +3,8 @@ import st from "./Profile.module.css";
 import myFoto from "../../../image/myFoto.jpg";
 import {authThunk} from "../authSlice";
 import {useSelector} from "react-redux";
-import {Navigate} from "react-router-dom";
-import {useAppDispatch} from "../../../common/hooks/useAppDispatch";
+import {Navigate, NavLink} from "react-router-dom";
+import {useAppDispatch} from "common/hooks/useAppDispatch";
 import {selectLogOut} from "../authSelectors";
 
 
@@ -36,6 +36,11 @@ export const Profile = () => {
 
                 <div className={st.mail}>
                     pavelminsk@mail.ru
+                </div>
+
+                <div className={st.linkEditProfile}>
+                    <NavLink to={'/editProfile'}>
+                        Edit PROFILE</NavLink>
                 </div>
 
                 <div>

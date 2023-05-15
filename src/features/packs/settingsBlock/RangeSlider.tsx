@@ -1,7 +1,7 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
 import Slider from '@mui/material/Slider';
-import st from './RangeSlider.module.css'
+import st from 'features/packs/settingsBlock/RangeSlider.module.css'
 
 function valuetext(value: number) {
     return `${value}°C`;

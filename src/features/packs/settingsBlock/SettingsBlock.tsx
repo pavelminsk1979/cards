@@ -1,7 +1,7 @@
 import React, {ChangeEvent, useState, KeyboardEvent} from 'react';
-import st from './SettingsBlock.module.css'
+import st from 'features/packs/settingsBlock/SettingsBlock.module.css'
 import Button from "@mui/material/Button";
-import {RangeSlider} from "components/packs/settingsBlock/RangeSlider";
+import {RangeSlider} from "features/packs/settingsBlock/RangeSlider";
 
 
 

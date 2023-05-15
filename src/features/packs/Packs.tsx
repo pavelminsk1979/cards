@@ -9,9 +9,12 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import st from './Packs.module.css'
-import {BlokNameAndButton} from "components/packs/upperBlock/BlokNameAndButton";
-import {SettingsBlock} from "components/packs/settingsBlock/SettingsBlock";
+import st from 'features/packs/Packs.module.css'
+import {BlokNameAndButton} from "features/packs/upperBlock/BlokNameAndButton";
+import {SettingsBlock} from "features/packs/settingsBlock/SettingsBlock";
+import {useEffect} from "react";
+import {useAppDispatch} from "common/hooks/useAppDispatch";
+import {packThunk} from "features/packs/packSlice";
 
 function createData(
     name: string,
@@ -32,7 +35,12 @@ const rows = [
 ];
 
 export const Packs = () => {
+    const dispatch = useAppDispatch();
     const isLoggedIn = useSelector (selectIsLoggedIn)
+
+    useEffect(() => {
+        dispatch(packThunk.fetchPack())
+    }, [])
 
 
     if ( !isLoggedIn ) {

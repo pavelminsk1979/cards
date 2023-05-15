@@ -6,7 +6,7 @@ import {CheckEmail} from "features/auth/checkEmail/CheckEmail";
 import {CreateNewPassword} from "features/auth/createNewPassword/CreateNewPassword";
 import {ForgotPassword} from "features/auth/forgotPassword/ForgotPassword";
 import {Profile} from "features/auth/profile/Profile";
-import {Packs} from "components/packs/Packs";
+import {Packs} from "features/packs/Packs";
 import {Cards} from "components/Cards";
 import {Learn} from "components/Learn";
 import st from './App.module.css'
@@ -42,7 +42,7 @@ export const App = () => {
             <AppBar/>
             {statusLoading === 'loading' && <LinearProgress
                 color="secondary"/>}
-            <div>
+        {/*    <div>
                 <NavLink to={'/login'}>login</NavLink>
                 <NavLink to={'/register'}>register</NavLink>
                 <NavLink to={'/checkEmail'}>checkEmail</NavLink>
@@ -52,7 +52,7 @@ export const App = () => {
                 <NavLink to={'/cards'}>cards</NavLink>
                 <NavLink to={'/learn'}>learn</NavLink>
                 <NavLink to={'/editProfile'}>EditProfile</NavLink>
-            </div>
+            </div>*/}
 
 
             <Routes>

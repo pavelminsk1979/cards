@@ -7,7 +7,7 @@ import TextField from "@mui/material/TextField";
 import st from "./Login.module.css";
 import {Navigate, NavLink} from "react-router-dom";
 import {useSelector} from "react-redux";
-import {useAppDispatch} from "../../../common/hooks/useAppDispatch";
+import {useAppDispatch} from "common/hooks/useAppDispatch";
 import {selectIsLoggedIn} from "../authSelectors";
 
 
@@ -90,10 +90,11 @@ export const Login = () => {
                         />
                     }/>
                 </div>
+
                 <div className={st.forgotPassword}>
                     <NavLink to={'/forgotPassword'}>Forgot Password?</NavLink>
-
                 </div>
+
                 <div>
                     <button type={'submit'}
                         className={st.button}>
