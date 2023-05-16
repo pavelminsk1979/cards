@@ -1,5 +1,5 @@
 import  React from 'react';
-import st from 'features/packs/upperBlock/BlokNameAndButton.module.css'
+import st from 'features/packs/packs/upperBlock/BlokNameAndButton.module.css'
 
 export const BlokNameAndButton = () => {
   return(

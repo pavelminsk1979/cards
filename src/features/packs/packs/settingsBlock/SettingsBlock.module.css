@@ -21,7 +21,7 @@
     height: 40px;
     margin-top: 30px;
     margin-bottom: 10px;
-    background-color: #eef2f5;
+    background-color: #fbfbfb;
     border: 2px solid #eef2f5;
     color: #434447;
     border-radius: 15px;
@@ -31,7 +31,7 @@
 
 .button:hover {
     transform: scale(1.1);
-    background-color: #c8cdcf;;
+    background-color: #f1f1f4;;
     border: 2px solid #c8cdcf;
     box-shadow: 2px 2px 5px 2px #666664;
     transition: 0.5s;

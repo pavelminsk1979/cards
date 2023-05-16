@@ -6,7 +6,7 @@ import {CheckEmail} from "features/auth/checkEmail/CheckEmail";
 import {CreateNewPassword} from "features/auth/createNewPassword/CreateNewPassword";
 import {ForgotPassword} from "features/auth/forgotPassword/ForgotPassword";
 import {Profile} from "features/auth/profile/Profile";
-import {Packs} from "features/packs/Packs";
+import {Packs} from "features/packs/packs/Packs";
 import {Cards} from "components/Cards";
 import {Learn} from "components/Learn";
 import st from './App.module.css'

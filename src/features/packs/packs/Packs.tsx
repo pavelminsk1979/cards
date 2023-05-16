@@ -9,9 +9,9 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import st from 'features/packs/Packs.module.css'
-import {BlokNameAndButton} from "features/packs/upperBlock/BlokNameAndButton";
-import {SettingsBlock} from "features/packs/settingsBlock/SettingsBlock";
+import st from 'features/packs/packs/Packs.module.css'
+import {BlokNameAndButton} from "features/packs/packs/upperBlock/BlokNameAndButton";
+import {SettingsBlock} from "features/packs/packs/settingsBlock/SettingsBlock";
 import {useEffect} from "react";
 import {useAppDispatch} from "common/hooks/useAppDispatch";
 import {packThunk} from "features/packs/packSlice";
