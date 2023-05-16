@@ -1,14 +1,17 @@
 
 import {createAppAsyncThunk} from "common/utils/createAppAsyncThunk";
 import {thunkTryCatch} from "common/utils/thunkTryCatch";
-import {packApi} from "features/packs/packApi";
+import {GetResponsePacksType, packApi} from "features/packs/packApi";
 import {createSlice} from "@reduxjs/toolkit";
+import {initialPacksState} from "features/packs/initialPacksState";
 
 
-const fetchPack = createAppAsyncThunk<any>('packs/fetchPack', async (arg, thunkAPI) => {
+
+
+const fetchPacks = createAppAsyncThunk<GetResponsePacksType>('packs/fetchPacks', async (arg, thunkAPI) => {
         return thunkTryCatch(thunkAPI, async () => {
-            const response = await packApi.fetchPacks()
-            return {responsLogOut: response.data}
+            const respons = await packApi.fetchPacks()
+            return respons.data
         })
     }
 )
@@ -16,11 +19,16 @@ const fetchPack = createAppAsyncThunk<any>('packs/fetchPack', async (arg, thunkA
 
 const slice = createSlice({
     name:'packs',
-    initialState:{},
+    initialState:initialPacksState,
     reducers:{},
-    extraReducers:{}
+    extraReducers:builder => {
+        builder
+            .addCase(fetchPacks.fulfilled,(state,action)=>{
+                return  action.payload
+            })
+    }
 })
 
-export const packThunk = {fetchPack}
+export const packThunk = {fetchPacks}
 
 export const packReducer = slice.reducer

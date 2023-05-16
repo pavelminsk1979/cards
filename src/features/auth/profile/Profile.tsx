@@ -25,6 +25,13 @@ export const Profile = () => {
     }
 
     return (
+        <div>
+            <div className={st.link}>
+            <NavLink
+                className={st.linkText}
+                to={'/packs'}>
+                Список КОЛОД</NavLink>
+            </div>
         <div className={st.common}>
             <div className={st.container}>
                 <div className={st.title}>
@@ -50,6 +57,7 @@ export const Profile = () => {
                     </button>
                 </div>
             </div>
+        </div>
         </div>
     )
 }

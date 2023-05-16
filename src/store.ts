@@ -3,11 +3,13 @@
 import { configureStore, ThunkAction, Action } from "@reduxjs/toolkit";
 import {authReducer} from "features/auth/authSlice";
 import {appReducer} from "app/appSlise";
+import {packReducer} from "features/packs/packSlice";
 
 export const store = configureStore({
   reducer: {
     app:appReducer,
-    auth:authReducer
+    auth:authReducer,
+    packs:packReducer,
   },
 });
 
@@ -24,3 +26,7 @@ export type AppThunk<ReturnType = void> = ThunkAction<
 
 /* @ts-ignore */   /* store.getState()  */
 window.store = store
+
+
+
+

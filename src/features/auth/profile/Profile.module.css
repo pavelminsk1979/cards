@@ -1,3 +1,13 @@
+.link{
+    margin-top: 10px;
+    margin-left: 150px;
+}
+.linkText{
+    font-weight: 500;
+    font-size: 17px;
+    color: #4f5158;
+    text-decoration: none;
+}
 .common{
     display: flex;
     justify-content: center;
@@ -72,3 +82,6 @@
     box-shadow: 2px 2px 5px 2px #666664;
     transition: 0.5s;
 }
+
+
+

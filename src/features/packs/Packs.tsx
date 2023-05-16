@@ -15,31 +15,16 @@ import {SettingsBlock} from "features/packs/settingsBlock/SettingsBlock";
 import {useEffect} from "react";
 import {useAppDispatch} from "common/hooks/useAppDispatch";
 import {packThunk} from "features/packs/packSlice";
+import {selectPacksState} from "features/packs/packSelectors";
 
-function createData(
-    name: string,
-    calories: number,
-    fat: number,
-    carbs: number,
-    protein: number,
-) {
-    return {name, calories, fat, carbs, protein};
-}
-
-const rows = [
-    createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-    createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-    createData('Eclair', 262, 16.0, 24, 6.0),
-    createData('Cupcake', 305, 3.7, 67, 4.3),
-    createData('Gingerbread', 356, 16.0, 49, 3.9),
-];
 
 export const Packs = () => {
     const dispatch = useAppDispatch();
     const isLoggedIn = useSelector (selectIsLoggedIn)
+    const packsState = useSelector (selectPacksState)
 
     useEffect(() => {
-        dispatch(packThunk.fetchPack())
+        dispatch(packThunk.fetchPacks())
     }, [])
 
 
@@ -63,18 +48,18 @@ export const Packs = () => {
                         </TableRow>
                     </TableHead>
                     <TableBody className={st.tableBody}>
-                        {rows.map((row) => (
+                        {packsState.cardPacks.map((pack) => (
                             <TableRow
-                                key={row.name}
+                                key={pack._id}
                                 sx={{'&:last-child td, &:last-child th': {border: 0}}}
                             >
                                 <TableCell component="th" scope="row">
-                                    {row.name}
+                                    {pack.name}
                                 </TableCell>
-                                <TableCell align="center">{row.calories}</TableCell>
-                                <TableCell align="center">{row.fat}</TableCell>
-                                <TableCell align="center">{row.carbs}</TableCell>
-                                <TableCell align="center">{row.protein}</TableCell>
+                                <TableCell align="center">{pack.cardsCount}</TableCell>
+                                <TableCell align="center">{pack.updated}</TableCell>
+                                <TableCell align="center">{pack.user_name}</TableCell>
+                                <TableCell align="center">{pack.name}</TableCell>
                             </TableRow>
                         ))}
                     </TableBody>
@@ -84,41 +69,3 @@ export const Packs = () => {
     );
 }
 
-
-/*
-export const Packs = () => {
-    const isLoggedIn = useSelector (selectIsLoggedIn)
-
-
-    if ( !isLoggedIn ) {
-        return <Navigate to={'/login'}/>
-    }
-
-    return(
-        <div>
-
-            <table>
-            <thead>
-            <tr>
-            <th>Имя</th>
-            <th>Фамилия</th>
-            <th>Возраст</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-            <td>Иван</td>
-            <td>Иванов</td>
-            <td>25</td>
-            </tr>
-            <tr>
-            <td>Петр</td>
-            <td>Петров</td>
-            <td>30</td>
-            </tr>
-            </tbody>
-            </table>
-
-        </div>
-    )
-}*/
