@@ -29,7 +29,7 @@ export const SettingsBlock = () => {
     return (
         <div className={st.common}>
             <div>
-                <div>
+                <div className={st.text}>
                     Поиск
                 </div>
                 <input
@@ -41,7 +41,7 @@ export const SettingsBlock = () => {
 
             </div>
             <div>
-                <div>
+                <div className={st.text}>
                     Показать колоды карточек
                 </div>
 
@@ -57,7 +57,7 @@ export const SettingsBlock = () => {
                     Все</Button>
             </div>
             <div>
-                <div>
+                <div className={st.text}>
                     Количество карточек
                 </div>
 

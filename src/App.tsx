@@ -20,6 +20,9 @@ import 'react-toastify/dist/ReactToastify.css';
 import {useAppDispatch} from "common/hooks/useAppDispatch";
 import LinearProgress from "@mui/material/LinearProgress";
 import {selectIsInitialized, selectStatusLoading} from "app/appSelectors";
+import {MyPacks} from "features/packs/myPacks/MyPacks";
+import {FriendPacks} from "features/packs/friendPacks/FriendPacks";
+import {AddNewCard} from "features/packs/addNewCard/AddNewCard";
 
 
 export const App = () => {
@@ -42,8 +45,12 @@ export const App = () => {
             <AppBar/>
             {statusLoading === 'loading' && <LinearProgress
                 color="secondary"/>}
-        {/*    <div>
-                <NavLink to={'/login'}>login</NavLink>
+            <div>
+                <NavLink to={'/addNewCard'}>addNewCard</NavLink>
+                <NavLink to={'/friendPacks'}>friendPacks</NavLink>
+                <NavLink to={'/myPacks'}>myPacks</NavLink>
+
+                {/*    <NavLink to={'/login'}>login</NavLink>
                 <NavLink to={'/register'}>register</NavLink>
                 <NavLink to={'/checkEmail'}>checkEmail</NavLink>
                 <NavLink to={'/setNewPassword'}>setNewPassword</NavLink>
@@ -51,8 +58,8 @@ export const App = () => {
                 <NavLink to={'/packs'}>packs</NavLink>
                 <NavLink to={'/cards'}>cards</NavLink>
                 <NavLink to={'/learn'}>learn</NavLink>
-                <NavLink to={'/editProfile'}>EditProfile</NavLink>
-            </div>*/}
+                <NavLink to={'/editProfile'}>EditProfile</NavLink>*/}
+            </div>
 
 
             <Routes>
@@ -66,6 +73,9 @@ export const App = () => {
                 <Route path="packs" element={<Packs/>}/>
                 <Route path="cards" element={<Cards/>}/>
                 <Route path="learn" element={<Learn/>}/>
+                <Route path="addNewCard" element={<AddNewCard/>}/>
+                <Route path="friendPacks" element={<FriendPacks/>}/>
+                <Route path="myPacks" element={<MyPacks/>}/>
 
 
                 <Route path="/404" element={<h2>404: PAGE NOT FOUND</h2>}/>

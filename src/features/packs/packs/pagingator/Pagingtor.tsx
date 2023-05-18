@@ -42,7 +42,7 @@ export const Pagingtor = () => {
 
     const fetchActivePageHandler = (page:number) => {
         dispatch(packThunk.fetchPacks({pageCount,page}))
-    }
+    }  /*когда на стрелку нажал то пошел запрос за следующими  колодами*/
 
     const  onClickNextPart= () => {
         setPart(part+1)
@@ -62,7 +62,8 @@ export const Pagingtor = () => {
             {
                 arrayNumbers.filter(el=>el >=numberStartPart &&  el<=numberFinishPart).map(el => {
                     return (
-                        <span onClick={()=>onClickHandler(el)}
+                        <span key={el}
+                            onClick={()=>onClickHandler(el)}
                             className={page===el
                             ?st.activeNumber
                             :st.number
