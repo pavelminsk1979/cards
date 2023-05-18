@@ -1,0 +1,21 @@
+.activeNumber{
+    width: 30px;
+    height: 30px;
+    margin-right: 3px;
+    border-radius: 3px;
+    background-color: #0787cb;
+    border: 2px solid #0787cb;
+    color: white;
+    display: inline-block;
+}
+
+.number{
+    width: 30px;
+    height: 30px;
+    margin-right: 3px;
+    border-radius: 3px;
+    background-color: #fcfbfb;
+    border: 2px solid lavender;
+    color: #4f5158;
+    display: inline-block;
+}

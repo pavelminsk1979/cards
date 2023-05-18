@@ -16,6 +16,7 @@ import {useEffect} from "react";
 import {useAppDispatch} from "common/hooks/useAppDispatch";
 import {packThunk} from "features/packs/packSlice";
 import {selectPacksState} from "features/packs/packSelectors";
+import {Pagingtor} from "features/packs/packs/pagingator/Pagingtor";
 
 
 export const Packs = () => {
@@ -24,7 +25,9 @@ export const Packs = () => {
     const packsState = useSelector (selectPacksState)
 
     useEffect(() => {
-        dispatch(packThunk.fetchPacks())
+        const pageCount:number = 10  /*столько колод ожидаю с сервера при get запросе */
+        const page:number = 1
+        dispatch(packThunk.fetchPacks({pageCount,page}))
     }, [])
 
 
@@ -65,6 +68,7 @@ export const Packs = () => {
                     </TableBody>
                 </Table>
             </TableContainer>
+            <Pagingtor/>
         </div>
     );
 }

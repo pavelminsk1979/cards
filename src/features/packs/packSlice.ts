@@ -8,9 +8,9 @@ import {initialPacksState} from "features/packs/initialPacksState";
 
 
 
-const fetchPacks = createAppAsyncThunk<GetResponsePacksType>('packs/fetchPacks', async (arg, thunkAPI) => {
+const fetchPacks = createAppAsyncThunk<GetResponsePacksType,{pageCount:number,page:number}>('packs/fetchPacks', async (arg, thunkAPI) => {
         return thunkTryCatch(thunkAPI, async () => {
-            const respons = await packApi.fetchPacks()
+            const respons = await packApi.fetchPacks(arg.pageCount,arg.page)
             return respons.data
         })
     }

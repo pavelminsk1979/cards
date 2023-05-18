@@ -1,10 +1,11 @@
 import {instance} from "common/instanceAxios/instansAxios";
 
 export const packApi = {
-    fetchPacks () {
-        return instance.get<GetResponsePacksType>('cards/pack')
+    fetchPacks (pageCount:number,page:number) {
+        return instance.get<GetResponsePacksType>(`cards/pack?pageCount=${pageCount}&page=${page}`)
     }
 }
+
  type CardPacksType = {
 	_id: string;
 	user_id: string;
