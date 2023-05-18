@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {useSelector} from "react-redux";
 import {selectPacksState} from "features/packs/packSelectors";
 import st from "./Paginator.module.css"
@@ -31,11 +31,26 @@ export const Pagingtor = () => {
         dispatch(packThunk.fetchPacks({pageCount,page}))
     }
 
-    const onClickReturnPart = () => {
 
+    const sizeOnePart = 10 /* размер одной части кнопок*/
+    const [part,setPart]=useState(1)
+
+    const numberStartPart =(part-1)*sizeOnePart+1
+    const numberFinishPart =part*sizeOnePart
+    /*    у порции есть первое число с которой порция начинается
+    и последнее число которым порция заканчивается*/
+
+    const fetchActivePageHandler = (page:number) => {
+        dispatch(packThunk.fetchPacks({pageCount,page}))
     }
-    const onClickNextPart = () => {
 
+    const  onClickNextPart= () => {
+        setPart(part+1)
+        fetchActivePageHandler((part )*sizeOnePart+1)
+    }
+    const onClickReturnPart = () => {
+        setPart(part-1)
+        fetchActivePageHandler((part-1 )*sizeOnePart)
     }
 
     return (
@@ -45,7 +60,7 @@ export const Pagingtor = () => {
                 <FastRewind/>
             </IconButton>
             {
-                arrayNumbers.map(el => {
+                arrayNumbers.filter(el=>el >=numberStartPart &&  el<=numberFinishPart).map(el => {
                     return (
                         <span onClick={()=>onClickHandler(el)}
                             className={page===el
