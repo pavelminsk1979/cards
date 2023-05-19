@@ -6,15 +6,29 @@ import {createSlice} from "@reduxjs/toolkit";
 import {initialPacksState} from "features/packs/initialPacksState";
 
 
-
-
-const fetchPacks = createAppAsyncThunk<GetResponsePacksType,{pageCount:number,page:number}>('packs/fetchPacks', async (arg, thunkAPI) => {
+const fetchPacks = createAppAsyncThunk<GetResponsePacksType,{pageCount?:number,page?:number,packName?:string}>('packs/fetchPacks', async (arg, thunkAPI) => {
         return thunkTryCatch(thunkAPI, async () => {
-            const respons = await packApi.fetchPacks(arg.pageCount,arg.page)
+            let pageCount: number = 9  /*столько колод ожидаю с сервера при get запросе */
+            if(pageCount!=9){
+                pageCount=thunkAPI.getState().packs.pageCount
+            }
+            /*const state = thunkAPI.getState() достать можно текущие данные */
+            const respons = await packApi.fetchPacks(
+                pageCount,arg.page,arg.packName)
             return respons.data
         })
     }
 )
+
+
+/*const fetchPacks = createAppAsyncThunk<GetResponsePacksType,{pageCount?:number,page?:number,packName?:string}>('packs/fetchPacks', async (arg, thunkAPI) => {
+        return thunkTryCatch(thunkAPI, async () => {
+            /!*const state = thunkAPI.getState() достать можно текущие данные *!/
+            const respons = await packApi.fetchPacks(arg.pageCount,arg.page,arg.packName)
+            return respons.data
+        })
+    }
+)*/
 
 
 const slice = createSlice({

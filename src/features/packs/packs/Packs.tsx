@@ -15,32 +15,34 @@ import {SettingsBlock} from "features/packs/packs/settingsBlock/SettingsBlock";
 import {useEffect} from "react";
 import {useAppDispatch} from "common/hooks/useAppDispatch";
 import {packThunk} from "features/packs/packSlice";
-import {selectPacksState} from "features/packs/packSelectors";
-import {Pagingtor} from "features/packs/packs/pagingator/Pagingtor";
+import {selectCardPacks} from "features/packs/packSelectors";
+import {Pagingtor} from "components/pagingator/Pagingtor";
 
 
 export const Packs = () => {
     const dispatch = useAppDispatch();
-    const isLoggedIn = useSelector (selectIsLoggedIn)
-    const packsState = useSelector (selectPacksState)
+    const isLoggedIn = useSelector(selectIsLoggedIn)
+    const cardPacks = useSelector(selectCardPacks)
 
     useEffect(() => {
-        const pageCount:number = 10  /*столько колод ожидаю с сервера при get запросе */
-        const page:number = 1
-        dispatch(packThunk.fetchPacks({pageCount,page}))
+
+        dispatch(packThunk.fetchPacks({}))
     }, [])
 
 
-    if ( !isLoggedIn ) {
+    if (!isLoggedIn) {
         return <Navigate to={'/login'}/>
     }
 
     return (
         <div className={st.common}>
-          <BlokNameAndButton/>
+            <BlokNameAndButton
+                title='Список КОЛОД'
+                nameButton='Добавить колоду'/>
+
             <SettingsBlock/>
             <TableContainer component={Paper}>
-                <Table  sx={{minWidth: 650}} aria-label="simple table">
+                <Table sx={{minWidth: 650}} aria-label="simple table">
                     <TableHead>
                         <TableRow className={st.tableHead}>
                             <TableCell>Наименование Колоды</TableCell>
@@ -51,7 +53,7 @@ export const Packs = () => {
                         </TableRow>
                     </TableHead>
                     <TableBody className={st.tableBody}>
-                        {packsState.cardPacks.map((pack) => (
+                        {cardPacks.map((pack) => (
                             <TableRow
                                 key={pack._id}
                                 sx={{'&:last-child td, &:last-child th': {border: 0}}}

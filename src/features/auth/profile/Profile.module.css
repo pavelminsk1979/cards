@@ -1,13 +1,4 @@
-.link{
-    margin-top: 10px;
-    margin-left: 150px;
-}
-.linkText{
-    font-weight: 500;
-    font-size: 17px;
-    color: #4f5158;
-    text-decoration: none;
-}
+
 .common{
     display: flex;
     justify-content: center;

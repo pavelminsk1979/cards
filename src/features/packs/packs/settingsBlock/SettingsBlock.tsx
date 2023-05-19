@@ -2,27 +2,36 @@ import React, {ChangeEvent, useState, KeyboardEvent} from 'react';
 import st from 'features/packs/packs/settingsBlock/SettingsBlock.module.css'
 import Button from "@mui/material/Button";
 import { RangeSlider } from 'features/packs/packs/settingsBlock/rangeSlider/RangeSlider';
+import {packThunk} from "features/packs/packSlice";
+import {useAppDispatch} from "common/hooks/useAppDispatch";
+import {useSelector} from "react-redux";
+import {selectPage} from "features/packs/packSelectors";
 
 
 
 
 
 export const SettingsBlock = () => {
+    const dispatch = useAppDispatch();
+
     const [valueButton, setValueButton] = useState('all')
-    const [textInput, setTextInput] = useState('')
+    const [packName, setPackName] = useState('')
+
+    const page = useSelector(selectPage)
+
 
     const onClickHandler = (value: string) => {
         setValueButton(value)
     }
 
     const onChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
-        setTextInput(event.currentTarget.value)
+        setPackName(event.currentTarget.value)
     }
 
     const onKeyPressHandler = (event: KeyboardEvent<HTMLInputElement>) => {
         if (event.key === 'Enter') {
-            setTextInput('')
-            /* ОТСЮда текс из инпута передавать дальше*/
+            setPackName('')
+            dispatch(packThunk.fetchPacks({page,packName}))
         }
     }
 
@@ -35,7 +44,7 @@ export const SettingsBlock = () => {
                 <input
                     onKeyPress={onKeyPressHandler}
                     onChange={onChangeHandler}
-                    value={textInput}
+                    value={packName}
                     className={st.input}
                     type="text"/>
 

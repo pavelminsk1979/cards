@@ -1,10 +1,18 @@
 import {instance} from "common/instanceAxios/instansAxios";
 
 export const packApi = {
-    fetchPacks(pageCount: number, page: number) {
-        return instance.get<GetResponsePacksType>(`cards/pack?pageCount=${pageCount}&page=${page}`)
+    fetchPacks(pageCount?: number, page?: number,packName?:string) {
+
+        return instance.get<GetResponsePacksType>(`cards/pack`,{params:{pageCount,page,packName}})
     }
 }
+/*
+export const packApi = {
+    fetchPacks(pageCount?: number, page?: number,packName?:string) {
+
+        return instance.get<GetResponsePacksType>(`cards/pack?pageCount=${pageCount}&page=${page}&packName=${packName}`)
+    }
+}*/
 
 type CardPacksType = {
     _id: string;  /*id колоды*/

@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {useSelector} from "react-redux";
-import {selectPacksState} from "features/packs/packSelectors";
-import st from "./Paginator.module.css"
+import {selectPacksState, selectPage, selectPageCount} from "features/packs/packSelectors";
+import st from "components/pagingator/Paginator.module.css"
 import {packThunk} from "features/packs/packSlice";
 import {useAppDispatch} from "common/hooks/useAppDispatch";
 import IconButton from "@mui/material/IconButton";
@@ -14,10 +14,10 @@ export const Pagingtor = () => {
     const cardPacksTotalCount = useSelector(selectPacksState).cardPacksTotalCount  /* количество
     пакетов на сервере   1800*/
 
-    const pageCount = useSelector(selectPacksState).pageCount  /* я определил что с сервера придет
+    const pageCount = useSelector(selectPageCount)  /* я определил что с сервера придет
     10 пакетов */
 
-    const page = useSelector(selectPacksState).page
+    const page = useSelector(selectPage)
 
     let pageCountNumber = Math.ceil(cardPacksTotalCount / pageCount)
     /* количество страниц    в которое уместятся все пакеты--просто число */
@@ -28,7 +28,7 @@ export const Pagingtor = () => {
     }
 
     const onClickHandler = (page:number) => {
-        dispatch(packThunk.fetchPacks({pageCount,page}))
+        dispatch(packThunk.fetchPacks({page}))
     }
 
 
@@ -41,7 +41,7 @@ export const Pagingtor = () => {
     и последнее число которым порция заканчивается*/
 
     const fetchActivePageHandler = (page:number) => {
-        dispatch(packThunk.fetchPacks({pageCount,page}))
+        dispatch(packThunk.fetchPacks({page}))
     }  /*когда на стрелку нажал то пошел запрос за следующими  колодами*/
 
     const  onClickNextPart= () => {

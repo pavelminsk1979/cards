@@ -8,12 +8,13 @@ import {useAppDispatch} from "common/hooks/useAppDispatch";
 import {selectLogOut} from "../authSelectors";
 import IconButton from "@mui/material/IconButton";
 import KeyboardBackspace from "@mui/icons-material/KeyboardBackspace";
+import {ArrowBackPage} from "components/arrowBackPage/ArrowBackPage";
 
 
 export const Profile = () => {
     const dispatch = useAppDispatch();
     const logOut = useSelector(selectLogOut)
-    const navigate = useNavigate();
+
 
 
     const onClickHandler = () => {
@@ -24,26 +25,16 @@ export const Profile = () => {
         backgroundImage: `url(${myFoto})`,
     }
 
-    const onClickKeyboardBackspace = () => {
-         navigate('/packs')
-    }
+
     if (logOut === null) {
         return <Navigate to={'/login'}/>
     }
 
     return (
         <div>
-            <div className={st.link}>
-                <IconButton
-                    onClick={onClickKeyboardBackspace}
-                    size={"small"}>
-                    <KeyboardBackspace/>
-                </IconButton>
-                <NavLink
-                    className={st.linkText}
-                    to={'/packs'}>
-                    Список КОЛОД</NavLink>
-            </div>
+       <ArrowBackPage
+           text='Список КОЛОД'
+           path='/packs'/>
             <div className={st.common}>
                 <div className={st.container}>
                     <div className={st.title}>
