@@ -6,13 +6,7 @@ export const packApi = {
         return instance.get<GetResponsePacksType>(`cards/pack`,{params:{pageCount,page,packName}})
     }
 }
-/*
-export const packApi = {
-    fetchPacks(pageCount?: number, page?: number,packName?:string) {
 
-        return instance.get<GetResponsePacksType>(`cards/pack?pageCount=${pageCount}&page=${page}&packName=${packName}`)
-    }
-}*/
 
 type CardPacksType = {
     _id: string;  /*id колоды*/

@@ -30,7 +30,6 @@ export const SettingsBlock = () => {
 
     const onKeyPressHandler = (event: KeyboardEvent<HTMLInputElement>) => {
         if (event.key === 'Enter') {
-            setPackName('')
             dispatch(packThunk.fetchPacks({page,packName}))
         }
     }

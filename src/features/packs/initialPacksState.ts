@@ -1,5 +1,7 @@
 import {GetResponsePacksType} from "features/packs/packApi";
 
+
+
 export const initialPacksState:GetResponsePacksType = {
     cardPacks: [{
         _id: '',

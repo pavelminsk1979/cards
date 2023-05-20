@@ -5,30 +5,38 @@ import {GetResponsePacksType, packApi} from "features/packs/packApi";
 import {createSlice} from "@reduxjs/toolkit";
 import {initialPacksState} from "features/packs/initialPacksState";
 
+type CompletePacksStateType = GetResponsePacksType & {
+    packNameFromInput:''
+}
 
-const fetchPacks = createAppAsyncThunk<GetResponsePacksType,{pageCount?:number,page?:number,packName?:string}>('packs/fetchPacks', async (arg, thunkAPI) => {
+
+const fetchPacks = createAppAsyncThunk<CompletePacksStateType,{page?:number,packName?:string}>('packs/fetchPacks', async (arg, thunkAPI) => {
         return thunkTryCatch(thunkAPI, async () => {
             let pageCount: number = 9  /*столько колод ожидаю с сервера при get запросе */
-            if(pageCount!=9){
-                pageCount=thunkAPI.getState().packs.pageCount
-            }
-            /*const state = thunkAPI.getState() достать можно текущие данные */
+
+           /* const state = thunkAPI.getState() /!*достать можно текущие данные *!/  */
+
             const respons = await packApi.fetchPacks(
                 pageCount,arg.page,arg.packName)
-            return respons.data
+            return respons.data/*,packNameFromInput:arg.packName}*/
         })
     }
 )
 
-
-/*const fetchPacks = createAppAsyncThunk<GetResponsePacksType,{pageCount?:number,page?:number,packName?:string}>('packs/fetchPacks', async (arg, thunkAPI) => {
+/*const fetchPacks = createAppAsyncThunk<GetResponsePacksType,{page?:number,packName?:string}>('packs/fetchPacks', async (arg, thunkAPI) => {
         return thunkTryCatch(thunkAPI, async () => {
-            /!*const state = thunkAPI.getState() достать можно текущие данные *!/
-            const respons = await packApi.fetchPacks(arg.pageCount,arg.page,arg.packName)
+            let pageCount: number = 9  /!*столько колод ожидаю с сервера при get запросе *!/
+
+            /!* const state = thunkAPI.getState() /!*достать можно текущие данные *!/  *!/
+
+            const respons = await packApi.fetchPacks(
+                pageCount,arg.page,arg.packName)
+            debugger
             return respons.data
         })
     }
 )*/
+
 
 
 const slice = createSlice({
@@ -38,7 +46,7 @@ const slice = createSlice({
     extraReducers:builder => {
         builder
             .addCase(fetchPacks.fulfilled,(state,action)=>{
-                return  action.payload
+                return  {...action.payload, packNameFromInput:''}
             })
     }
 })
