@@ -9,7 +9,7 @@ import {
     RegisterType
 } from "./authApi";
 import {createAppAsyncThunk} from "common/utils/createAppAsyncThunk";
-import {appThunk} from "app/appSlise";
+import {appThunk} from "features/app/appSlice";
 import {thunkTryCatch} from "common/utils/thunkTryCatch";
 
 

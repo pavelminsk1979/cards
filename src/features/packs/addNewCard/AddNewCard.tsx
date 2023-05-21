@@ -1,15 +1,13 @@
 
 import   React from 'react';
-import {ArrowBackPage} from "components/arrowBackPage/ArrowBackPage";
 import st from "./AddNewCard.module.css"
+import {LinkOnPacks} from "components/linkOnPacks/linkOnPacks";
 
 
 export const AddNewCard = () => {
     return(
         <div className={st.common}>
-            <ArrowBackPage
-                text='Список КОЛОД'
-                path='/packs'/>
+            <LinkOnPacks/>
             <div className={st.namePack}>
                 Имя Колоды
             </div>

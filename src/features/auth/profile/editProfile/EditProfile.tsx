@@ -1,13 +1,14 @@
 import React from "react";
-import st from "./EditProfile.module.css";
-import myFoto from "../../../image/myFoto.jpg";
+import st from "features/auth/profile/editProfile/EditProfile.module.css";
+import myFoto from "image/myFoto.jpg";
 import TextField from "@mui/material/TextField";
 import {useFormik} from "formik";
 import {useSelector} from "react-redux";
 import {Navigate} from "react-router-dom";
-import {authThunk} from "../authSlice";
-import {useAppDispatch} from "../../../common/hooks/useAppDispatch";
-import {selectEditName, selectLogOut} from "../authSelectors";
+import {authThunk} from "features/auth/authSlice";
+import {useAppDispatch} from "common/hooks/useAppDispatch";
+import {selectEditName, selectLogOut} from "features/auth/authSelectors";
+import {LinkOnPacks} from "components/linkOnPacks/linkOnPacks";
 
 
 type FormikErrorType = {
@@ -53,6 +54,7 @@ export const EditProfile = () => {
 
     return (
         <form onSubmit={formik.handleSubmit}>
+            <LinkOnPacks/>
             <div className={st.common}>
                 <div className={st.container}>
                     <div className={st.title}>

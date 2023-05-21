@@ -1,8 +1,8 @@
 import { toast, ToastContainer } from "react-toastify";
 import { useEffect } from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {RootState} from "store";
-import {appActions} from "app/appSlise";
+import {RootState} from "store/store";
+import {appActions} from "features/app/appSlice";
 
 
 

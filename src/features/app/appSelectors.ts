@@ -1,4 +1,4 @@
-import {RootState} from "store";
+import {RootState} from "store/store";
 
 export const selectStatusLoading = (state:RootState) =>state.app.statusLoading
 

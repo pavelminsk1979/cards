@@ -10,8 +10,9 @@ import Paper from '@mui/material/Paper';
 import st from './FriendPacks.module.css'
 import {BlokNameAndButton} from "features/packs/packs/upperBlock/BlokNameAndButton";
 import {ChangeEvent, KeyboardEvent,  useState} from "react";
-import {Pagingtor} from "components/pagingator/Pagingtor";
-import {ArrowBackPage} from "components/arrowBackPage/ArrowBackPage";
+import {Pagingtor} from "components/paginator/Pagingtor";
+import {LinkOnPacks} from "components/linkOnPacks/linkOnPacks";
+
 
 
 export const FriendPacks = () => {
@@ -34,11 +35,9 @@ export const FriendPacks = () => {
 
     return (
         <div className={st.common}>
-            <ArrowBackPage
-                text='Список КОЛОД'
-                path='/packs'/>
+            <LinkOnPacks/>
             <BlokNameAndButton
-                title='Колоды Пользователей'
+                title='Колоды Пользователей или Мои Колоды'
                 nameButton='ГО на пиво! '/>
             <div>
                 <div className={st.text}>

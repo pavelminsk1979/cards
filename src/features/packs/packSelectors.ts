@@ -1,4 +1,4 @@
-import {RootState} from "store";
+import {RootState} from "store/store";
 
 export const selectCardPacks = (state:RootState) => state.packs.cardPacks
 
@@ -10,3 +10,5 @@ export const selectPageCount = (
     state:RootState) => state.packs.pageCount
 
 export const selectPage = (state:RootState) => state.packs.page
+
+export const selectPackNameInput = (state:RootState) => state.packs.packNameInput

@@ -3,12 +3,12 @@ import st from "./Profile.module.css";
 import myFoto from "../../../image/myFoto.jpg";
 import {authThunk} from "../authSlice";
 import {useSelector} from "react-redux";
-import {Navigate, NavLink, useNavigate} from "react-router-dom";
+import {Navigate, NavLink} from "react-router-dom";
 import {useAppDispatch} from "common/hooks/useAppDispatch";
 import {selectLogOut} from "../authSelectors";
-import IconButton from "@mui/material/IconButton";
-import KeyboardBackspace from "@mui/icons-material/KeyboardBackspace";
-import {ArrowBackPage} from "components/arrowBackPage/ArrowBackPage";
+
+import {LinkOnPacks} from "components/linkOnPacks/linkOnPacks";
+
 
 
 export const Profile = () => {
@@ -32,9 +32,7 @@ export const Profile = () => {
 
     return (
         <div>
-       <ArrowBackPage
-           text='Список КОЛОД'
-           path='/packs'/>
+       <LinkOnPacks/>
             <div className={st.common}>
                 <div className={st.container}>
                     <div className={st.title}>

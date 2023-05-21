@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {useSelector} from "react-redux";
-import {selectPacksState, selectPage, selectPageCount} from "features/packs/packSelectors";
-import st from "components/pagingator/Paginator.module.css"
+import {selectPackNameInput, selectPacksState, selectPage, selectPageCount} from "features/packs/packSelectors";
+import st from "components/paginator/Paginator.module.css"
 import {packThunk} from "features/packs/packSlice";
 import {useAppDispatch} from "common/hooks/useAppDispatch";
 import IconButton from "@mui/material/IconButton";
@@ -19,6 +19,8 @@ export const Pagingtor = () => {
 
     const page = useSelector(selectPage)
 
+    const packNameInput = useSelector(selectPackNameInput)
+
     let pageCountNumber = Math.ceil(cardPacksTotalCount / pageCount)
     /* количество страниц    в которое уместятся все пакеты--просто число */
 
@@ -28,7 +30,7 @@ export const Pagingtor = () => {
     }
 
     const onClickHandler = (page:number) => {
-        dispatch(packThunk.fetchPacks({page}))
+        dispatch(packThunk.fetchPacks({page,packNameInput}))
     }
 
 

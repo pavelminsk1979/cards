@@ -1,6 +1,6 @@
 import {createAppAsyncThunk} from "common/utils/createAppAsyncThunk";
 import {createSlice} from "@reduxjs/toolkit";
-import {appApi} from "./appApi";
+import {appApi} from "features/app/appApi";
 import {LoginResponseType} from "features/auth/authApi";
 import {thunkTryCatch} from "common/utils/thunkTryCatch";
 

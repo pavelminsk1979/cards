@@ -5,7 +5,7 @@ import TextField from "@mui/material/TextField";
 import st from "./ForgotPassword.module.css";
 import {Navigate, NavLink} from "react-router-dom";
 import {useSelector} from "react-redux";
-import {RootState} from "../../../store";
+import {RootState} from "store/store";
 import {useAppDispatch} from "../../../common/hooks/useAppDispatch";
 import {selectFlagForgotPassword} from "../authSelectors";
 

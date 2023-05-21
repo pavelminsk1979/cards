@@ -9,18 +9,17 @@ import {Profile} from "features/auth/profile/Profile";
 import {Packs} from "features/packs/packs/Packs";
 import {Cards} from "components/Cards";
 import {Learn} from "components/Learn";
-import st from './App.module.css'
+import st from 'App.module.css'
 import {AppBar} from "components/appBar/AppBar";
-import {EditProfile} from "features/auth/editProfile/EditProfile";
-import {appThunk} from "app/appSlise";
+import {EditProfile} from "features/auth/profile/editProfile/EditProfile";
+import {appThunk} from "features/app/appSlice";
 import {useSelector} from "react-redux";
 import {Loading} from "components/loading/Loading";
 import {GlobalError} from "common/globalError/GlobalError";
 import 'react-toastify/dist/ReactToastify.css';
 import {useAppDispatch} from "common/hooks/useAppDispatch";
 import LinearProgress from "@mui/material/LinearProgress";
-import {selectIsInitialized, selectStatusLoading} from "app/appSelectors";
-import {MyPacks} from "features/packs/myPacks/MyPacks";
+import {selectIsInitialized, selectStatusLoading} from "features/app/appSelectors";
 import {FriendPacks} from "features/packs/friendPacks/FriendPacks";
 import {AddNewCard} from "features/packs/addNewCard/AddNewCard";
 
@@ -48,7 +47,6 @@ export const App = () => {
             <div>
                 <NavLink to={'/addNewCard'}>addNewCard</NavLink>
                 <NavLink to={'/friendPacks'}>friendPacks</NavLink>
-                <NavLink to={'/myPacks'}>myPacks</NavLink>
 
                 {/*    <NavLink to={'/login'}>login</NavLink>
                 <NavLink to={'/register'}>register</NavLink>
@@ -75,7 +73,6 @@ export const App = () => {
                 <Route path="learn" element={<Learn/>}/>
                 <Route path="addNewCard" element={<AddNewCard/>}/>
                 <Route path="friendPacks" element={<FriendPacks/>}/>
-                <Route path="myPacks" element={<MyPacks/>}/>
 
 
                 <Route path="/404" element={<h2>404: PAGE NOT FOUND</h2>}/>

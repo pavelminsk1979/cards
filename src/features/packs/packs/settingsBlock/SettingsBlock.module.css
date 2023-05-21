@@ -4,6 +4,15 @@
     justify-content: space-between;
 }
 
+@media screen and (max-width : 1400px)
+{ .common {
+    height: 350px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+} }
+
+
 .text {
     color: #4f5158 !important;
     font-weight: 500;

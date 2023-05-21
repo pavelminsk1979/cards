@@ -16,7 +16,7 @@ import {useEffect} from "react";
 import {useAppDispatch} from "common/hooks/useAppDispatch";
 import {packThunk} from "features/packs/packSlice";
 import {selectCardPacks} from "features/packs/packSelectors";
-import {Pagingtor} from "components/pagingator/Pagingtor";
+import {Pagingtor} from "components/paginator/Pagingtor";
 
 
 export const Packs = () => {

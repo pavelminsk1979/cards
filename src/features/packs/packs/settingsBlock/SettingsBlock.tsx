@@ -8,14 +8,11 @@ import {useSelector} from "react-redux";
 import {selectPage} from "features/packs/packSelectors";
 
 
-
-
-
 export const SettingsBlock = () => {
     const dispatch = useAppDispatch();
 
     const [valueButton, setValueButton] = useState('all')
-    const [packName, setPackName] = useState('')
+    const [packNameInput, setPackNameInput] = useState('')
 
     const page = useSelector(selectPage)
 
@@ -25,12 +22,12 @@ export const SettingsBlock = () => {
     }
 
     const onChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
-        setPackName(event.currentTarget.value)
+        setPackNameInput(event.currentTarget.value)
     }
 
     const onKeyPressHandler = (event: KeyboardEvent<HTMLInputElement>) => {
         if (event.key === 'Enter') {
-            dispatch(packThunk.fetchPacks({page,packName}))
+            dispatch(packThunk.fetchPacks({page,packNameInput}))
         }
     }
 
@@ -43,7 +40,7 @@ export const SettingsBlock = () => {
                 <input
                     onKeyPress={onKeyPressHandler}
                     onChange={onChangeHandler}
-                    value={packName}
+                    value={packNameInput}
                     className={st.input}
                     type="text"/>
 
