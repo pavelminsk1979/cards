@@ -17,6 +17,7 @@ import {useAppDispatch} from "common/hooks/useAppDispatch";
 import {packThunk} from "features/packs/packSlice";
 import {selectCardPacks} from "features/packs/packSelectors";
 import {Pagingtor} from "components/paginator/Pagingtor";
+import {TableHeaders} from "features/packs/packs/tableHeaders/TableHeaders";
 
 
 export const Packs = () => {
@@ -25,7 +26,6 @@ export const Packs = () => {
     const cardPacks = useSelector(selectCardPacks)
 
     useEffect(() => {
-
         dispatch(packThunk.fetchPacks({}))
     }, [])
 
@@ -44,13 +44,14 @@ export const Packs = () => {
             <TableContainer component={Paper}>
                 <Table sx={{minWidth: 650}} aria-label="simple table">
                     <TableHead>
-                        <TableRow className={st.tableHead}>
-                            <TableCell>Наименование Колоды</TableCell>
+                        <TableHeaders/>
+                   {/*     <TableRow className={st.tableHead}>
+                            <TableCell sortDirection='asc' >Наименование Колоды</TableCell>
                             <TableCell align="center">Карточки</TableCell>
                             <TableCell align="center">Последнее обновление</TableCell>
                             <TableCell align="center">Автор</TableCell>
                             <TableCell align="center">Действия</TableCell>
-                        </TableRow>
+                        </TableRow>*/}
                     </TableHead>
                     <TableBody className={st.tableBody}>
                         {cardPacks.map((pack) => (

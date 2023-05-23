@@ -4,11 +4,6 @@ import {GetResponsePacksType, packApi} from "features/packs/packApi";
 import {createSlice} from "@reduxjs/toolkit";
 import {initialPacksState} from "features/packs/initialPacksState";
 
-/*type CompletePacksStateType = {
-    packName:'',
-    data: GetResponsePacksType
-}*/
-
 
 type CompletePacksStateType = GetResponsePacksType & {
     packNameInput: string
@@ -19,27 +14,29 @@ type CompletePacksStateType = GetResponsePacksType & {
 
 const fetchPacks = createAppAsyncThunk<{
     data: GetResponsePacksType,
-    packName: string,
+    packName: string,      /* что санка возвращает-положительный кейс */
     min: number,
     max: number
 },
     { page?: number,
         packNameInput?: string,
-        min?: number,
+        min?: number,       /* что санка принимает */
         max?: number
+        sortPacks?:string
     }>('packs/fetchPacks', async (arg, thunkAPI) => {
         return thunkTryCatch(thunkAPI, async () => {
             let pageCount: number = 9  /*столько колод ожидаю с сервера при get запросе */
 
             /*  const state = thunkAPI.getState() /!*достать можно текущие данные *!/  */
 
-
             const respons = await packApi.fetchPacks(
                 pageCount,
                 arg.page,
                 arg.packNameInput,
                 arg.min,
-                arg.max)
+                arg.max,
+                arg.sortPacks
+            )
 
             return {
                 data: respons.data,
