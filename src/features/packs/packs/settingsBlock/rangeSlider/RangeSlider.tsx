@@ -4,23 +4,36 @@ import Box from '@mui/material/Box';
 import Slider from '@mui/material/Slider';
 import st from 'features/packs/packs/settingsBlock/rangeSlider/RangeSlider.module.css'
 import {useSelector} from "react-redux";
-import {selectArrayMinMaxValueSlice} from "features/packs/packSelectors";
-
-
+import {selectArrayMinMaxValueSlice, selectPage
+} from "features/packs/packSelectors";
+import {packThunk} from "features/packs/packSlice";
+import {useAppDispatch} from "common/hooks/useAppDispatch";
 
 
 export function RangeSlider() {
+    const dispatch = useAppDispatch();
+
     const arrayMinMaxValueSlice = useSelector(selectArrayMinMaxValueSlice)
+
+    const page = useSelector(selectPage)
+
 
     const [value, setValue] = React.useState<number[]>([]);
 
     const handleChange = (event: Event, newValue: number | number[]) => {
         setValue(newValue as number[]);
-    };
+    }
 
-    useEffect(()=>{
-        setValue(arrayMinMaxValueSlice)
-    },[arrayMinMaxValueSlice])
+    const sendDataSlider = () => {
+        dispatch(packThunk.fetchPacks({page, min: value[0], max: value[1]}))
+    }
+
+    useEffect(() => {
+        if(!value.length||value[0]===0&&value[1]===0){
+            setValue(arrayMinMaxValueSlice)
+        }
+    }, [arrayMinMaxValueSlice])
+
 
     return (
         <div className={st.slider}>
@@ -31,6 +44,7 @@ export function RangeSlider() {
                 <Slider
                     getAriaLabel={() => 'Temperature range'}
                     value={value}
+                    onChangeCommitted={sendDataSlider}
                     onChange={handleChange}/>
             </Box>
             <div className={st.value}>
@@ -39,3 +53,5 @@ export function RangeSlider() {
         </div>
     );
 }
+
+

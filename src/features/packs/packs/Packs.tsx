@@ -71,6 +71,7 @@ export const Packs = () => {
                 </Table>
             </TableContainer>
             <Pagingtor/>
+            {!cardPacks.length && <div className={st.message}>Колоды с данным именем не найдено. Измените параметры поиска</div>}
         </div>
     );
 }

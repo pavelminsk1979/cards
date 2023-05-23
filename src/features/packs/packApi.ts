@@ -1,9 +1,9 @@
 import {instance} from "common/instanceAxios/instansAxios";
 
 export const packApi = {
-    fetchPacks(pageCount?: number, page?: number,packName?:string) {
+    fetchPacks(pageCount?: number, page?: number,packName?:string,min?:number,max?:number) {
 
-        return instance.get<GetResponsePacksType>(`cards/pack`,{params:{pageCount,page,packName}})
+        return instance.get<GetResponsePacksType>(`cards/pack`,{params:{pageCount,page,packName,min,max}})
     }
 }
 

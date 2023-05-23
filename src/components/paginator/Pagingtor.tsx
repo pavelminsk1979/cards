@@ -1,6 +1,12 @@
 import React, {useState} from 'react';
 import {useSelector} from "react-redux";
-import {selectPackNameInput, selectPacksState, selectPage, selectPageCount} from "features/packs/packSelectors";
+import {
+    selectArrayMinMaxCorrectValueSlice,
+    selectPackNameInput,
+    selectPacksState,
+    selectPage,
+    selectPageCount
+} from "features/packs/packSelectors";
 import st from "components/paginator/Paginator.module.css"
 import {packThunk} from "features/packs/packSlice";
 import {useAppDispatch} from "common/hooks/useAppDispatch";
@@ -24,13 +30,18 @@ export const Pagingtor = () => {
     let pageCountNumber = Math.ceil(cardPacksTotalCount / pageCount)
     /* количество страниц    в которое уместятся все пакеты--просто число */
 
+    const arrayMinMaxCorrectValueSlice =
+        useSelector(selectArrayMinMaxCorrectValueSlice)
+
     let arrayNumbers = []  /*чтобы отрисовать кнопки---их надо в масив поместить*/
     for (let i = 1; i <= pageCountNumber; i++) {
         arrayNumbers.push(i)
     }
 
     const onClickHandler = (page:number) => {
-        dispatch(packThunk.fetchPacks({page,packNameInput}))
+        dispatch(packThunk.fetchPacks({page,packNameInput,
+            min:arrayMinMaxCorrectValueSlice[0],
+           max: arrayMinMaxCorrectValueSlice[1]}))
     }
 
 

@@ -18,3 +18,9 @@
 .tableBody{
     background-color: #f5f7f7;
 }
+
+.message{
+    color: #b23222;
+    font-weight: 500;
+    font-size: 20px;
+}
