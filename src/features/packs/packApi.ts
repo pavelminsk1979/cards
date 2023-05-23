@@ -3,6 +3,10 @@ import {instance} from "common/instanceAxios/instansAxios";
 export const packApi = {
     fetchPacks(pageCount?: number, page?: number,packName?:string,min?:number,max?:number,sortPacks?:string) {
         return instance.get<GetResponsePacksType>(`cards/pack`,{params:{pageCount,page,packName,min,max,sortPacks}})
+    },
+    createPack(cardsPack:any){
+        debugger
+        return instance.post('cards/pack',{cardsPack})
     }
 }
 

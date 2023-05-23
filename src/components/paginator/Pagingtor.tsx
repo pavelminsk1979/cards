@@ -5,7 +5,7 @@ import {
     selectPackNameInput,
     selectPacksState,
     selectPage,
-    selectPageCount
+    selectPageCount, selectSortPacks
 } from "features/packs/packSelectors";
 import st from "components/paginator/Paginator.module.css"
 import {packThunk} from "features/packs/packSlice";
@@ -27,6 +27,8 @@ export const Pagingtor = () => {
 
     const packNameInput = useSelector(selectPackNameInput)
 
+    const sortPacks = useSelector(selectSortPacks)
+
     let pageCountNumber = Math.ceil(cardPacksTotalCount / pageCount)
     /* количество страниц    в которое уместятся все пакеты--просто число */
 
@@ -41,7 +43,7 @@ export const Pagingtor = () => {
     const onClickHandler = (page:number) => {
         dispatch(packThunk.fetchPacks({page,packNameInput,
             min:arrayMinMaxCorrectValueSlice[0],
-           max: arrayMinMaxCorrectValueSlice[1]}))
+           max: arrayMinMaxCorrectValueSlice[1],sortPacks}))
     }
 
 
@@ -54,7 +56,9 @@ export const Pagingtor = () => {
     и последнее число которым порция заканчивается*/
 
     const fetchActivePageHandler = (page:number) => {
-        dispatch(packThunk.fetchPacks({page}))
+        dispatch(packThunk.fetchPacks({page,packNameInput,
+            min:arrayMinMaxCorrectValueSlice[0],
+            max: arrayMinMaxCorrectValueSlice[1],sortPacks}))
     }  /*когда на стрелку нажал то пошел запрос за следующими  колодами*/
 
     const  onClickNextPart= () => {

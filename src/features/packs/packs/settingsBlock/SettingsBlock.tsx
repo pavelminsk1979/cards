@@ -5,7 +5,7 @@ import { RangeSlider } from 'features/packs/packs/settingsBlock/rangeSlider/Rang
 import {packThunk} from "features/packs/packSlice";
 import {useAppDispatch} from "common/hooks/useAppDispatch";
 import {useSelector} from "react-redux";
-import {selectArrayMinMaxCorrectValueSlice, selectPage} from "features/packs/packSelectors";
+import {selectArrayMinMaxCorrectValueSlice, selectPage, selectSortPacks} from "features/packs/packSelectors";
 
 
 export const SettingsBlock = () => {
@@ -15,6 +15,8 @@ export const SettingsBlock = () => {
     const [packNameInput, setPackNameInput] = useState('')
 
     const page = useSelector(selectPage)
+
+    const sortPacks = useSelector(selectSortPacks)
 
     const arrayMinMaxCorrectValueSlice =
         useSelector(selectArrayMinMaxCorrectValueSlice)
@@ -32,7 +34,7 @@ export const SettingsBlock = () => {
         if (event.key === 'Enter') {
             dispatch(packThunk.fetchPacks({page,packNameInput,
                 min:arrayMinMaxCorrectValueSlice[0],
-                max: arrayMinMaxCorrectValueSlice[1]}))
+                max: arrayMinMaxCorrectValueSlice[1],sortPacks}))
         }
     }
 

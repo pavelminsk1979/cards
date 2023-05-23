@@ -18,6 +18,7 @@ import {packThunk} from "features/packs/packSlice";
 import {selectCardPacks} from "features/packs/packSelectors";
 import {Pagingtor} from "components/paginator/Pagingtor";
 import {TableHeaders} from "features/packs/packs/tableHeaders/TableHeaders";
+import School from "@mui/icons-material/School";
 
 
 export const Packs = () => {
@@ -45,13 +46,6 @@ export const Packs = () => {
                 <Table sx={{minWidth: 650}} aria-label="simple table">
                     <TableHead>
                         <TableHeaders/>
-                   {/*     <TableRow className={st.tableHead}>
-                            <TableCell sortDirection='asc' >Наименование Колоды</TableCell>
-                            <TableCell align="center">Карточки</TableCell>
-                            <TableCell align="center">Последнее обновление</TableCell>
-                            <TableCell align="center">Автор</TableCell>
-                            <TableCell align="center">Действия</TableCell>
-                        </TableRow>*/}
                     </TableHead>
                     <TableBody className={st.tableBody}>
                         {cardPacks.map((pack) => (
@@ -65,7 +59,7 @@ export const Packs = () => {
                                 <TableCell align="center">{pack.cardsCount}</TableCell>
                                 <TableCell align="center">{pack.updated}</TableCell>
                                 <TableCell align="center">{pack.user_name}</TableCell>
-                                <TableCell align="center">{pack.name}</TableCell>
+                                <TableCell align="center"><School/></TableCell>
                             </TableRow>
                         ))}
                     </TableBody>

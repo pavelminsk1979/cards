@@ -9,14 +9,24 @@ type CompletePacksStateType = GetResponsePacksType & {
     packNameInput: string
     minValueSlider: number
     maxValueSlider: number
+    sortPacks:string
 }
 
+const createPack = createAppAsyncThunk<any,{name:string}>('packs/createPack',
+    async (arg,thunkAPI)=>{
+    return thunkTryCatch(thunkAPI,async ()=>{
+        const cardsPack={name:arg.name,user_name:'Добрый день!'}
+        const respons = await packApi.createPack(cardsPack)
+        return
+    })
+    })
 
 const fetchPacks = createAppAsyncThunk<{
     data: GetResponsePacksType,
     packName: string,      /* что санка возвращает-положительный кейс */
     min: number,
     max: number
+    sortPacks:string
 },
     { page?: number,
         packNameInput?: string,
@@ -42,7 +52,8 @@ const fetchPacks = createAppAsyncThunk<{
                 data: respons.data,
                 packName: arg.packNameInput,
                 min: arg.min,
-                max: arg.max
+                max: arg.max,
+                sortPacks:arg.sortPacks
             }
         })
     }
@@ -59,12 +70,13 @@ const slice = createSlice({
                 return {
                     ...action.payload.data,
                     packNameInput: action.payload.packName, minValueSlider: action.payload.min,
-                    maxValueSlider: action.payload.max
+                    maxValueSlider: action.payload.max,
+                    sortPacks:action.payload.sortPacks
                 }
             })
     }
 })
 
-export const packThunk = {fetchPacks}
+export const packThunk = {fetchPacks,createPack}
 
 export const packReducer = slice.reducer

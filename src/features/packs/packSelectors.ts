@@ -15,3 +15,5 @@ export const selectPageCount = (
 export const selectPage = (state:RootState) => state.packs.page
 
 export const selectPackNameInput = (state:RootState) => state.packs.packNameInput
+
+export const selectSortPacks = (state:RootState) => state.packs.sortPacks

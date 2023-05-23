@@ -8,9 +8,25 @@ import ArrowCircleDown from "@mui/icons-material/ArrowCircleDown";
 import ArrowCircleUp from "@mui/icons-material/ArrowCircleUp";
 import {packThunk} from "features/packs/packSlice";
 import {useAppDispatch} from "common/hooks/useAppDispatch";
+import {useSelector} from "react-redux";
+import {
+    selectArrayMinMaxCorrectValueSlice,
+    selectPackNameInput,
+    selectPage,
+    selectSortPacks
+} from "features/packs/packSelectors";
 
 export const TableHeaders = () => {
     const dispatch = useAppDispatch();
+
+    const page = useSelector(selectPage)
+
+    const packNameInput = useSelector(selectPackNameInput)
+
+    const sortPacks = useSelector(selectSortPacks)
+
+    const arrayMinMaxCorrectValueSlice =
+        useSelector(selectArrayMinMaxCorrectValueSlice)
 
 type HeadersType = {
     id:number
@@ -33,7 +49,9 @@ type HeadersType = {
         if(valueArrowDirection){
             sortPacks=1+fieldFromType
         }
-        dispatch(packThunk.fetchPacks({sortPacks}))
+        dispatch(packThunk.fetchPacks({page,packNameInput,
+            min:arrayMinMaxCorrectValueSlice[0],
+            max: arrayMinMaxCorrectValueSlice[1],sortPacks}))
     }
 
 

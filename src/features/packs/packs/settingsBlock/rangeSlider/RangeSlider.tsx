@@ -4,7 +4,8 @@ import Box from '@mui/material/Box';
 import Slider from '@mui/material/Slider';
 import st from 'features/packs/packs/settingsBlock/rangeSlider/RangeSlider.module.css'
 import {useSelector} from "react-redux";
-import {selectArrayMinMaxValueSlice, selectPage
+import {
+    selectArrayMinMaxValueSlice, selectPackNameInput, selectPage, selectSortPacks
 } from "features/packs/packSelectors";
 import {packThunk} from "features/packs/packSlice";
 import {useAppDispatch} from "common/hooks/useAppDispatch";
@@ -17,6 +18,10 @@ export function RangeSlider() {
 
     const page = useSelector(selectPage)
 
+    const sortPacks = useSelector(selectSortPacks)
+
+    const packNameInput = useSelector(selectPackNameInput)
+
 
     const [value, setValue] = React.useState<number[]>([]);
 
@@ -25,11 +30,11 @@ export function RangeSlider() {
     }
 
     const sendDataSlider = () => {
-        dispatch(packThunk.fetchPacks({page, min: value[0], max: value[1]}))
+        dispatch(packThunk.fetchPacks({page, min: value[0], max: value[1],sortPacks,packNameInput}))
     }
 
     useEffect(() => {
-        if(!value.length||value[0]===0&&value[1]===0){
+        if (!value.length || value[0] === 0 && value[1] === 0) {
             setValue(arrayMinMaxValueSlice)
         }
     }, [arrayMinMaxValueSlice])
