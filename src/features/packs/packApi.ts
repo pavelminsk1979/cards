@@ -4,9 +4,19 @@ export const packApi = {
     fetchPacks(pageCount?: number, page?: number,packName?:string,min?:number,max?:number,sortPacks?:string) {
         return instance.get<GetResponsePacksType>(`cards/pack`,{params:{pageCount,page,packName,min,max,sortPacks}})
     },
-    createPack(cardsPack:any){
-        debugger
-        return instance.post('cards/pack',{cardsPack})
+    createPack(cardsPack:PayloadCreatePackType){
+        return instance.post('cards/pack',cardsPack)
+    },
+    deletePack(id?:string) {
+        return instance.delete(`cards/pack?id=${id??''}`)
+    }
+}
+
+type PayloadCreatePackType = {
+    cardsPack:{
+        name : string
+        deckCover?:string
+        private?:boolean
     }
 }
 

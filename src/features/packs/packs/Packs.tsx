@@ -19,6 +19,9 @@ import {selectCardPacks} from "features/packs/packSelectors";
 import {Pagingtor} from "components/paginator/Pagingtor";
 import {TableHeaders} from "features/packs/packs/tableHeaders/TableHeaders";
 import School from "@mui/icons-material/School";
+import BorderColor from "@mui/icons-material/BorderColor";
+import Delete from "@mui/icons-material/Delete";
+import {TableColumnActions} from "features/packs/packs/inTableColumnActions/TableColumnActions";
 
 
 export const Packs = () => {
@@ -59,7 +62,7 @@ export const Packs = () => {
                                 <TableCell align="center">{pack.cardsCount}</TableCell>
                                 <TableCell align="center">{pack.updated}</TableCell>
                                 <TableCell align="center">{pack.user_name}</TableCell>
-                                <TableCell align="center"><School/></TableCell>
+                                <TableColumnActions packId={pack._id}/>
                             </TableRow>
                         ))}
                     </TableBody>

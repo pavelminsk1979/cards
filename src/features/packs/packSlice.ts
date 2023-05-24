@@ -9,16 +9,39 @@ type CompletePacksStateType = GetResponsePacksType & {
     packNameInput: string
     minValueSlider: number
     maxValueSlider: number
-    sortPacks:string
+    sortPacks: string
 }
 
-const createPack = createAppAsyncThunk<any,{name:string}>('packs/createPack',
-    async (arg,thunkAPI)=>{
-    return thunkTryCatch(thunkAPI,async ()=>{
-        const cardsPack={name:arg.name,user_name:'Добрый день!'}
-        const respons = await packApi.createPack(cardsPack)
-        return
+const deletePack = createAppAsyncThunk<void, { id: string }>('packs/deletePack', async (arg, thunkAPI) => {
+    return thunkTryCatch(thunkAPI, async () => {
+        const res = await packApi.deletePack(arg.id)
+        const statePacks = thunkAPI.getState().packs
+
+        thunkAPI.dispatch(packThunk.fetchPacks({
+            page: statePacks.page,
+            packNameInput: statePacks.packNameInput,
+            min: statePacks.minValueSlider,
+            max: statePacks.minValueSlider,
+            sortPacks: statePacks.sortPacks
+        }))
     })
+})
+
+const createPack = createAppAsyncThunk<void, { name: string }>('packs/createPack',
+    async (arg, thunkAPI) => {
+        return thunkTryCatch(thunkAPI, async () => {
+            const cardsPack = {name: arg.name}
+            const respons = await packApi.createPack({cardsPack})
+            const statePacks = thunkAPI.getState().packs
+
+            thunkAPI.dispatch(packThunk.fetchPacks({
+                page: statePacks.page,
+                packNameInput: statePacks.packNameInput,
+                min: statePacks.minValueSlider,
+                max: statePacks.minValueSlider,
+                sortPacks: statePacks.sortPacks
+            }))
+        })
     })
 
 const fetchPacks = createAppAsyncThunk<{
@@ -26,16 +49,17 @@ const fetchPacks = createAppAsyncThunk<{
     packName: string,      /* что санка возвращает-положительный кейс */
     min: number,
     max: number
-    sortPacks:string
+    sortPacks: string
 },
-    { page?: number,
+    {
+        page?: number,
         packNameInput?: string,
         min?: number,       /* что санка принимает */
         max?: number
-        sortPacks?:string
+        sortPacks?: string
     }>('packs/fetchPacks', async (arg, thunkAPI) => {
         return thunkTryCatch(thunkAPI, async () => {
-            let pageCount: number = 9  /*столько колод ожидаю с сервера при get запросе */
+            let pageCount: number = 7  /*столько колод ожидаю с сервера при get запросе */
 
             /*  const state = thunkAPI.getState() /!*достать можно текущие данные *!/  */
 
@@ -53,7 +77,7 @@ const fetchPacks = createAppAsyncThunk<{
                 packName: arg.packNameInput,
                 min: arg.min,
                 max: arg.max,
-                sortPacks:arg.sortPacks
+                sortPacks: arg.sortPacks
             }
         })
     }
@@ -71,12 +95,12 @@ const slice = createSlice({
                     ...action.payload.data,
                     packNameInput: action.payload.packName, minValueSlider: action.payload.min,
                     maxValueSlider: action.payload.max,
-                    sortPacks:action.payload.sortPacks
+                    sortPacks: action.payload.sortPacks
                 }
             })
     }
 })
 
-export const packThunk = {fetchPacks,createPack}
+export const packThunk = {fetchPacks, createPack,deletePack}
 
 export const packReducer = slice.reducer
