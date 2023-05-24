@@ -10,7 +10,7 @@ import {packThunk} from "features/packs/packSlice";
 import {useAppDispatch} from "common/hooks/useAppDispatch";
 import {useSelector} from "react-redux";
 import {
-    selectArrayMinMaxCorrectValueSlice,
+    selectArrayMinMaxCorrectValueSlice, selectMyId,
     selectPackNameInput,
     selectPage,
     selectSortPacks
@@ -27,6 +27,8 @@ export const TableHeaders = () => {
 
     const arrayMinMaxCorrectValueSlice =
         useSelector(selectArrayMinMaxCorrectValueSlice)
+
+    const user_id = useSelector(selectMyId)
 
 type HeadersType = {
     id:number
@@ -51,7 +53,7 @@ type HeadersType = {
         }
         dispatch(packThunk.fetchPacks({page,packNameInput,
             min:arrayMinMaxCorrectValueSlice[0],
-            max: arrayMinMaxCorrectValueSlice[1],sortPacks}))
+            max: arrayMinMaxCorrectValueSlice[1],sortPacks,user_id}))
     }
 
 

@@ -5,7 +5,12 @@ import { RangeSlider } from 'features/packs/packs/settingsBlock/rangeSlider/Rang
 import {packThunk} from "features/packs/packSlice";
 import {useAppDispatch} from "common/hooks/useAppDispatch";
 import {useSelector} from "react-redux";
-import {selectArrayMinMaxCorrectValueSlice, selectPage, selectSortPacks} from "features/packs/packSelectors";
+import {
+    selectArrayMinMaxCorrectValueSlice,
+    selectMyId,
+    selectPage,
+    selectSortPacks
+} from "features/packs/packSelectors";
 
 
 export const SettingsBlock = () => {
@@ -16,14 +21,27 @@ export const SettingsBlock = () => {
 
     const page = useSelector(selectPage)
 
+    const user_id = useSelector(selectMyId)
+
     const sortPacks = useSelector(selectSortPacks)
 
     const arrayMinMaxCorrectValueSlice =
         useSelector(selectArrayMinMaxCorrectValueSlice)
 
-
+    /*МОЯ АЙДИШКА packUserId === "64505ad094d2b62338730b93"*/
     const onClickHandler = (value: string) => {
         setValueButton(value)
+        if(value==='my'){
+
+        }
+        const user_id = "64505ad094d2b62338730b93"
+        dispatch(packThunk.fetchPacks({
+            page,
+            packNameInput,
+            min:arrayMinMaxCorrectValueSlice[0],
+            max: arrayMinMaxCorrectValueSlice[1],
+            sortPacks,
+            user_id: value=== 'my' ? user_id : ''}))
     }
 
     const onChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
@@ -34,10 +52,17 @@ export const SettingsBlock = () => {
         if (event.key === 'Enter') {
             dispatch(packThunk.fetchPacks({page,packNameInput,
                 min:arrayMinMaxCorrectValueSlice[0],
-                max: arrayMinMaxCorrectValueSlice[1],sortPacks}))
+                max: arrayMinMaxCorrectValueSlice[1],sortPacks,user_id}))
         }
     }
 
+    const resetHandler = () => {
+        dispatch(packThunk.fetchPacks({}))
+        setPackNameInput('')
+        setValueButton('all')
+    }
+
+/*CMОТРЕТЬ по  ЗАМЫКАНИЮ   где и откуда берутся значения для переменных*/
     return (
         <div className={st.common}>
             <div>
@@ -77,7 +102,8 @@ export const SettingsBlock = () => {
                     <RangeSlider/>
                 </div>
             </div>
-            <button className={st.button}>
+            <button onClick={resetHandler}
+                className={st.button}>
                 Сброс настроек
             </button>
         </div>

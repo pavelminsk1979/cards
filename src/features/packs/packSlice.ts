@@ -1,8 +1,9 @@
 import {createAppAsyncThunk} from "common/utils/createAppAsyncThunk";
 import {thunkTryCatch} from "common/utils/thunkTryCatch";
-import {GetResponsePacksType, packApi} from "features/packs/packApi";
+import {CardsPackType, GetResponsePacksType, packApi} from "features/packs/packApi";
 import {createSlice} from "@reduxjs/toolkit";
 import {initialPacksState} from "features/packs/initialPacksState";
+
 
 
 type CompletePacksStateType = GetResponsePacksType & {
@@ -10,7 +11,25 @@ type CompletePacksStateType = GetResponsePacksType & {
     minValueSlider: number
     maxValueSlider: number
     sortPacks: string
+    myId:string
 }
+
+const updatePack = createAppAsyncThunk<void, {cardsPack:CardsPackType}>('packs/updatePack', async (arg, thunkAPI) => {
+    return thunkTryCatch(thunkAPI, async () => {
+        const res = await packApi.updatePack(arg.cardsPack)
+        const statePacks = thunkAPI.getState().packs
+
+        thunkAPI.dispatch(packThunk.fetchPacks({
+            page: statePacks.page,
+            packNameInput: statePacks.packNameInput,
+            min: statePacks.minValueSlider,
+            max: statePacks.minValueSlider,
+            sortPacks: statePacks.sortPacks,
+            user_id:statePacks.myId
+        }))
+    })
+})
+
 
 const deletePack = createAppAsyncThunk<void, { id: string }>('packs/deletePack', async (arg, thunkAPI) => {
     return thunkTryCatch(thunkAPI, async () => {
@@ -22,7 +41,8 @@ const deletePack = createAppAsyncThunk<void, { id: string }>('packs/deletePack',
             packNameInput: statePacks.packNameInput,
             min: statePacks.minValueSlider,
             max: statePacks.minValueSlider,
-            sortPacks: statePacks.sortPacks
+            sortPacks: statePacks.sortPacks,
+            user_id:statePacks.myId
         }))
     })
 })
@@ -39,7 +59,8 @@ const createPack = createAppAsyncThunk<void, { name: string }>('packs/createPack
                 packNameInput: statePacks.packNameInput,
                 min: statePacks.minValueSlider,
                 max: statePacks.minValueSlider,
-                sortPacks: statePacks.sortPacks
+                sortPacks: statePacks.sortPacks,
+                user_id:statePacks.myId
             }))
         })
     })
@@ -50,6 +71,7 @@ const fetchPacks = createAppAsyncThunk<{
     min: number,
     max: number
     sortPacks: string
+    myId:string
 },
     {
         page?: number,
@@ -57,6 +79,7 @@ const fetchPacks = createAppAsyncThunk<{
         min?: number,       /* что санка принимает */
         max?: number
         sortPacks?: string
+        user_id?:string
     }>('packs/fetchPacks', async (arg, thunkAPI) => {
         return thunkTryCatch(thunkAPI, async () => {
             let pageCount: number = 7  /*столько колод ожидаю с сервера при get запросе */
@@ -69,7 +92,8 @@ const fetchPacks = createAppAsyncThunk<{
                 arg.packNameInput,
                 arg.min,
                 arg.max,
-                arg.sortPacks
+                arg.sortPacks,
+                arg.user_id
             )
 
             return {
@@ -77,7 +101,8 @@ const fetchPacks = createAppAsyncThunk<{
                 packName: arg.packNameInput,
                 min: arg.min,
                 max: arg.max,
-                sortPacks: arg.sortPacks
+                sortPacks: arg.sortPacks,
+                myId:arg.user_id
             }
         })
     }
@@ -95,12 +120,13 @@ const slice = createSlice({
                     ...action.payload.data,
                     packNameInput: action.payload.packName, minValueSlider: action.payload.min,
                     maxValueSlider: action.payload.max,
-                    sortPacks: action.payload.sortPacks
+                    sortPacks: action.payload.sortPacks,
+                    myId:action.payload.myId
                 }
             })
     }
 })
 
-export const packThunk = {fetchPacks, createPack,deletePack}
+export const packThunk = {fetchPacks, createPack,deletePack,updatePack}
 
 export const packReducer = slice.reducer

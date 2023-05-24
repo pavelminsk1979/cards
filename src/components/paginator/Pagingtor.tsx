@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {useSelector} from "react-redux";
 import {
-    selectArrayMinMaxCorrectValueSlice,
+    selectArrayMinMaxCorrectValueSlice, selectMyId,
     selectPackNameInput,
     selectPacksState,
     selectPage,
@@ -29,6 +29,8 @@ export const Pagingtor = () => {
 
     const sortPacks = useSelector(selectSortPacks)
 
+    const user_id = useSelector(selectMyId)
+
     let pageCountNumber = Math.ceil(cardPacksTotalCount / pageCount)
     /* количество страниц    в которое уместятся все пакеты--просто число */
 
@@ -43,7 +45,7 @@ export const Pagingtor = () => {
     const onClickHandler = (page:number) => {
         dispatch(packThunk.fetchPacks({page,packNameInput,
             min:arrayMinMaxCorrectValueSlice[0],
-           max: arrayMinMaxCorrectValueSlice[1],sortPacks}))
+           max: arrayMinMaxCorrectValueSlice[1],sortPacks,user_id}))
     }
 
 
@@ -58,7 +60,7 @@ export const Pagingtor = () => {
     const fetchActivePageHandler = (page:number) => {
         dispatch(packThunk.fetchPacks({page,packNameInput,
             min:arrayMinMaxCorrectValueSlice[0],
-            max: arrayMinMaxCorrectValueSlice[1],sortPacks}))
+            max: arrayMinMaxCorrectValueSlice[1],sortPacks,user_id}))
     }  /*когда на стрелку нажал то пошел запрос за следующими  колодами*/
 
     const  onClickNextPart= () => {
