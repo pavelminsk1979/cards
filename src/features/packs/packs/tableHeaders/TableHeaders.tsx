@@ -6,11 +6,11 @@ import IconButton from "@mui/material/IconButton";
 
 import ArrowCircleDown from "@mui/icons-material/ArrowCircleDown";
 import ArrowCircleUp from "@mui/icons-material/ArrowCircleUp";
-import {packThunk} from "features/packs/packSlice";
+import {packActions, packThunk} from "features/packs/packSlice";
 import {useAppDispatch} from "common/hooks/useAppDispatch";
 import {useSelector} from "react-redux";
 import {
-    selectArrayMinMaxCorrectValueSlice, selectMyId,
+    selectArrayMinMaxCorrectValueSlice, selectDataTableHeadersPacks, selectMyId,
     selectPackNameInput,
     selectPage,
     selectSortPacks
@@ -20,7 +20,7 @@ export const TableHeaders = () => {
     const dispatch = useAppDispatch();
 
     const page = useSelector(selectPage)
-
+    //useSelector
     const packNameInput = useSelector(selectPackNameInput)
 
     const sortPacks = useSelector(selectSortPacks)
@@ -30,23 +30,13 @@ export const TableHeaders = () => {
 
     const user_id = useSelector(selectMyId)
 
-type HeadersType = {
-    id:number
-    title:string
-    align:"center" | "left" | "right" | "inherit" | "justify" | undefined
-    arrowDirection:boolean
-    fieldFromType:string
-}
+    const DataTableHeadersPacks = useSelector(selectDataTableHeadersPacks)
 
-    const [arrayHeaders,setArrayHeaders] = useState<HeadersType[]>([
-        {id:1,title:'Наименование Колоды',align:'left',arrowDirection:true,fieldFromType:'name'},
-        {id:2,title:'Карточки',align:'center',arrowDirection:true,fieldFromType:'cardsCount'},
-        {id:3,title:'Последнее обновление',align:'center',arrowDirection:true,fieldFromType:'updated'},
-        {id:4,title:'Автор',align:'center',arrowDirection:true,fieldFromType:'user_name'},
-    ])
+
 
     const onClickArrowHandler = (id:number,valueArrowDirection:boolean,fieldFromType:string) => {
-        setArrayHeaders(arrayHeaders.map(e=>e.id===id?{...e,arrowDirection:!valueArrowDirection}:e))
+dispatch(packActions.setNewDataTableHeadersPacks({
+    id, valueArrowDirection}))
         let sortPacks:string=0+fieldFromType
         if(valueArrowDirection){
             sortPacks=1+fieldFromType
@@ -60,7 +50,7 @@ type HeadersType = {
   return(
       <TableRow className={st.tableHead}>
           {
-              arrayHeaders.map(el=>{
+              DataTableHeadersPacks.map(el=>{
                   return(
                       <TableCell
                           key={el.id}
@@ -72,8 +62,8 @@ type HeadersType = {
                               onClick={()=>onClickArrowHandler(
                                   el.id,el.arrowDirection,el.fieldFromType)}>
                               {el.arrowDirection
-                                  ? <ArrowCircleDown/>
-                                  : <ArrowCircleUp/>}
+                                  ? <ArrowCircleUp/>
+                                  : <ArrowCircleDown/>}
                           </IconButton>
                       </TableCell>
                   )

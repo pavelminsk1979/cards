@@ -2,11 +2,11 @@ import React, {ChangeEvent, useState, KeyboardEvent} from 'react';
 import st from 'features/packs/packs/settingsBlock/SettingsBlock.module.css'
 import Button from "@mui/material/Button";
 import { RangeSlider } from 'features/packs/packs/settingsBlock/rangeSlider/RangeSlider';
-import {packThunk} from "features/packs/packSlice";
+import {packActions, packThunk} from "features/packs/packSlice";
 import {useAppDispatch} from "common/hooks/useAppDispatch";
 import {useSelector} from "react-redux";
 import {
-    selectArrayMinMaxCorrectValueSlice,
+    selectArrayMinMaxCorrectValueSlice, selectArrayMinMaxValueSlice,
     selectMyId,
     selectPage,
     selectSortPacks
@@ -18,6 +18,8 @@ export const SettingsBlock = () => {
 
     const [valueButton, setValueButton] = useState('all')
     const [packNameInput, setPackNameInput] = useState('')
+
+/*    const arrayMinMaxValueSlice = useSelector(selectArrayMinMaxValueSlice)/!* в этих значениях всегда [0,78]*!/*/
 
     const page = useSelector(selectPage)
 
@@ -57,6 +59,8 @@ export const SettingsBlock = () => {
     }
 
     const resetHandler = () => {
+        dispatch(packActions.resetDataTableHeadersPacks())
+        dispatch(packActions.resetValueSlider())
         dispatch(packThunk.fetchPacks({}))
         setPackNameInput('')
         setValueButton('all')

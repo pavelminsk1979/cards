@@ -1,12 +1,12 @@
 import {createAppAsyncThunk} from "common/utils/createAppAsyncThunk";
 import {thunkTryCatch} from "common/utils/thunkTryCatch";
 import {CardsPackType, GetResponsePacksType, packApi} from "features/packs/packApi";
-import {createSlice} from "@reduxjs/toolkit";
-import {initialPacksState} from "features/packs/initialPacksState";
+import {createSlice, PayloadAction} from "@reduxjs/toolkit";
+import {initialPacksState, initialPacksStateType} from "features/packs/initialPacksState";
 
 
 
-type CompletePacksStateType = GetResponsePacksType & {
+type CompletePacksStateType = initialPacksStateType & {
     packNameInput: string
     minValueSlider: number
     maxValueSlider: number
@@ -82,7 +82,7 @@ const fetchPacks = createAppAsyncThunk<{
         user_id?:string
     }>('packs/fetchPacks', async (arg, thunkAPI) => {
         return thunkTryCatch(thunkAPI, async () => {
-            let pageCount: number = 7  /*столько колод ожидаю с сервера при get запросе */
+            let pageCount: number = 5  /*столько колод ожидаю с сервера при get запросе */
 
             /*  const state = thunkAPI.getState() /!*достать можно текущие данные *!/  */
 
@@ -112,17 +112,27 @@ const fetchPacks = createAppAsyncThunk<{
 const slice = createSlice({
     name: 'packs',
     initialState: initialPacksState as CompletePacksStateType,
-    reducers: {},
+    reducers: {
+        setNewDataTableHeadersPacks(state,action: PayloadAction<{id:number,valueArrowDirection:boolean}>){
+            const index = state.dataTableHeadersPacks.findIndex(el => el.id === action.payload.id)
+            state.dataTableHeadersPacks[index].arrowDirection = !action.payload.valueArrowDirection
+        },
+        resetDataTableHeadersPacks(state){
+            return state.dataTableHeadersPacks.forEach(el=> el.arrowDirection=true)
+        },
+        resetValueSlider(state){
+            state.minValueSlider=0
+        }
+    },
     extraReducers: builder => {
         builder
             .addCase(fetchPacks.fulfilled, (state, action) => {
-                return {
+                return { ...state,
                     ...action.payload.data,
                     packNameInput: action.payload.packName, minValueSlider: action.payload.min,
                     maxValueSlider: action.payload.max,
                     sortPacks: action.payload.sortPacks,
-                    myId:action.payload.myId
-                }
+                    myId:action.payload.myId }
             })
     }
 })
@@ -130,3 +140,7 @@ const slice = createSlice({
 export const packThunk = {fetchPacks, createPack,deletePack,updatePack}
 
 export const packReducer = slice.reducer
+
+export const packActions = slice.actions
+
+

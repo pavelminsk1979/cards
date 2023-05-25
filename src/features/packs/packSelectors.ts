@@ -19,3 +19,5 @@ export const selectPackNameInput = (state:RootState) => state.packs.packNameInpu
 export const selectSortPacks = (state:RootState) => state.packs.sortPacks
 
 export const selectMyId = (state:RootState) => state.packs.myId
+
+export const selectDataTableHeadersPacks = (state:RootState) => state.packs.dataTableHeadersPacks
