@@ -17,7 +17,6 @@ export function RangeSlider() {
 
     const arrayMinMaxValueSlice = useSelector(selectArrayMinMaxValueSlice)
 
-    const аrrayMinMaxCorrectValueSlice = useSelector(selectArrayMinMaxCorrectValueSlice)
 
     const flagResetSlider = useSelector(selectFlagResetSlider)
 

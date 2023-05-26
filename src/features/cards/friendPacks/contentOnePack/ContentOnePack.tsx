@@ -1,4 +1,3 @@
-
 import React from 'react';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -7,19 +6,21 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import st from './FriendPacks.module.css'
+import st from './ContentOnePack.module.css'
 import {BlokNameAndButton} from "features/packs/packs/upperBlock/BlokNameAndButton";
 import {ChangeEvent, KeyboardEvent,  useState} from "react";
 import {Pagingtor} from "components/paginator/Pagingtor";
 import {LinkOnPacks} from "components/linkOnPacks/linkOnPacks";
+import {useSelector} from "react-redux";
+import {selectCards} from "features/cards/cardSelectors";
 
 
 
-export const FriendPacks = () => {
+export const ContentOnePack = () => {
+
+    const arrayCards = useSelector(selectCards)
 
     const [textInput, setTextInput] = useState('')
-
-    const cardPacks = [1,2,3,4,5,6,7,8,9] /*чтобы при мапинге  небыло ошибки*/
 
 
     const onChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
@@ -29,7 +30,7 @@ export const FriendPacks = () => {
     const onKeyPressHandler = (event: KeyboardEvent<HTMLInputElement>) => {
         if (event.key === 'Enter') {
             setTextInput('')
-            /* ОТСЮда текс из инпута передавать дальше*/
+            /* ОТСЮда тексt из инпута передавать дальше*/
         }
     }
 
@@ -62,16 +63,18 @@ export const FriendPacks = () => {
                         </TableRow>
                     </TableHead>
                     <TableBody className={st.tableBody}>
-                        {cardPacks.map((pack) => (
+                        {arrayCards.map((el) => (
                             <TableRow
-                                key={pack}
+                                key={el._id}
                                 sx={{'&:last-child td, &:last-child th': {border: 0}}}>
 
                                 <TableCell component="th" scope="row">
-                                   какойто вопрос
+                                    {el.question}
                                 </TableCell>
-                                <TableCell align="center">какойто ответ</TableCell>
-                                <TableCell align="center">дата-дата</TableCell>
+                                <TableCell align="center">
+                                    {el.answer}</TableCell>
+                                <TableCell align="center">
+                                    {el.updated}</TableCell>
                                 <TableCell align="center">звездочки</TableCell>
                             </TableRow>
                         ))}

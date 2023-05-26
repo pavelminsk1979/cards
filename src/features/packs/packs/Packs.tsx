@@ -4,10 +4,8 @@ import {selectIsLoggedIn} from "features/auth/authSelectors";
 import * as React from 'react';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import st from 'features/packs/packs/Packs.module.css'
 import {BlokNameAndButton} from "features/packs/packs/upperBlock/BlokNameAndButton";
@@ -18,7 +16,7 @@ import {packThunk} from "features/packs/packSlice";
 import {selectCardPacks} from "features/packs/packSelectors";
 import {Pagingtor} from "components/paginator/Pagingtor";
 import {TableHeaders} from "features/packs/packs/tableHeaders/TableHeaders";
-import {TableColumnActions} from "features/packs/packs/inTableColumnActions/TableColumnActions";
+import {ContentTablePacks} from "features/packs/packs/contentTablePacks/ContentTablePacks";
 
 
 export const Packs = () => {
@@ -42,32 +40,22 @@ export const Packs = () => {
                 nameButton='Добавить колоду'/>
 
             <SettingsBlock/>
+
             <TableContainer component={Paper}>
                 <Table sx={{minWidth: 650}} aria-label="simple table">
+
                     <TableHead>
                         <TableHeaders/>
                     </TableHead>
-                    <TableBody className={st.tableBody}>
-                        {cardPacks.map((pack) => (
-                            <TableRow
-                                key={pack._id}
-                                sx={{'&:last-child td, &:last-child th': {border: 0}}}
-                            >
-                                <TableCell component="th" scope="row">
-                                    {pack.name}
-                                </TableCell>
-                                <TableCell align="center">{pack.cardsCount}</TableCell>
-                                <TableCell align="center">{pack.updated}</TableCell>
-                                <TableCell align="center">{pack.user_name}</TableCell>
-                                <TableColumnActions packUserId={pack.user_id}
-                                    packId={pack._id}/>
-                            </TableRow>
-                        ))}
-                    </TableBody>
+
+                    <ContentTablePacks cardPacks={cardPacks}/>
+
                 </Table>
             </TableContainer>
+
             <Pagingtor/>
-            {!cardPacks.length && <div className={st.message}>Колоды с данным именем не найдено. Измените параметры поиска</div>}
+            {!cardPacks.length &&
+                <div className={st.message}>Колоды с данным именем не найдено. Измените параметры поиска</div>}
         </div>
     );
 }

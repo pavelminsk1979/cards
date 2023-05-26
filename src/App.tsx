@@ -20,8 +20,8 @@ import 'react-toastify/dist/ReactToastify.css';
 import {useAppDispatch} from "common/hooks/useAppDispatch";
 import LinearProgress from "@mui/material/LinearProgress";
 import {selectIsInitialized, selectStatusLoading} from "features/app/appSelectors";
-import {FriendPacks} from "features/packs/friendPacks/FriendPacks";
 import {AddNewCard} from "features/packs/addNewCard/AddNewCard";
+import {ContentOnePack} from "features/cards/friendPacks/contentOnePack/ContentOnePack";
 
 
 export const App = () => {
@@ -46,7 +46,7 @@ export const App = () => {
                 color="secondary"/>}
             <div>
                 <NavLink to={'/addNewCard'}>addNewCard</NavLink>
-                <NavLink to={'/friendPacks'}>friendPacks</NavLink>
+                <NavLink to={'/contentOnePack'}>contentOnePack</NavLink>
 
                 {/*    <NavLink to={'/login'}>login</NavLink>
                 <NavLink to={'/register'}>register</NavLink>
@@ -72,7 +72,7 @@ export const App = () => {
                 <Route path="cards" element={<Cards/>}/>
                 <Route path="learn" element={<Learn/>}/>
                 <Route path="addNewCard" element={<AddNewCard/>}/>
-                <Route path="friendPacks" element={<FriendPacks/>}/>
+                <Route path="contentOnePack" element={<ContentOnePack/>}/>
 
 
                 <Route path="/404" element={<h2>404: PAGE NOT FOUND</h2>}/>

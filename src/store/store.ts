@@ -4,12 +4,14 @@ import { configureStore, ThunkAction, Action } from "@reduxjs/toolkit";
 import {authReducer} from "features/auth/authSlice";
 import {appReducer} from "features/app/appSlice";
 import {packReducer} from "features/packs/packSlice";
+import {cardReducer} from "features/cards/cardSlice";
 
 export const store = configureStore({
   reducer: {
     app:appReducer,
     auth:authReducer,
     packs:packReducer,
+    cards:cardReducer
   },
 });
 
