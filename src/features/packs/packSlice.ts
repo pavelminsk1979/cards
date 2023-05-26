@@ -12,6 +12,7 @@ type CompletePacksStateType = initialPacksStateType & {
     maxValueSlider: number
     sortPacks: string
     myId:string
+    flagResetSlider:boolean
 }
 
 const updatePack = createAppAsyncThunk<void, {cardsPack:CardsPackType}>('packs/updatePack', async (arg, thunkAPI) => {
@@ -120,22 +121,27 @@ const slice = createSlice({
         resetDataTableHeadersPacks(state){
             return state.dataTableHeadersPacks.forEach(el=> el.arrowDirection=true)
         },
-        resetValueSlider(state){
-            state.minValueSlider=0
-        }
+        resetValueSlider(state,action){
+            state.minValueSlider = action.payload.arrayMinMaxValueSlice[0]
+            state.maxValueSlider = action.payload.arrayMinMaxValueSlice[1]
+        },
+        changeFlagResetSlider(state,action){
+            state.flagResetSlider = !action.payload.flagResetSlider
+        },
     },
     extraReducers: builder => {
         builder
             .addCase(fetchPacks.fulfilled, (state, action) => {
                 return { ...state,
                     ...action.payload.data,
-                    packNameInput: action.payload.packName, minValueSlider: action.payload.min,
-                    maxValueSlider: action.payload.max,
+                    packNameInput: action.payload.packName,
+                    minValueSlider: action.payload.min ?? action.payload.data.minCardsCount,
+                    maxValueSlider: action.payload.max ?? action.payload.data.maxCardsCount,
                     sortPacks: action.payload.sortPacks,
-                    myId:action.payload.myId }
+                    myId:action.payload.myId ,flagResetSlider:false}
             })
     }
-})
+})  /*если в значении null или underfined тогда присвоится то что прописано после оператора (??)*/
 
 export const packThunk = {fetchPacks, createPack,deletePack,updatePack}
 

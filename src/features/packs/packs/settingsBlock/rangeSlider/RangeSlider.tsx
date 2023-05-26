@@ -6,9 +6,9 @@ import st from 'features/packs/packs/settingsBlock/rangeSlider/RangeSlider.modul
 import {useSelector} from "react-redux";
 import {
     selectArrayMinMaxCorrectValueSlice,
-    selectArrayMinMaxValueSlice, selectMyId, selectPackNameInput, selectPage, selectSortPacks
+    selectArrayMinMaxValueSlice, selectFlagResetSlider, selectMyId, selectPackNameInput, selectPage, selectSortPacks
 } from "features/packs/packSelectors";
-import {packThunk} from "features/packs/packSlice";
+import {packActions, packThunk} from "features/packs/packSlice";
 import {useAppDispatch} from "common/hooks/useAppDispatch";
 
 
@@ -18,6 +18,8 @@ export function RangeSlider() {
     const arrayMinMaxValueSlice = useSelector(selectArrayMinMaxValueSlice)
 
     const аrrayMinMaxCorrectValueSlice = useSelector(selectArrayMinMaxCorrectValueSlice)
+
+    const flagResetSlider = useSelector(selectFlagResetSlider)
 
     const page = useSelector(selectPage)
 
@@ -30,16 +32,20 @@ export function RangeSlider() {
 
     const [value, setValue] = React.useState<number[]>([]);
 
-/*if(аrrayMinMaxCorrectValueSlice[0]===0){
+    useEffect(() => {
+        if(flagResetSlider){
+            setValue(arrayMinMaxValueSlice)
+            dispatch(packActions.resetValueSlider({arrayMinMaxValueSlice}))
+        }
+    }, [flagResetSlider])
 
-    setValue([1,77])
-}*/
     const handleChange = (event: Event, newValue: number | number[]) => {
         setValue(newValue as number[]);
 
     }
 
     const sendDataSlider = () => {
+
         dispatch(packThunk.fetchPacks({page, min: value[0], max: value[1],sortPacks,packNameInput,user_id}))
     }
 
