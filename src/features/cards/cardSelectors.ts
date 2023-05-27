@@ -9,5 +9,8 @@ export const selectNumberPageWithServer = (state:RootState) => state.cards.page
 
 export const selectCountItemsForOnePage = (state:RootState) => state.cards.pageCount
 
+export const selectCurrentIdPack = (state:RootState) => state.cards.currentIdPack
+
+
 export const selectCountWithServerItems = (state:RootState) => state.cards.cardsTotalCount
 

@@ -14,14 +14,17 @@ import {LinkOnPacks} from "components/linkOnPacks/linkOnPacks";
 import {useSelector} from "react-redux";
 import {
     selectCards,
-    selectCountItemsForOnePage, selectCountWithServerItems,
+    selectCountItemsForOnePage, selectCountWithServerItems, selectCurrentIdPack,
     selectNumberPageWithServer,
     selectPackName
 } from "features/cards/cardSelectors";
+import {useAppDispatch} from "common/hooks/useAppDispatch";
+import {cardThunk} from "features/cards/cardSlice";
 
 
 
 export const ContentOnePack = () => {
+    const dispatch = useAppDispatch();
 
     const arrayCards = useSelector(selectCards)
 
@@ -32,6 +35,8 @@ export const ContentOnePack = () => {
     const countItemsForOnePage = useSelector(selectCountItemsForOnePage)
 
     const countWithServerItems = useSelector(selectCountWithServerItems)
+
+    const currentIdPack = useSelector(selectCurrentIdPack)
 
     const [textInput, setTextInput] = useState('')
 
@@ -48,7 +53,7 @@ export const ContentOnePack = () => {
     }
     
     const createCard = () => {
-      
+      dispatch(cardThunk.createCard({cardsPack_id:currentIdPack}))
     }
     const titlePlasNamePack = `Наименование Колоды : ${packName}`
 
@@ -101,7 +106,7 @@ export const ContentOnePack = () => {
                 </Table>
             </TableContainer>
             <Paginator
-                idCurrentPack={arrayCards[0].cardsPack_id}  /*айдишка колоды одинаковая в любой карточке из массива карточек*/
+                idCurrentPack={arrayCards[0]?.cardsPack_id}  /*айдишка колоды одинаковая в любой карточке из массива карточек*/
                 countWithServerItems={countWithServerItems}
                 countItemsForOnePage={countItemsForOnePage}
                 numberPageWithServer={numberPageWithServer}/>

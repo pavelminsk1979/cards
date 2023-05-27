@@ -4,9 +4,31 @@ import {instance} from "common/instanceAxios/instansAxios";
 export const cardApi = {
     fetchCards (cardsPack_id:string,pageCount:number,page?:number) {
         return instance.get<GetResponseCardsType>('cards/card',{params:{cardsPack_id,pageCount,page}})
-    }
+    },
+	createCard(card:any){
+		return instance.post<PostResponseType>('cards/card',{card})
+	}
+}
+export type PostResponseType = {
+	newCard: CardType;
+	token: string;
+	tokenDeathTime: number;
 }
 
+
+type  PayloadPostRequestType = {
+	card:{
+		cardsPack_id:string
+		question: string
+		answer: string
+		grade: number
+		shots: number
+		answerImg: string
+		questionImg: string
+		questionVideo: string
+		answerVideo: string
+	}
+}
 
 export type GetResponseCardsType = {
 	cards: CardType[];
