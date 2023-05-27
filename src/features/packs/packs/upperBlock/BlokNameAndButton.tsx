@@ -6,21 +6,23 @@ import {packThunk} from "features/packs/packSlice";
 type BlokNameAndButtonType = {
     title:string
     nameButton:string
+    callback:()=>void
 }
 
 
-export const BlokNameAndButton = (props:BlokNameAndButtonType) => {
+export const BlokNameAndButton = ({title,nameButton,callback}:BlokNameAndButtonType) => {
     const dispatch = useAppDispatch();
 
-    const createPackHandler = () => {
+ /*   const createPackHandler = () => {
+        callback
         dispatch(packThunk.createPack({name:'Beautiful $$PACK$$'}))
-    }
+    }*/
 
     return(
       <div className={st.common}>
-          <div className={st.title}>{props.title}</div>
-         <button onClick={createPackHandler}
-             className={st.button}>{props.nameButton}</button>
+          <div className={st.title}>{title}</div>
+         <button onClick={callback}
+             className={st.button}>{nameButton}</button>
       </div>
   )
 }

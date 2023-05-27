@@ -9,7 +9,7 @@ import Paper from '@mui/material/Paper';
 import st from 'features/cards/contentOnePack/ContentOnePack.module.css'
 import {BlokNameAndButton} from "features/packs/packs/upperBlock/BlokNameAndButton";
 import {ChangeEvent, KeyboardEvent,  useState} from "react";
-import {Pagingtor} from "components/paginator/Pagingtor";
+import {Paginator} from "components/paginator/Paginator";
 import {LinkOnPacks} from "components/linkOnPacks/linkOnPacks";
 import {useSelector} from "react-redux";
 import {
@@ -46,12 +46,17 @@ export const ContentOnePack = () => {
             /* ОТСЮда тексt из инпута передавать дальше*/
         }
     }
+    
+    const createCard = () => {
+      
+    }
     const titlePlasNamePack = `Наименование Колоды : ${packName}`
 
     return (
         <div className={st.common}>
             <LinkOnPacks/>
             <BlokNameAndButton
+                callback={createCard}
                 title={titlePlasNamePack}
                 nameButton='Добавить карточку'/>
             <div>
@@ -95,7 +100,7 @@ export const ContentOnePack = () => {
                     </TableBody>
                 </Table>
             </TableContainer>
-            <Pagingtor
+            <Paginator
                 idCurrentPack={arrayCards[0].cardsPack_id}  /*айдишка колоды одинаковая в любой карточке из массива карточек*/
                 countWithServerItems={countWithServerItems}
                 countItemsForOnePage={countItemsForOnePage}

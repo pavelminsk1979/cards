@@ -21,7 +21,7 @@ type PropsType={
 }
 
 
-export const Pagingtor = ({numberPageWithServer,countItemsForOnePage,countWithServerItems,idCurrentPack}:PropsType) => {
+export const Paginator = ({numberPageWithServer,countItemsForOnePage,countWithServerItems,idCurrentPack}:PropsType) => {
     const dispatch = useAppDispatch();
 
 

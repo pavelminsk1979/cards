@@ -16,8 +16,8 @@ type PropsType={
 export const ContentTablePacks = ({cardPacks}:PropsType) => {
     const dispatch = useAppDispatch();
 
-    const onClickHandler = (cardsPack_id:string) => {
-     dispatch(cardThunk.fetchCards({cardsPack_id}))
+    const onClickHandler = (cardsPack_id:string,cardsCount:number) => {
+        dispatch(cardThunk.fetchCards({cardsPack_id}))
     }
 
   return(
@@ -27,10 +27,15 @@ export const ContentTablePacks = ({cardPacks}:PropsType) => {
                   key={pack._id}
                   sx={{'&:last-child td, &:last-child th': {border: 0}}}>
                   <TableCell component="th" scope="row">
-
-                      <NavLink onClick={()=>onClickHandler(pack._id)}
-                          className={st.namePack}
-                          to={'/contentOnePack'}>{pack.name}</NavLink>
+                      {pack.cardsCount
+                          ?  <NavLink
+                              onClick={()=>onClickHandler(pack._id,
+                                  pack.cardsCount)}
+                              className={st.namePack}
+                              to={'/contentOnePack'}>{pack.name}</NavLink>
+                          :  <div
+                              className={st.namePack}>{pack.name}</div>
+                          }
 
                   </TableCell>
                   <TableCell align="center">{pack.cardsCount}</TableCell>

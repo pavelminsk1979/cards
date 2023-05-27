@@ -19,7 +19,7 @@ import {
     selectPage,
     selectPageCount
 } from "features/packs/packSelectors";
-import {Pagingtor} from "components/paginator/Pagingtor";
+import {Paginator} from "components/paginator/Paginator";
 import {TableHeaders} from "features/packs/packs/tableHeaders/TableHeaders";
 import {ContentTablePacks} from "features/packs/packs/contentTablePacks/ContentTablePacks";
 
@@ -39,6 +39,10 @@ export const Packs = () => {
     const cardPacksTotalCount = useSelector(selectPacksTotalCount)  /* количество
     пакетов на сервере   1800*/
 
+    const createPack = () => {
+        dispatch(packThunk.createPack({name:'Beautiful $$PACK$$'}))
+    }
+
 
     useEffect(() => {
         dispatch(packThunk.fetchPacks({}))
@@ -52,6 +56,7 @@ export const Packs = () => {
     return (
         <div className={st.common}>
             <BlokNameAndButton
+                callback={createPack}
                 title='Список КОЛОД'
                 nameButton='Добавить колоду'/>
 
@@ -69,7 +74,7 @@ export const Packs = () => {
                 </Table>
             </TableContainer>
 
-            <Pagingtor
+            <Paginator
                 countWithServerItems={cardPacksTotalCount}
                 countItemsForOnePage={pageCount}
             numberPageWithServer={page}/>
