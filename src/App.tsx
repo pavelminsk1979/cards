@@ -21,7 +21,7 @@ import {useAppDispatch} from "common/hooks/useAppDispatch";
 import LinearProgress from "@mui/material/LinearProgress";
 import {selectIsInitialized, selectStatusLoading} from "features/app/appSelectors";
 import {AddNewCard} from "features/packs/addNewCard/AddNewCard";
-import {ContentOnePack} from "features/cards/friendPacks/contentOnePack/ContentOnePack";
+import {ContentOnePack} from "features/cards/contentOnePack/ContentOnePack";
 
 
 export const App = () => {

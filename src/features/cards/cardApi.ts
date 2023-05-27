@@ -2,8 +2,8 @@ import {instance} from "common/instanceAxios/instansAxios";
 
 
 export const cardApi = {
-    fetchCards (cardsPack_id:string) {
-        return instance.get<GetResponseCardsType>('cards/card',{params:{cardsPack_id}})
+    fetchCards (cardsPack_id:string,pageCount:number,page?:number) {
+        return instance.get<GetResponseCardsType>('cards/card',{params:{cardsPack_id,pageCount,page}})
     }
 }
 

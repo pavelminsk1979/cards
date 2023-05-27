@@ -6,19 +6,32 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import st from './ContentOnePack.module.css'
+import st from 'features/cards/contentOnePack/ContentOnePack.module.css'
 import {BlokNameAndButton} from "features/packs/packs/upperBlock/BlokNameAndButton";
 import {ChangeEvent, KeyboardEvent,  useState} from "react";
 import {Pagingtor} from "components/paginator/Pagingtor";
 import {LinkOnPacks} from "components/linkOnPacks/linkOnPacks";
 import {useSelector} from "react-redux";
-import {selectCards} from "features/cards/cardSelectors";
+import {
+    selectCards,
+    selectCountItemsForOnePage, selectCountWithServerItems,
+    selectNumberPageWithServer,
+    selectPackName
+} from "features/cards/cardSelectors";
 
 
 
 export const ContentOnePack = () => {
 
     const arrayCards = useSelector(selectCards)
+
+    const packName = useSelector(selectPackName)
+
+    const numberPageWithServer = useSelector(selectNumberPageWithServer)
+
+    const countItemsForOnePage = useSelector(selectCountItemsForOnePage)
+
+    const countWithServerItems = useSelector(selectCountWithServerItems)
 
     const [textInput, setTextInput] = useState('')
 
@@ -33,13 +46,14 @@ export const ContentOnePack = () => {
             /* ОТСЮда тексt из инпута передавать дальше*/
         }
     }
+    const titlePlasNamePack = `Наименование Колоды : ${packName}`
 
     return (
         <div className={st.common}>
             <LinkOnPacks/>
             <BlokNameAndButton
-                title='Колоды Пользователей или Мои Колоды'
-                nameButton='ГО на пиво! '/>
+                title={titlePlasNamePack}
+                nameButton='Добавить карточку'/>
             <div>
                 <div className={st.text}>
                     Поиск
@@ -81,7 +95,11 @@ export const ContentOnePack = () => {
                     </TableBody>
                 </Table>
             </TableContainer>
-            <Pagingtor/>
+            <Pagingtor
+                idCurrentPack={arrayCards[0].cardsPack_id}  /*айдишка колоды одинаковая в любой карточке из массива карточек*/
+                countWithServerItems={countWithServerItems}
+                countItemsForOnePage={countItemsForOnePage}
+                numberPageWithServer={numberPageWithServer}/>
         </div>
     );
 }

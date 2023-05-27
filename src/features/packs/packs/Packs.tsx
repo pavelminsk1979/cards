@@ -13,7 +13,12 @@ import {SettingsBlock} from "features/packs/packs/settingsBlock/SettingsBlock";
 import {useEffect} from "react";
 import {useAppDispatch} from "common/hooks/useAppDispatch";
 import {packThunk} from "features/packs/packSlice";
-import {selectCardPacks} from "features/packs/packSelectors";
+import {
+    selectCardPacks,
+    selectPacksTotalCount,
+    selectPage,
+    selectPageCount
+} from "features/packs/packSelectors";
 import {Pagingtor} from "components/paginator/Pagingtor";
 import {TableHeaders} from "features/packs/packs/tableHeaders/TableHeaders";
 import {ContentTablePacks} from "features/packs/packs/contentTablePacks/ContentTablePacks";
@@ -21,8 +26,19 @@ import {ContentTablePacks} from "features/packs/packs/contentTablePacks/ContentT
 
 export const Packs = () => {
     const dispatch = useAppDispatch();
+
     const isLoggedIn = useSelector(selectIsLoggedIn)
+
     const cardPacks = useSelector(selectCardPacks)
+
+    const page = useSelector(selectPage) /*номер страницы которая пришла с сервера */
+
+    const pageCount = useSelector(selectPageCount)  /* я определил что с сервера придет
+    10 пакетов */
+
+    const cardPacksTotalCount = useSelector(selectPacksTotalCount)  /* количество
+    пакетов на сервере   1800*/
+
 
     useEffect(() => {
         dispatch(packThunk.fetchPacks({}))
@@ -53,7 +69,11 @@ export const Packs = () => {
                 </Table>
             </TableContainer>
 
-            <Pagingtor/>
+            <Pagingtor
+                countWithServerItems={cardPacksTotalCount}
+                countItemsForOnePage={pageCount}
+            numberPageWithServer={page}/>
+
             {!cardPacks.length &&
                 <div className={st.message}>Колоды с данным именем не найдено. Измените параметры поиска</div>}
         </div>

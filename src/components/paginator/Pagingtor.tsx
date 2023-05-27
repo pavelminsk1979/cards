@@ -3,9 +3,7 @@ import {useSelector} from "react-redux";
 import {
     selectArrayMinMaxCorrectValueSlice, selectMyId,
     selectPackNameInput,
-    selectPacksState,
-    selectPage,
-    selectPageCount, selectSortPacks
+     selectSortPacks
 } from "features/packs/packSelectors";
 import st from "components/paginator/Paginator.module.css"
 import {packThunk} from "features/packs/packSlice";
@@ -13,17 +11,19 @@ import {useAppDispatch} from "common/hooks/useAppDispatch";
 import IconButton from "@mui/material/IconButton";
 import  FastRewind from '@mui/icons-material/FastRewind';
 import FastForward from '@mui/icons-material/FastForward';
+import {cardThunk} from "features/cards/cardSlice";
+
+type PropsType={
+    numberPageWithServer:number
+    countItemsForOnePage:number
+    countWithServerItems:number
+    idCurrentPack?:string
+}
 
 
-export const Pagingtor = () => {
+export const Pagingtor = ({numberPageWithServer,countItemsForOnePage,countWithServerItems,idCurrentPack}:PropsType) => {
     const dispatch = useAppDispatch();
-    const cardPacksTotalCount = useSelector(selectPacksState).cardPacksTotalCount  /* количество
-    пакетов на сервере   1800*/
 
-    const pageCount = useSelector(selectPageCount)  /* я определил что с сервера придет
-    10 пакетов */
-
-    const page = useSelector(selectPage)
 
     const packNameInput = useSelector(selectPackNameInput)
 
@@ -31,7 +31,7 @@ export const Pagingtor = () => {
 
     const user_id = useSelector(selectMyId)
 
-    let pageCountNumber = Math.ceil(cardPacksTotalCount / pageCount)
+    let pageCountNumber = Math.ceil(countWithServerItems / countItemsForOnePage)
     /* количество страниц    в которое уместятся все пакеты--просто число */
 
     const arrayMinMaxCorrectValueSlice =
@@ -43,9 +43,13 @@ export const Pagingtor = () => {
     }
 
     const onClickHandler = (page:number) => {
-        dispatch(packThunk.fetchPacks({page,packNameInput,
-            min:arrayMinMaxCorrectValueSlice[0],
-           max: arrayMinMaxCorrectValueSlice[1],sortPacks,user_id}))
+        if(idCurrentPack){
+            dispatch(cardThunk.fetchCards({cardsPack_id:idCurrentPack,page}))
+        } else {
+            dispatch(packThunk.fetchPacks({page,packNameInput,
+                min:arrayMinMaxCorrectValueSlice[0],
+                max: arrayMinMaxCorrectValueSlice[1],sortPacks,user_id}))
+        }
     }
 
 
@@ -58,9 +62,13 @@ export const Pagingtor = () => {
     и последнее число которым порция заканчивается*/
 
     const fetchActivePageHandler = (page:number) => {
-        dispatch(packThunk.fetchPacks({page,packNameInput,
-            min:arrayMinMaxCorrectValueSlice[0],
-            max: arrayMinMaxCorrectValueSlice[1],sortPacks,user_id}))
+        if(idCurrentPack){
+            dispatch(cardThunk.fetchCards({cardsPack_id:idCurrentPack,page}))
+        }else {
+            dispatch(packThunk.fetchPacks({page,packNameInput,
+                min:arrayMinMaxCorrectValueSlice[0],
+                max: arrayMinMaxCorrectValueSlice[1],sortPacks,user_id}))
+        }
     }  /*когда на стрелку нажал то пошел запрос за следующими  колодами*/
 
     const  onClickNextPart= () => {
@@ -83,7 +91,7 @@ export const Pagingtor = () => {
                     return (
                         <span key={el}
                             onClick={()=>onClickHandler(el)}
-                            className={page===el
+                            className={numberPageWithServer===el
                             ?st.activeNumber
                             :st.number
                         }>{el}</span>

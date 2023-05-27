@@ -5,10 +5,11 @@ import {createSlice} from "@reduxjs/toolkit";
 import {initialCardsState} from "features/cards/initialCardState";
 
 
-const fetchCards = createAppAsyncThunk<{data:GetResponseCardsType}, {cardsPack_id:string}>('cards/fetchCards',
+const fetchCards = createAppAsyncThunk<{data:GetResponseCardsType}, {cardsPack_id:string,page?:number}>('cards/fetchCards',
     async (arg, thunkAPI) => {
         return thunkTryCatch(thunkAPI, async () => {
-const respons = await cardApi.fetchCards(arg.cardsPack_id)
+            let pageCount: number = 5
+const respons = await cardApi.fetchCards(arg.cardsPack_id,pageCount,arg.page)
             return {data:respons.data}
         })
     })
