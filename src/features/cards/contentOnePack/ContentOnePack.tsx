@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -20,10 +20,19 @@ import {
 } from "features/cards/cardSelectors";
 import {useAppDispatch} from "common/hooks/useAppDispatch";
 import {cardThunk} from "features/cards/cardSlice";
+import {appThunk} from "features/app/appSlice";
 
 
 
 export const ContentOnePack = () => {
+
+    useEffect(() => {
+        const cardsPack_id = localStorage.getItem('lastCardsPack_id')
+        if(cardsPack_id) {
+            dispatch(cardThunk.fetchCards({cardsPack_id}))
+        }
+        }, [])
+
     const dispatch = useAppDispatch();
 
     const arrayCards = useSelector(selectCards)

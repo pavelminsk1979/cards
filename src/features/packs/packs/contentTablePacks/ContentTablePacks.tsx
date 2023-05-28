@@ -1,6 +1,6 @@
 import TableRow from "@mui/material/TableRow";
 import TableCell from "@mui/material/TableCell";
-import {NavLink} from "react-router-dom";
+import {NavLink, useParams} from "react-router-dom";
 import {TableColumnActions} from "features/packs/packs/inTableColumnActions/TableColumnActions";
 import * as React from "react";
 import {CardPacksType} from "features/packs/packApi";
@@ -16,7 +16,11 @@ type PropsType={
 export const ContentTablePacks = ({cardPacks}:PropsType) => {
     const dispatch = useAppDispatch();
 
-    const onClickNamePack = (cardsPack_id:string,cardsCount:number) => {
+
+/*    const params = useParams()
+    console.log(params)*/
+    const onClickNamePack = (cardsPack_id:string) => {
+        localStorage.setItem('lastCardsPack_id', cardsPack_id);
         dispatch(cardThunk.fetchCards({cardsPack_id}))
     }
       /* pack.user_id==='64505ad094d2b62338730b93'*/
@@ -30,8 +34,7 @@ export const ContentTablePacks = ({cardPacks}:PropsType) => {
                       {
                           pack.cardsCount||pack.user_id==='64505ad094d2b62338730b93'
                           ?  <NavLink
-                              onClick={()=>onClickNamePack(pack._id,
-                                  pack.cardsCount)}
+                              onClick={()=>onClickNamePack(pack._id)}
                               className={st.namePack}
                               to={'/contentOnePack'}>{pack.name}</NavLink>
                           :  <div
