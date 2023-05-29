@@ -5,7 +5,7 @@ import Delete from "@mui/icons-material/Delete";
 import * as React from "react";
 import {useAppDispatch} from "common/hooks/useAppDispatch";
 import {packThunk} from "features/packs/packSlice";
-import st from './TableColumnActions.module.css'
+import st from 'features/packs/packs/contentTablePacks/inTableColumnActions/TableColumnActions.module.css'
 import { CardsPackType } from "features/packs/packApi";
 
 type TableColumnActionsType = {

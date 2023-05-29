@@ -7,7 +7,6 @@ import {CreateNewPassword} from "features/auth/createNewPassword/CreateNewPasswo
 import {ForgotPassword} from "features/auth/forgotPassword/ForgotPassword";
 import {Profile} from "features/auth/profile/Profile";
 import {Packs} from "features/packs/packs/Packs";
-import {Cards} from "components/Cards";
 import {Learn} from "components/Learn";
 import st from 'App.module.css'
 import {AppBar} from "components/appBar/AppBar";
@@ -21,7 +20,7 @@ import {useAppDispatch} from "common/hooks/useAppDispatch";
 import LinearProgress from "@mui/material/LinearProgress";
 import {selectIsInitialized, selectStatusLoading} from "features/app/appSelectors";
 import {AddNewCard} from "features/packs/addNewCard/AddNewCard";
-import {ContentOnePack} from "features/cards/contentOnePack/ContentOnePack";
+import {PageCards} from "features/cards/pageCards/PageCards";
 
 
 export const App = () => {
@@ -46,7 +45,7 @@ export const App = () => {
                 color="secondary"/>}
             <div>
                 <NavLink to={'/addNewCard'}>addNewCard</NavLink>
-                <NavLink to={'/contentOnePack'}>contentOnePack</NavLink>
+                <NavLink to={'/pageCards'}>PageCards</NavLink>
 
                 {/*    <NavLink to={'/login'}>login</NavLink>
                 <NavLink to={'/register'}>register</NavLink>
@@ -69,10 +68,9 @@ export const App = () => {
                 <Route path="profile" element={<Profile/>}/>
                 <Route path="editProfile" element={<EditProfile/>}/>
                 <Route path="packs" element={<Packs/>}/>
-                <Route path="cards" element={<Cards/>}/>
                 <Route path="learn" element={<Learn/>}/>
                 <Route path="addNewCard" element={<AddNewCard/>}/>
-                <Route path="contentOnePack" element={<ContentOnePack/>}/>
+                <Route path="pageCards" element={<PageCards/>}/>
 
 
                 <Route path="/404" element={<h2>404: PAGE NOT FOUND</h2>}/>

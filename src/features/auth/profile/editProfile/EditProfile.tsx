@@ -33,7 +33,7 @@ export const EditProfile = () => {
         },
         onSubmit: values => {
             /*alert(JSON.stringify(values));*/
-           /* dispatch(authThunk.editProfile(values));*//* ПРОВЕРИТЬ ибо этот запрос на сервер устанавливал данные в profile и перекидывала на страницу с карточками даже когда я не был залогинет*/
+            dispatch(authThunk.editProfile(values));
             formik.resetForm()
         }
     })

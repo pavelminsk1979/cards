@@ -1,7 +1,7 @@
 import TableRow from "@mui/material/TableRow";
 import TableCell from "@mui/material/TableCell";
 import {NavLink, useParams} from "react-router-dom";
-import {TableColumnActions} from "features/packs/packs/inTableColumnActions/TableColumnActions";
+import {TableColumnActions} from "features/packs/packs/contentTablePacks/inTableColumnActions/TableColumnActions";
 import * as React from "react";
 import {CardPacksType} from "features/packs/packApi";
 import st from "./ContentTablePacks.module.css";
@@ -36,7 +36,7 @@ export const ContentTablePacks = ({cardPacks}:PropsType) => {
                           ?  <NavLink
                               onClick={()=>onClickNamePack(pack._id)}
                               className={st.namePack}
-                              to={'/contentOnePack'}>{pack.name}</NavLink>
+                              to={'/pageCards'}>{pack.name}</NavLink>
                           :  <div
                               className={st.namePack}>{pack.name}</div>
                           }

@@ -30,3 +30,8 @@
 .tableBody{
     background-color: #f5f7f7;
 }
+
+.error{
+    font-size: 23px;
+    color: red;
+}

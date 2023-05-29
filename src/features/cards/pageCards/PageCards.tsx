@@ -6,9 +6,8 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import st from 'features/cards/contentOnePack/ContentOnePack.module.css'
+import st from 'features/cards/pageCards/PageCards.module.css'
 import {BlokNameAndButton} from "features/packs/packs/upperBlock/BlokNameAndButton";
-import {ChangeEvent, KeyboardEvent,  useState} from "react";
 import {Paginator} from "components/paginator/Paginator";
 import {LinkOnPacks} from "components/linkOnPacks/linkOnPacks";
 import {useSelector} from "react-redux";
@@ -21,17 +20,23 @@ import {
 import {useAppDispatch} from "common/hooks/useAppDispatch";
 import {cardThunk} from "features/cards/cardSlice";
 import {appThunk} from "features/app/appSlice";
+import {InputForSearchCards} from "features/cards/pageCards/inputForSearch/InputForSearchCards";
+import {ColumnActions} from "features/cards/pageCards/columnActions/ColumnActions";
 
 
 
-export const ContentOnePack = () => {
+export const PageCards = () => {
+const page = useSelector(selectNumberPageWithServer)
+
+
+
 
     useEffect(() => {
         const cardsPack_id = localStorage.getItem('lastCardsPack_id')
         if(cardsPack_id) {
             dispatch(cardThunk.fetchCards({cardsPack_id}))
         }
-        }, [])
+        }, [page])
 
     const dispatch = useAppDispatch();
 
@@ -47,23 +52,12 @@ export const ContentOnePack = () => {
 
     const currentIdPack = useSelector(selectCurrentIdPack)
 
-    const [textInput, setTextInput] = useState('')
 
-
-    const onChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
-        setTextInput(event.currentTarget.value)
-    }
-
-    const onKeyPressHandler = (event: KeyboardEvent<HTMLInputElement>) => {
-        if (event.key === 'Enter') {
-            setTextInput('')
-            /* ОТСЮда тексt из инпута передавать дальше*/
-        }
-    }
     
     const createCard = () => {
-      dispatch(cardThunk.createCard({cardsPack_id:currentIdPack}))
+     /* dispatch(cardThunk.createCard({cardsPack_id:currentIdPack}))*/
     }
+
     const titlePlasNamePack = `Наименование Колоды : ${packName}`
 
     return (
@@ -73,18 +67,9 @@ export const ContentOnePack = () => {
                 callback={createCard}
                 title={titlePlasNamePack}
                 nameButton='Добавить карточку'/>
-            <div>
-                <div className={st.text}>
-                    Поиск
-                </div>
-                <input
-                    onKeyPress={onKeyPressHandler}
-                    onChange={onChangeHandler}
-                    value={textInput}
-                    className={st.input}
-                    type="text"/>
 
-            </div>
+            <InputForSearchCards/>
+
             <TableContainer component={Paper}>
                 <Table sx={{minWidth: 650}} aria-label="simple table">
                     <TableHead>
@@ -93,6 +78,7 @@ export const ContentOnePack = () => {
                             <TableCell align="center">Ответы</TableCell>
                             <TableCell align="center">Последнее обновление</TableCell>
                             <TableCell align="center">Оценка</TableCell>
+                            <TableCell align="center">Действия</TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody className={st.tableBody}>
@@ -109,6 +95,9 @@ export const ContentOnePack = () => {
                                 <TableCell align="center">
                                     {el.updated}</TableCell>
                                 <TableCell align="center">звездочки</TableCell>
+
+                                <ColumnActions card={el}/>
+
                             </TableRow>
                         ))}
                     </TableBody>
@@ -119,6 +108,7 @@ export const ContentOnePack = () => {
                 countWithServerItems={countWithServerItems}
                 countItemsForOnePage={countItemsForOnePage}
                 numberPageWithServer={numberPageWithServer}/>
+            {!arrayCards.length&&<div className={st.error}>В данной колоде нет карточек удовлетворяющих поиску</div>}
         </div>
     );
 }
