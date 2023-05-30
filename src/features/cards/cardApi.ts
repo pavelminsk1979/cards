@@ -2,11 +2,18 @@ import {instance} from "common/instanceAxios/instansAxios";
 
 
 export const cardApi = {
-	fetchCards (cardsPack_id:string,page?:number) {
-		return instance.get<GetResponseCardsType>('cards/card',{params:{cardsPack_id,page}})
+	fetchCards (cardsPack_id:string,page?:number,cardQuestion?:string,sortCards?:string) {
+		return instance.get<GetResponseCardsType>('cards/card',{params:{cardsPack_id,page,cardQuestion,sortCards}})
 	},
-	createCard(card:any){
-		return instance.post<PostResponseType>('cards/card',{card})
+	createCard(card:PayloadPostRequestType){
+		return instance.post<PostResponseType>('cards/card',card)
+	},
+	deleteCard(id:string){
+		/*return instance.delete('cards/card',id)*/
+		return instance.delete(`cards/card?id=${id}`)
+	},
+	updateCard(payload:PayloadPutType){
+		return instance.put('cards/card',payload)
 	}
 }
 export type PostResponseType = {
@@ -15,18 +22,17 @@ export type PostResponseType = {
 	tokenDeathTime: number;
 }
 
-
-type  PayloadPostRequestType = {
+export type PayloadPutType = {
+	card: {
+		_id: string,
+		question: string
+	}
+}
+export  type  PayloadPostRequestType = {
 	card:{
 		cardsPack_id:string
 		question: string
 		answer: string
-		grade: number
-		shots: number
-		answerImg: string
-		questionImg: string
-		questionVideo: string
-		answerVideo: string
 	}
 }
 

@@ -70,7 +70,7 @@ export const App = () => {
                 <Route path="packs" element={<Packs/>}/>
                 <Route path="learn" element={<Learn/>}/>
                 <Route path="addNewCard" element={<AddNewCard/>}/>
-                <Route path="pageCards" element={<PageCards/>}/>
+                <Route path="pageCards/:id" element={<PageCards/>}/>
 
 
                 <Route path="/404" element={<h2>404: PAGE NOT FOUND</h2>}/>

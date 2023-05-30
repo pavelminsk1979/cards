@@ -4,25 +4,32 @@ import BorderColor from "@mui/icons-material/BorderColor";
 import Delete from "@mui/icons-material/Delete";
 import TableCell from "@mui/material/TableCell";
 import * as React from "react";
-import {CardType} from "features/cards/cardApi";
-import {packThunk} from "features/packs/packSlice";
-import {CardsPackType} from "features/packs/packApi";
+import {CardType, PayloadPutType} from "features/cards/cardApi";
+import {cardThunk} from "features/cards/cardSlice";
+import {useAppDispatch} from "common/hooks/useAppDispatch";
+import {useSelector} from "react-redux";
+import {selectCurrentIdPack} from "features/cards/cardSelectors";
 
 type PropsType = {
     card: CardType
 }
 
 export const ColumnActions = ({card}: PropsType) => {
+    const dispatch = useAppDispatch();
+
 
     const deletePackHandler = (id: string) => {
-        /*dispatch(packThunk.deletePack({id}))*/
+        dispatch(cardThunk.deleteCard({id}))
     }
 
     const updatePackHandler = (id: string) => {
-        /*    const cardsPack:CardsPackType = {_id:id,
-                name:'Супер-Пупер колода',
-                user_name:'$$$$'}
-            dispatch(packThunk.updatePack({cardsPack}))*/
+            const payload:PayloadPutType = {
+                card: {
+                    _id: id,
+                    question: 'Обновленный вопрос'
+                }
+            }
+            dispatch(cardThunk.updateCard({payload}))
     }
 
     return (

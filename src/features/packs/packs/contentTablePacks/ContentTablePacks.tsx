@@ -7,23 +7,16 @@ import {CardPacksType} from "features/packs/packApi";
 import st from "./ContentTablePacks.module.css";
 import TableBody from "@mui/material/TableBody";
 import {useAppDispatch} from "common/hooks/useAppDispatch";
-import {cardThunk} from "features/cards/cardSlice";
+import {cardActions, cardThunk} from "features/cards/cardSlice";
 
 type PropsType={
     cardPacks:CardPacksType[]
 }
 
 export const ContentTablePacks = ({cardPacks}:PropsType) => {
-    const dispatch = useAppDispatch();
 
 
-/*    const params = useParams()
-    console.log(params)*/
-    const onClickNamePack = (cardsPack_id:string) => {
-        localStorage.setItem('lastCardsPack_id', cardsPack_id);
-        dispatch(cardThunk.fetchCards({cardsPack_id}))
-    }
-      /* pack.user_id==='64505ad094d2b62338730b93'*/
+
   return(
       <TableBody className={st.tableBody}>
           {cardPacks.map((pack) => (
@@ -34,9 +27,8 @@ export const ContentTablePacks = ({cardPacks}:PropsType) => {
                       {
                           pack.cardsCount||pack.user_id==='64505ad094d2b62338730b93'
                           ?  <NavLink
-                              onClick={()=>onClickNamePack(pack._id)}
                               className={st.namePack}
-                              to={'/pageCards'}>{pack.name}</NavLink>
+                              to={'/pageCards/'+pack._id}>{pack.name}</NavLink>
                           :  <div
                               className={st.namePack}>{pack.name}</div>
                           }

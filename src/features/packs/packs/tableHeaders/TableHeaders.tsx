@@ -20,7 +20,7 @@ export const TableHeaders = () => {
     const dispatch = useAppDispatch();
 
     const page = useSelector(selectPage)
-    //useSelector
+
     const packNameInput = useSelector(selectPackNameInput)
 
     const sortPacks = useSelector(selectSortPacks)

@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -12,33 +12,29 @@ import {Paginator} from "components/paginator/Paginator";
 import {LinkOnPacks} from "components/linkOnPacks/linkOnPacks";
 import {useSelector} from "react-redux";
 import {
+    selectCardQuestion,
     selectCards,
     selectCountItemsForOnePage, selectCountWithServerItems, selectCurrentIdPack,
     selectNumberPageWithServer,
-    selectPackName
+    selectPackName, selectValueSortCards
 } from "features/cards/cardSelectors";
 import {useAppDispatch} from "common/hooks/useAppDispatch";
-import {cardThunk} from "features/cards/cardSlice";
-import {appThunk} from "features/app/appSlice";
+import {cardActions, cardThunk} from "features/cards/cardSlice";
 import {InputForSearchCards} from "features/cards/pageCards/inputForSearch/InputForSearchCards";
 import {ColumnActions} from "features/cards/pageCards/columnActions/ColumnActions";
-
+import {useParams} from "react-router-dom";
+import {PayloadPostRequestType} from "features/cards/cardApi";
+import IconButton from "@mui/material/IconButton";
+import ArrowCircleUp from "@mui/icons-material/ArrowCircleUp";
+import ArrowCircleDown from "@mui/icons-material/ArrowCircleDown";
 
 
 export const PageCards = () => {
-const page = useSelector(selectNumberPageWithServer)
-
-
-
-
-    useEffect(() => {
-        const cardsPack_id = localStorage.getItem('lastCardsPack_id')
-        if(cardsPack_id) {
-            dispatch(cardThunk.fetchCards({cardsPack_id}))
-        }
-        }, [page])
-
     const dispatch = useAppDispatch();
+
+    const page = useSelector(selectNumberPageWithServer)
+
+    const cardQuestion = useSelector(selectCardQuestion)
 
     const arrayCards = useSelector(selectCards)
 
@@ -52,13 +48,41 @@ const page = useSelector(selectNumberPageWithServer)
 
     const currentIdPack = useSelector(selectCurrentIdPack)
 
+    const sortCards = useSelector(selectValueSortCards)
 
-    
+    const {id} = useParams()
+
+
+
+    useEffect(() => {
+        if(id){
+            dispatch(cardThunk.fetchCards({cardsPack_id: id}))
+        }
+        }, [page, cardQuestion,sortCards])
+
+
     const createCard = () => {
-     /* dispatch(cardThunk.createCard({cardsPack_id:currentIdPack}))*/
+        const card: PayloadPostRequestType = {
+            card: {
+                cardsPack_id: currentIdPack,
+                question: ' Вопросы-Вопросы',
+                answer: 'без ответа',
+            }
+        }
+        dispatch(cardThunk.createCard({card}))
     }
 
     const titlePlasNamePack = `Наименование Колоды : ${packName}`
+
+    const [arrowDirection,setArrowDirection]=useState(true)
+    const onClickArrowHandler = () => {
+        setArrowDirection(!arrowDirection)
+        let sortCards:string = 0+'updated'
+        if(arrowDirection){
+            sortCards = 1+'updated'
+        }
+        dispatch(cardActions.SetValueSortCards({sortCards}))
+    }
 
     return (
         <div className={st.common}>
@@ -76,7 +100,19 @@ const page = useSelector(selectNumberPageWithServer)
                         <TableRow className={st.tableHead}>
                             <TableCell>Вопрсы</TableCell>
                             <TableCell align="center">Ответы</TableCell>
-                            <TableCell align="center">Последнее обновление</TableCell>
+                            
+                            <TableCell 
+                                align="center">
+                                Последнее обновление
+                                <IconButton
+                                    size={"large"}
+                                    onClick={onClickArrowHandler}>
+                                    {arrowDirection
+                                        ? <ArrowCircleUp/>
+                                        : <ArrowCircleDown/>}
+                                </IconButton>
+                            </TableCell>
+                            
                             <TableCell align="center">Оценка</TableCell>
                             <TableCell align="center">Действия</TableCell>
                         </TableRow>
@@ -108,7 +144,7 @@ const page = useSelector(selectNumberPageWithServer)
                 countWithServerItems={countWithServerItems}
                 countItemsForOnePage={countItemsForOnePage}
                 numberPageWithServer={numberPageWithServer}/>
-            {!arrayCards.length&&<div className={st.error}>В данной колоде нет карточек удовлетворяющих поиску</div>}
+            {!arrayCards.length && <div className={st.error}>В данной колоде нет карточек удовлетворяющих поиску</div>}
         </div>
     );
 }
