@@ -27,6 +27,8 @@ import {PayloadPostRequestType} from "features/cards/cardApi";
 import IconButton from "@mui/material/IconButton";
 import ArrowCircleUp from "@mui/icons-material/ArrowCircleUp";
 import ArrowCircleDown from "@mui/icons-material/ArrowCircleDown";
+import Star from "@mui/icons-material/Star";
+import StarBorder from "@mui/icons-material/StarBorder";
 
 
 export const PageCards = () => {
@@ -130,7 +132,13 @@ export const PageCards = () => {
                                     {el.answer}</TableCell>
                                 <TableCell align="center">
                                     {el.updated}</TableCell>
-                                <TableCell align="center">звездочки</TableCell>
+                                <TableCell align="center">
+                                    <Star className={st.star}/>
+                                    <Star className={st.star}/>
+                                    <Star className={st.star}/>
+                                    <Star className={st.star}/>
+                                    <StarBorder className={st.star}/>
+                                </TableCell>
 
                                 <ColumnActions card={el}/>
 
