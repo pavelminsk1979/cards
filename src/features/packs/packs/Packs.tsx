@@ -22,6 +22,7 @@ import {TableHeaders} from "features/packs/packs/tableHeaders/TableHeaders";
 import {ContentTablePacks} from "features/packs/packs/contentTablePacks/ContentTablePacks";
 import {BasicModal} from "components/basicModal/BasicModal";
 import {ModalCreatPack} from "features/packs/packs/modals/modalCreatPack/ModalCreatPack";
+import {ModalUpdatePack} from "features/packs/packs/modals/modalUpdatePack/ModalUpdatePack";
 
 
 export const Packs = () => {
@@ -38,14 +39,21 @@ export const Packs = () => {
     const cardPacksTotalCount = useSelector(selectPacksTotalCount)
 
 
-
     const [flagModal, setFlagModal] = useState('') /*какая из трех модалок покажется */
 
     const [positionModal, setPositionModal] = useState(false);
 
+    const [stateForUpdatePack,setStateForUpdatePack] =useState({
+        packId:'',packName:''})
+
     const handlerButtonCreatePack = () => {
         setPositionModal(true)
         setFlagModal('create')
+    }
+    const clickButtonUpdatePack = (packId:string,packName:string) => {
+        setPositionModal(true)
+        setFlagModal('update')
+        setStateForUpdatePack({...stateForUpdatePack,packId,packName})
     }
 
     useEffect(() => {
@@ -60,15 +68,19 @@ export const Packs = () => {
     return (
         <div className={st.common}>
 
-            <BasicModal closeModal={setPositionModal}
-                        openModal={positionModal}>
-                {flagModal==='create'&&<ModalCreatPack closeModal={setPositionModal}/>}
-                {flagModal==='update'&&<div>#7kfkhgkhg</div>}
-             {/*   {flag ===1 &&<ModalCreatPack closeModal={setPositionModal}/>}
-                {flag ===2 &&<ModalCreatPack closeModal={setPositionModal}/>}
-                <ModalCreatPack closeModal={setPositionModal}/>*/}
+
+            <BasicModal
+                closeModal={setPositionModal}
+                openModal={positionModal}>
+
+                {flagModal === 'create' && <ModalCreatPack closeModal={setPositionModal}/>}
+
+                {flagModal === 'update' && <ModalUpdatePack
+                    stateForUpdatePack={stateForUpdatePack}
+                    closeModal={setPositionModal}/>}
 
             </BasicModal>
+
 
             <div className={st.blokNameAndButton}>
                 <div
@@ -77,16 +89,10 @@ export const Packs = () => {
                 </div>
                 <button
                     onClick={handlerButtonCreatePack}
-                        className={st.button}>
+                    className={st.button}>
                     Добавить колоду
                 </button>
             </div>
-
-        {/*    <BlokNameAndButton
-                setFlagShowModal={setFlagModal}
-                openModalCreatePack={setPositionModal}
-                title='Список КОЛОД'
-                nameButton='Добавить колоду'/>*/}
 
             <SettingsBlock/>
 
@@ -97,8 +103,7 @@ export const Packs = () => {
                     </TableHead>
 
                     <ContentTablePacks
-                        setFlagModal={setFlagModal}
-                        openModallUpdatePack={setPositionModal}
+                        clickButtonUpdatePack={clickButtonUpdatePack}
                         cardPacks={cardPacks}/>
 
                 </Table>

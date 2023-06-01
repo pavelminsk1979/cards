@@ -10,11 +10,10 @@ import TableBody from "@mui/material/TableBody";
 
 type PropsType={
     cardPacks:CardPacksType[]
-    openModallUpdatePack:(value:boolean)=>void
-    setFlagModal:(flag:string)=>void
+    clickButtonUpdatePack:(packId:string,packName:string)=>void
 }
 
-export const ContentTablePacks = ({cardPacks,openModallUpdatePack,setFlagModal}:PropsType) => {
+export const ContentTablePacks = ({cardPacks,clickButtonUpdatePack}:PropsType) => {
 
 
 
@@ -38,11 +37,10 @@ export const ContentTablePacks = ({cardPacks,openModallUpdatePack,setFlagModal}:
                   <TableCell align="center">{pack.cardsCount}</TableCell>
                   <TableCell align="center">{pack.updated}</TableCell>
                   <TableCell align="center">{pack.user_name}</TableCell>
+
                   <TableColumnActions
-                      setFlagModal={setFlagModal}
-                      openModallUpdatePack={openModallUpdatePack}
-                      packUserId={pack.user_id}
-                                      packId={pack._id}/>
+                      clickButtonUpdatePack={()=>clickButtonUpdatePack(pack._id,pack.name)}
+                      packUserId={pack.user_id}/>
               </TableRow>
           ))}
       </TableBody>
