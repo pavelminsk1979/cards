@@ -3,13 +3,20 @@
     display:flex;
     justify-content: space-between;
 }
-
 .title{
     margin-top: 30px;
     font-weight: 700;
     font-size: 32px;
     color: #4f5158;
 }
+
+
+
+
+
+
+
+
 
 .button {
     width: 185px;

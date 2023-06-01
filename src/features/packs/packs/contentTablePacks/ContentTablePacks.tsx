@@ -6,14 +6,15 @@ import * as React from "react";
 import {CardPacksType} from "features/packs/packApi";
 import st from "./ContentTablePacks.module.css";
 import TableBody from "@mui/material/TableBody";
-import {useAppDispatch} from "common/hooks/useAppDispatch";
-import {cardActions, cardThunk} from "features/cards/cardSlice";
+
 
 type PropsType={
     cardPacks:CardPacksType[]
+    openModallUpdatePack:(value:boolean)=>void
+    setFlagModal:(flag:string)=>void
 }
 
-export const ContentTablePacks = ({cardPacks}:PropsType) => {
+export const ContentTablePacks = ({cardPacks,openModallUpdatePack,setFlagModal}:PropsType) => {
 
 
 
@@ -37,7 +38,10 @@ export const ContentTablePacks = ({cardPacks}:PropsType) => {
                   <TableCell align="center">{pack.cardsCount}</TableCell>
                   <TableCell align="center">{pack.updated}</TableCell>
                   <TableCell align="center">{pack.user_name}</TableCell>
-                  <TableColumnActions packUserId={pack.user_id}
+                  <TableColumnActions
+                      setFlagModal={setFlagModal}
+                      openModallUpdatePack={openModallUpdatePack}
+                      packUserId={pack.user_id}
                                       packId={pack._id}/>
               </TableRow>
           ))}

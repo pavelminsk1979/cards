@@ -7,7 +7,6 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import st from 'features/cards/pageCards/PageCards.module.css'
-import {BlokNameAndButton} from "features/packs/packs/upperBlock/BlokNameAndButton";
 import {Paginator} from "components/paginator/Paginator";
 import {LinkOnPacks} from "components/linkOnPacks/linkOnPacks";
 import {useSelector} from "react-redux";
@@ -29,6 +28,7 @@ import ArrowCircleUp from "@mui/icons-material/ArrowCircleUp";
 import ArrowCircleDown from "@mui/icons-material/ArrowCircleDown";
 import Star from "@mui/icons-material/Star";
 import StarBorder from "@mui/icons-material/StarBorder";
+import {BlokNameAndButton} from "features/packs/packs/upperBlock/BlokNameAndButton";
 
 
 export const PageCards = () => {

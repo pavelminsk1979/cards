@@ -68,7 +68,6 @@ export const SettingsBlock = () => {
         setValueButton('all')
     }
 
-/*CMОТРЕТЬ по  ЗАМЫКАНИЮ   где и откуда берутся значения для переменных*/
     return (
         <div className={st.common}>
             <div>

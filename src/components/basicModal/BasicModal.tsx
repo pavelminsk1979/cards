@@ -1,32 +1,50 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import st from './BasicModal.module.css'
 import {ReactNode} from "react";
-import {Simulate} from "react-dom/test-utils";
-import change = Simulate.change;
-
-/*const style = {
-    position: 'absolute' as 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    width: 400,
-    bgcolor: 'background.paper',
-    border: '2px solid #000',
-    boxShadow: 24,
-    p: 4,
-};*/
 
 
+
+type PropsType = {
+    children:ReactNode
+    openModal:boolean
+    closeModal:(value:boolean)=>void
+}
+
+export const  BasicModal = ({openModal,closeModal,children}:PropsType) => {
+    const handleClose = () => {
+        closeModal(false)
+        };
+
+    return (
+        <div>
+            <Modal
+                open={openModal}
+                onClose={handleClose}
+                aria-labelledby="modal-modal-title"
+                aria-describedby="modal-modal-description"
+            >
+                <Box className={st.box}>
+                    {children}
+                </Box>
+            </Modal>
+        </div>
+    );
+}
+
+
+
+
+
+
+/*
 type PropsType = {
     children : ReactNode
 }
 
 export const  BasicModal = () => {
-    const [open, setOpen] = React.useState(false);
+    const [open, setOpen] = React.useState(true);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
 
@@ -40,15 +58,9 @@ export const  BasicModal = () => {
                 aria-describedby="modal-modal-description"
             >
                 <Box className={st.box}>
-                    {props.children}
-                {/*    <Typography id="modal-modal-title" variant="h6" component="h2">
-                        Text in a modal
-                    </Typography>
-                    <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                        Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-                    </Typography>*/}
+                    @@
                 </Box>
             </Modal>
         </div>
     );
-}
+}*/

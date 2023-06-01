@@ -5,11 +5,13 @@ import st from 'features/packs/packs/upperBlock/BlokNameAndButton.module.css'
 type BlokNameAndButtonType = {
     title:string
     nameButton:string
-    callback:()=>void
+  callback:()=>void
+
 }
 
 
 export const BlokNameAndButton = ({title,nameButton,callback}:BlokNameAndButtonType) => {
+
     return(
       <div className={st.common}>
           <div className={st.title}>{title}</div>

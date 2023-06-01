@@ -11,9 +11,11 @@ import { CardsPackType } from "features/packs/packApi";
 type TableColumnActionsType = {
     packId: string
     packUserId: string
+    openModallUpdatePack:(value:boolean)=>void
+    setFlagModal:(flag:string)=>void
 }
 
-export const TableColumnActions = ({packId, packUserId}: TableColumnActionsType) => {
+export const TableColumnActions = ({packId, packUserId,openModallUpdatePack,setFlagModal}: TableColumnActionsType) => {
     const dispatch = useAppDispatch();
 
     const deletePackHandler = (id: string) => {
@@ -21,10 +23,12 @@ export const TableColumnActions = ({packId, packUserId}: TableColumnActionsType)
     }
 
     const updatePackHandler = (id: string) => {
-        const cardsPack:CardsPackType = {_id:id,
+        openModallUpdatePack(true)
+        setFlagModal('update')
+     /*   const cardsPack:CardsPackType = {_id:id,
             name:'Супер-Пупер колода',
             user_name:'$$$$'}
-        dispatch(packThunk.updatePack({cardsPack}))
+        dispatch(packThunk.updatePack({cardsPack}))*/
     }
 
     return (
