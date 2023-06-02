@@ -12,20 +12,18 @@ type TableColumnActionsType = {
     packUserId: string
     clickButtonUpdatePack:()=>void
     clickButtonDeletePack:()=>void
+    clickButtonLearnPack:()=>void
 }
 
-export const TableColumnActions = ({clickButtonUpdatePack,clickButtonDeletePack, packUserId}: TableColumnActionsType) => {
+export const TableColumnActions = ({clickButtonUpdatePack,clickButtonDeletePack, packUserId,clickButtonLearnPack}: TableColumnActionsType) => {
 
-
-    const deletePackHandler = () => {
-      /*  dispatch(packThunk.deletePack(/!*{id}*!/))*/
-    }
 
     return (
         packUserId === "64505ad094d2b62338730b93"
 
             ? <TableCell align="center">
-                <School className={st.item}/>
+                <School onClick={clickButtonLearnPack}
+                    className={st.item}/>
                 <BorderColor onClick={clickButtonUpdatePack}
                              className={st.item}/>
                 <Delete className={st.item}
@@ -33,7 +31,8 @@ export const TableColumnActions = ({clickButtonUpdatePack,clickButtonDeletePack,
             </TableCell>
 
             : <TableCell align="center">
-                <School className={st.item}/>
+                <School onClick={clickButtonLearnPack}
+                    className={st.item}/>
             </TableCell>
     )
 }

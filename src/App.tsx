@@ -7,7 +7,6 @@ import {CreateNewPassword} from "features/auth/createNewPassword/CreateNewPasswo
 import {ForgotPassword} from "features/auth/forgotPassword/ForgotPassword";
 import {Profile} from "features/auth/profile/Profile";
 import {Packs} from "features/packs/packs/Packs";
-import {Learn} from "components/Learn";
 import st from 'App.module.css'
 import {AppBar} from "components/appBar/AppBar";
 import {EditProfile} from "features/auth/profile/editProfile/EditProfile";
@@ -19,8 +18,8 @@ import 'react-toastify/dist/ReactToastify.css';
 import {useAppDispatch} from "common/hooks/useAppDispatch";
 import LinearProgress from "@mui/material/LinearProgress";
 import {selectIsInitialized, selectStatusLoading} from "features/app/appSelectors";
-import {AddNewCard} from "features/cards/pageCards/addNewCard/AddNewCard";
 import {PageCards} from "features/cards/pageCards/PageCards";
+import {LearnQuestion} from "features/packs/packs/learn/learnQuestion/LearnQuestion";
 
 
 export const App = () => {
@@ -44,7 +43,7 @@ export const App = () => {
             {statusLoading === 'loading' && <LinearProgress
                 color="secondary"/>}
             <div>
-                <NavLink to={'/addNewCard'}>addNewCard</NavLink>
+                <NavLink to={'/learn'}>Learn</NavLink>
 
             </div>
 
@@ -58,8 +57,7 @@ export const App = () => {
                 <Route path="profile" element={<Profile/>}/>
                 <Route path="editProfile" element={<EditProfile/>}/>
                 <Route path="packs" element={<Packs/>}/>
-                <Route path="learn" element={<Learn/>}/>
-                <Route path="addNewCard" element={<AddNewCard/>}/>
+                <Route path="learn" element={<LearnQuestion/>}/>
                 <Route path="pageCards/:id" element={<PageCards/>}/>
 
 

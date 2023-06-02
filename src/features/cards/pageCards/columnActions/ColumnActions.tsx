@@ -18,10 +18,6 @@ export const ColumnActions = ({card,clickButtonUpdateCard,clickButtonDeleteCard}
     const dispatch = useAppDispatch();
 
 
-/*    const deletePackHandler = (id: string) => {
-        dispatch(cardThunk.deleteCard({id}))
-    }*/
-
 
     return (
         card.user_id === "64505ad094d2b62338730b93"

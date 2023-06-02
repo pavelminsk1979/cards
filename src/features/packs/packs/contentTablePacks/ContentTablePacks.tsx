@@ -9,8 +9,6 @@ import TableBody from "@mui/material/TableBody";
 
 
 
-
-
 type PropsType={
     cardPacks:CardPacksType[]
     clickButtonUpdatePack:(packId:string,packName:string)=>void
@@ -19,7 +17,9 @@ type PropsType={
 
 export const ContentTablePacks = ({clickButtonDeletePack,cardPacks,clickButtonUpdatePack}:PropsType) => {
 
-
+const clickButtonLearnPack = () => {
+  alert(6)
+}
 
   return(
       <TableBody className={st.tableBody}>
@@ -43,6 +43,7 @@ export const ContentTablePacks = ({clickButtonDeletePack,cardPacks,clickButtonUp
                   <TableCell align="center">{pack.user_name}</TableCell>
 
                   <TableColumnActions
+                      clickButtonLearnPack={clickButtonLearnPack}
                       clickButtonUpdatePack={()=>clickButtonUpdatePack(pack._id,pack.name)}
                       packUserId={pack.user_id}
                       clickButtonDeletePack={()=>clickButtonDeletePack(pack._id)}/>
