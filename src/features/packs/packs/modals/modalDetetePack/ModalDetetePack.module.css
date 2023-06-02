@@ -1,0 +1,50 @@
+.common {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.upperBlok {
+    width: 90%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.title {
+    margin-top: 20px;
+    font-weight: 500;
+    font-size: 23px;
+    color: #4f5158;
+}
+
+.text {
+    margin-top: 20px;
+    width: 85%;
+    font-weight: 400;
+    font-size: 19px;
+    color: #630263;
+}
+
+
+.button {
+    width: 145px;
+    height: 40px;
+    margin-top: 30px;
+    margin-bottom: 10px;
+    background-color: #c60303;
+    border: 2px solid #c60303;
+    color: white;
+    border-radius: 8px;
+    box-shadow: 2px 2px 5px 2px #bdae5b;
+    font-size: 20px;
+}
+
+.button:hover {
+    transform: scale(1.1);
+    background-color: #8e0202;;
+    border: 2px solid #8e0202;
+    box-shadow: 2px 2px 5px 2px #af8345;
+    transition: 0.5s;
+}

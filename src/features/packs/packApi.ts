@@ -19,7 +19,6 @@ export const packApi = {
 export type CardsPackType = {
     _id:string
     name:string
-    user_name:string
 }
 
 type PayloadCreatePackType = {

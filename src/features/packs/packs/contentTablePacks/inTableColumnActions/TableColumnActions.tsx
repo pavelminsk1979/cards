@@ -6,12 +6,15 @@ import * as React from "react";
 import st from 'features/packs/packs/contentTablePacks/inTableColumnActions/TableColumnActions.module.css'
 
 
+
+
 type TableColumnActionsType = {
     packUserId: string
     clickButtonUpdatePack:()=>void
+    clickButtonDeletePack:()=>void
 }
 
-export const TableColumnActions = ({clickButtonUpdatePack, packUserId}: TableColumnActionsType) => {
+export const TableColumnActions = ({clickButtonUpdatePack,clickButtonDeletePack, packUserId}: TableColumnActionsType) => {
 
 
     const deletePackHandler = () => {
@@ -26,7 +29,7 @@ export const TableColumnActions = ({clickButtonUpdatePack, packUserId}: TableCol
                 <BorderColor onClick={clickButtonUpdatePack}
                              className={st.item}/>
                 <Delete className={st.item}
-                        onClick={ deletePackHandler}/>
+                        onClick={clickButtonDeletePack}/>
             </TableCell>
 
             : <TableCell align="center">

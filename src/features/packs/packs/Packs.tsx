@@ -23,6 +23,10 @@ import {ContentTablePacks} from "features/packs/packs/contentTablePacks/ContentT
 import {BasicModal} from "components/basicModal/BasicModal";
 import {ModalCreatPack} from "features/packs/packs/modals/modalCreatPack/ModalCreatPack";
 import {ModalUpdatePack} from "features/packs/packs/modals/modalUpdatePack/ModalUpdatePack";
+import {ModalDeletePack} from "features/packs/packs/modals/modalDetetePack/ModalDetetePack";
+
+
+
 
 
 export const Packs = () => {
@@ -41,9 +45,9 @@ export const Packs = () => {
 
     const [flagModal, setFlagModal] = useState('') /*какая из трех модалок покажется */
 
-    const [positionModal, setPositionModal] = useState(false); /*открыть или закрыть отображение модалки*/
+    const [positionModal, setPositionModal] = useState(false);
 
-    const [stateForUpdatePack,setStateForUpdatePack] =useState({
+    const [valuesForUpdateAndDeletePack,setValues] =useState({
         packId:'',packName:''})
 
     const handlerButtonCreatePack = () => {
@@ -53,7 +57,12 @@ export const Packs = () => {
     const clickButtonUpdatePack = (packId:string,packName:string) => {
         setPositionModal(true)
         setFlagModal('update')
-        setStateForUpdatePack({...stateForUpdatePack,packId,packName})
+        setValues({...valuesForUpdateAndDeletePack,packId,packName})
+    }
+    const clickButtonDeletePack = (packId:string) => {
+        setPositionModal(true)
+        setFlagModal('delete')
+        setValues({...valuesForUpdateAndDeletePack,packId})
     }
 
     useEffect(() => {
@@ -76,7 +85,11 @@ export const Packs = () => {
                 {flagModal === 'create' && <ModalCreatPack closeModal={setPositionModal}/>}
 
                 {flagModal === 'update' && <ModalUpdatePack
-                    stateForUpdatePack={stateForUpdatePack}
+                    stateForUpdatePack={valuesForUpdateAndDeletePack}
+                    closeModal={setPositionModal}/>}
+
+                {flagModal === 'delete' && <ModalDeletePack
+                    stateForDeletPack={valuesForUpdateAndDeletePack}
                     closeModal={setPositionModal}/>}
 
             </BasicModal>
@@ -104,7 +117,8 @@ export const Packs = () => {
 
                     <ContentTablePacks
                         clickButtonUpdatePack={clickButtonUpdatePack}
-                        cardPacks={cardPacks}/>
+                        cardPacks={cardPacks}
+                        clickButtonDeletePack={clickButtonDeletePack}/>
 
                 </Table>
             </TableContainer>

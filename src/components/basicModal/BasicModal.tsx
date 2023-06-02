@@ -5,37 +5,31 @@ import st from './BasicModal.module.css'
 import {ReactNode} from "react";
 
 
-
 type PropsType = {
-    children:ReactNode
-    openModal:boolean
-    closeModal:(value:boolean)=>void
+    children: ReactNode
+    openModal: boolean
+    closeModal: (value: boolean) => void
 }
 
-export const  BasicModal = ({openModal,closeModal,children}:PropsType) => {
+export const BasicModal = ({openModal, closeModal, children}: PropsType) => {
     const handleClose = () => {
         closeModal(false)
-        };
+    };
 
     return (
-        <div>
-            <Modal
-                open={openModal}
-                onClose={handleClose}
-                aria-labelledby="modal-modal-title"
-                aria-describedby="modal-modal-description"
-            >
-                <Box className={st.box}>
-                    {children}
-                </Box>
-            </Modal>
-        </div>
+        <Modal
+            open={openModal}
+            onClose={handleClose}
+            aria-labelledby="modal-modal-title"
+            aria-describedby="modal-modal-description"
+        >
+            <Box className={st.box}>
+                {children}
+            </Box>
+        </Modal>
+
     );
 }
-
-
-
-
 
 
 /*

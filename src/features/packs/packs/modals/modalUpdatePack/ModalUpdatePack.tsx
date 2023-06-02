@@ -28,8 +28,7 @@ export const ModalUpdatePack = ({stateForUpdatePack,closeModal}: PropsType) => {
     const handlerCreatePack = () => {
         if(title.trim()){
             const cardsPack:CardsPackType = {_id:stateForUpdatePack.packId,
-                name:title,
-                user_name:'$$$$'}
+                name:title}
             dispatch(packThunk.updatePack({cardsPack}))
             closeModal(false)
         }
