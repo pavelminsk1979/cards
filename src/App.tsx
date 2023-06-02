@@ -19,7 +19,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import {useAppDispatch} from "common/hooks/useAppDispatch";
 import LinearProgress from "@mui/material/LinearProgress";
 import {selectIsInitialized, selectStatusLoading} from "features/app/appSelectors";
-import {AddNewCard} from "features/packs/addNewCard/AddNewCard";
+import {AddNewCard} from "features/cards/pageCards/addNewCard/AddNewCard";
 import {PageCards} from "features/cards/pageCards/PageCards";
 
 

@@ -1,26 +1,28 @@
+.common {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
 
-.common{
+.upperBlok{
+    width: 90%;
     display:flex;
     justify-content: space-between;
 }
+
 .title{
-    margin-top: 30px;
-    font-weight: 700;
-    font-size: 32px;
+    margin-top: 20px;
+    font-weight: 500;
+    font-size: 23px;
     color: #4f5158;
 }
 
 
-
-
-
-
-
-
-
 .button {
-    width: 185px;
-    height: 50px;
+    width: 145px;
+    height: 40px;
     margin-top: 30px;
     margin-bottom: 10px;
     background-color: #0787cb;

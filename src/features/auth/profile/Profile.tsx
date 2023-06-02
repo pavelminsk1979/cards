@@ -6,8 +6,8 @@ import {useSelector} from "react-redux";
 import {Navigate, NavLink} from "react-router-dom";
 import {useAppDispatch} from "common/hooks/useAppDispatch";
 import {selectLogOut} from "../authSelectors";
+import {LinkOnPagePacks} from "components/linkOnPagePacks/LinkOnPagePacks";
 
-import {LinkOnPacks} from "components/linkOnPacks/linkOnPacks";
 
 
 
@@ -32,7 +32,7 @@ export const Profile = () => {
 
     return (
         <div>
-       <LinkOnPacks/>
+       <LinkOnPagePacks/>
             <div className={st.common}>
                 <div className={st.container}>
                     <div className={st.title}>

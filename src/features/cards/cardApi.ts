@@ -26,6 +26,7 @@ export type PayloadPutType = {
 	card: {
 		_id: string,
 		question: string
+		answer:string
 	}
 }
 export  type  PayloadPostRequestType = {

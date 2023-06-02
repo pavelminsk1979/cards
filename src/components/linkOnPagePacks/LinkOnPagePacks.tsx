@@ -1,4 +1,4 @@
-import st from "components/linkOnPacks/linkOnPacks.module.css"
+import st from "./LinkOnPagePacks.module.css"
 import IconButton from "@mui/material/IconButton";
 import KeyboardBackspace from "@mui/icons-material/KeyboardBackspace";
 import {useNavigate} from "react-router-dom";
@@ -6,7 +6,7 @@ import React from "react";
 
 
 
-export const LinkOnPacks = () => {
+export const LinkOnPagePacks = () => {
     const navigate = useNavigate();
 
     const onClickKeyboardBackspace = () => {

@@ -9,7 +9,7 @@ import {CardsPackType} from "features/packs/packApi";
 
 
 type PropsType = {
-    stateForUpdatePack:any
+    stateForUpdatePack:{ packId:string,packName:string}
     closeModal:(value:boolean)=>void
 }
 

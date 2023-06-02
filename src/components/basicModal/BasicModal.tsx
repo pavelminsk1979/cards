@@ -31,30 +31,3 @@ export const BasicModal = ({openModal, closeModal, children}: PropsType) => {
     );
 }
 
-
-/*
-type PropsType = {
-    children : ReactNode
-}
-
-export const  BasicModal = () => {
-    const [open, setOpen] = React.useState(true);
-    const handleOpen = () => setOpen(true);
-    const handleClose = () => setOpen(false);
-
-    return (
-        <div>
-            <Button onClick={handleOpen}>Open modal</Button>
-            <Modal
-                open={open}
-                onClose={handleClose}
-                aria-labelledby="modal-modal-title"
-                aria-describedby="modal-modal-description"
-            >
-                <Box className={st.box}>
-                    @@
-                </Box>
-            </Modal>
-        </div>
-    );
-}*/

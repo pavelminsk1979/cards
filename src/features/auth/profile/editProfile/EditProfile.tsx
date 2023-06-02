@@ -8,7 +8,7 @@ import {Navigate} from "react-router-dom";
 import {authThunk} from "features/auth/authSlice";
 import {useAppDispatch} from "common/hooks/useAppDispatch";
 import {selectEditName, selectLogOut} from "features/auth/authSelectors";
-import {LinkOnPacks} from "components/linkOnPacks/linkOnPacks";
+import {LinkOnPagePacks} from "components/linkOnPagePacks/LinkOnPagePacks";
 
 
 type FormikErrorType = {
@@ -54,7 +54,7 @@ export const EditProfile = () => {
 
     return (
         <form onSubmit={formik.handleSubmit}>
-            <LinkOnPacks/>
+            <LinkOnPagePacks/>
             <div className={st.common}>
                 <div className={st.container}>
                     <div className={st.title}>

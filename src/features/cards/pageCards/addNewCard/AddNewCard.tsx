@@ -1,13 +1,14 @@
 
 import   React from 'react';
-import st from "./AddNewCard.module.css"
-import {LinkOnPacks} from "components/linkOnPacks/linkOnPacks";
+import st from "features/cards/pageCards/addNewCard/AddNewCard.module.css"
+import {LinkOnPagePacks} from "components/linkOnPagePacks/LinkOnPagePacks";
+
 
 
 export const AddNewCard = () => {
     return(
         <div className={st.common}>
-            <LinkOnPacks/>
+            <LinkOnPagePacks/>
             <div className={st.namePack}>
                 Имя Колоды
             </div>

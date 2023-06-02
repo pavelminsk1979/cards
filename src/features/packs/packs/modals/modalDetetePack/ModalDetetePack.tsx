@@ -6,7 +6,7 @@ import {packThunk} from "features/packs/packSlice";
 
 
 type PropsType = {
-    stateForDeletPack:any
+    stateForDeletPack:{ packId:string,packName:string}
     closeModal: (value: boolean) => void
 }
 

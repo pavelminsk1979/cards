@@ -8,7 +8,6 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import st from 'features/cards/pageCards/PageCards.module.css'
 import {Paginator} from "components/paginator/Paginator";
-import {LinkOnPacks} from "components/linkOnPacks/linkOnPacks";
 import {useSelector} from "react-redux";
 import {
     selectCardQuestion,
@@ -22,13 +21,16 @@ import {cardActions, cardThunk} from "features/cards/cardSlice";
 import {InputForSearchCards} from "features/cards/pageCards/inputForSearch/InputForSearchCards";
 import {ColumnActions} from "features/cards/pageCards/columnActions/ColumnActions";
 import {useParams} from "react-router-dom";
-import {PayloadPostRequestType} from "features/cards/cardApi";
 import IconButton from "@mui/material/IconButton";
 import ArrowCircleUp from "@mui/icons-material/ArrowCircleUp";
 import ArrowCircleDown from "@mui/icons-material/ArrowCircleDown";
 import Star from "@mui/icons-material/Star";
 import StarBorder from "@mui/icons-material/StarBorder";
-import {BlokNameAndButton} from "features/packs/packs/upperBlock/BlokNameAndButton";
+import {BasicModal} from "components/basicModal/BasicModal";
+import {ModalCreatCard} from "features/cards/pageCards/modalsCard/modalCreateCard/ModalCreateCard";
+import {ModalUpdateCard} from "features/cards/pageCards/modalsCard/modalUpdateCard/ModalUpdateCard";
+import {LinkOnPagePacks} from "components/linkOnPagePacks/LinkOnPagePacks";
+import {ModalDeleteCard} from "features/cards/pageCards/modalsCard/modalDeleteCard/ModalDeleteCard";
 
 
 export const PageCards = () => {
@@ -55,44 +57,76 @@ export const PageCards = () => {
     const {id} = useParams()
 
 
-
     useEffect(() => {
-        if(id){
+        if (id) {
             dispatch(cardThunk.fetchCards({cardsPack_id: id}))
         }
-        }, [page, cardQuestion,sortCards])
+    }, [page, cardQuestion, sortCards])
 
-
-    const createCard = () => {
-        const card: PayloadPostRequestType = {
-            card: {
-                cardsPack_id: currentIdPack,
-                question: ' Вопросы-Вопросы',
-                answer: 'без ответа',
-            }
-        }
-        dispatch(cardThunk.createCard({card}))
-    }
 
     const titlePlasNamePack = `Наименование Колоды : ${packName}`
 
-    const [arrowDirection,setArrowDirection]=useState(true)
+    const [arrowDirection, setArrowDirection] = useState(true)
+
     const onClickArrowHandler = () => {
         setArrowDirection(!arrowDirection)
-        let sortCards:string = 0+'updated'
-        if(arrowDirection){
-            sortCards = 1+'updated'
+        let sortCards: string = 0 + 'updated'
+        if (arrowDirection) {
+            sortCards = 1 + 'updated'
         }
         dispatch(cardActions.SetValueSortCards({sortCards}))
     }
 
+    const [positionModal, setPositionModal] = useState(false);
+    const [flagModal, setFlagModal] = useState('') /*какая из трех модалок покажется */
+    const [valuesForUpdateAndDeleteCard,setValue]=useState({cardId:'',
+        cardQuestion:'',cardAnswer:''})
+
+    const clickButtonCreatCard = () => {
+        setPositionModal(true)
+        setFlagModal('create')
+    }
+    const clickButtonUpdateCard = (cardId:string,cardQuestion:string,cardAnswer:string) => {
+        setPositionModal(true)
+        setFlagModal('update')
+        setValue({...valuesForUpdateAndDeleteCard,cardId,cardQuestion,cardAnswer})
+    }
+    const clickButtonDeleteCard = (cardId:string) => {
+        setPositionModal(true)
+        setFlagModal('delete')
+        setValue({...valuesForUpdateAndDeleteCard,cardId})
+    }
+
     return (
         <div className={st.common}>
-            <LinkOnPacks/>
-            <BlokNameAndButton
-                callback={createCard}
-                title={titlePlasNamePack}
-                nameButton='Добавить карточку'/>
+
+            <BasicModal
+                closeModal={setPositionModal}
+                openModal={positionModal}>
+                {flagModal === 'create' && <ModalCreatCard
+                    currentIdPack={currentIdPack}
+                    closeModal={setPositionModal}/>}
+
+                {flagModal === 'update' && <ModalUpdateCard
+                    valuesForUpdateCard={valuesForUpdateAndDeleteCard}
+                    currentIdPack={currentIdPack}
+                    closeModal={setPositionModal}/>}
+
+                {flagModal === 'delete' && <ModalDeleteCard
+                    valuesForDeleteCard={valuesForUpdateAndDeleteCard}
+                    closeModal={setPositionModal}/>}
+
+            </BasicModal>
+
+            <LinkOnPagePacks/>
+
+            <div className={st.blokNameAndButton}>
+                <div className={st.title}>{titlePlasNamePack}</div>
+                <button onClick={clickButtonCreatCard}
+                        className={st.button}>
+                    Добавить карточку
+                </button>
+            </div>
 
             <InputForSearchCards/>
 
@@ -102,8 +136,8 @@ export const PageCards = () => {
                         <TableRow className={st.tableHead}>
                             <TableCell>Вопрсы</TableCell>
                             <TableCell align="center">Ответы</TableCell>
-                            
-                            <TableCell 
+
+                            <TableCell
                                 align="center">
                                 Последнее обновление
                                 <IconButton
@@ -114,7 +148,7 @@ export const PageCards = () => {
                                         : <ArrowCircleDown/>}
                                 </IconButton>
                             </TableCell>
-                            
+
                             <TableCell align="center">Оценка</TableCell>
                             <TableCell align="center">Действия</TableCell>
                         </TableRow>
@@ -140,7 +174,9 @@ export const PageCards = () => {
                                     <StarBorder className={st.star}/>
                                 </TableCell>
 
-                                <ColumnActions card={el}/>
+                                <ColumnActions card={el}
+                                               clickButtonUpdateCard={()=>clickButtonUpdateCard(el._id,el.question,el.answer)}
+                                               clickButtonDeleteCard={()=>clickButtonDeleteCard(el._id)}/>
 
                             </TableRow>
                         ))}
