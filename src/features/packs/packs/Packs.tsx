@@ -41,7 +41,7 @@ export const Packs = () => {
 
     const [flagModal, setFlagModal] = useState('') /*какая из трех модалок покажется */
 
-    const [positionModal, setPositionModal] = useState(false);
+    const [positionModal, setPositionModal] = useState(false); /*открыть или закрыть отображение модалки*/
 
     const [stateForUpdatePack,setStateForUpdatePack] =useState({
         packId:'',packName:''})

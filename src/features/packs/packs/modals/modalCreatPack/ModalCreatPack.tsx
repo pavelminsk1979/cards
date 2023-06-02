@@ -43,8 +43,7 @@ export const ModalCreatPack = ({closeModal}: PropsType) => {
                        id="standard-basic"
                        label="Введите имя новой колоды"
                        variant="standard"/>
-            {/* <input  type="text"
-                className={st.input}/>*/}
+
 
             <button onClick={handlerCreatePack}
                 className={st.button}>Создать</button>

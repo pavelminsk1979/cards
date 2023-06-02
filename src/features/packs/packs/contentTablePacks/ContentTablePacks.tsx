@@ -1,6 +1,6 @@
 import TableRow from "@mui/material/TableRow";
 import TableCell from "@mui/material/TableCell";
-import {NavLink, useParams} from "react-router-dom";
+import {NavLink} from "react-router-dom";
 import {TableColumnActions} from "features/packs/packs/contentTablePacks/inTableColumnActions/TableColumnActions";
 import * as React from "react";
 import {CardPacksType} from "features/packs/packApi";
@@ -16,8 +16,7 @@ type PropsType={
 export const ContentTablePacks = ({cardPacks,clickButtonUpdatePack}:PropsType) => {
 
 
-
-  return(
+    return(
       <TableBody className={st.tableBody}>
           {cardPacks.map((pack) => (
               <TableRow

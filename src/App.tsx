@@ -21,7 +21,6 @@ import LinearProgress from "@mui/material/LinearProgress";
 import {selectIsInitialized, selectStatusLoading} from "features/app/appSelectors";
 import {AddNewCard} from "features/packs/addNewCard/AddNewCard";
 import {PageCards} from "features/cards/pageCards/PageCards";
-import {BasicModal} from "components/basicModal/BasicModal";
 
 
 export const App = () => {
@@ -46,18 +45,7 @@ export const App = () => {
                 color="secondary"/>}
             <div>
                 <NavLink to={'/addNewCard'}>addNewCard</NavLink>
-                <NavLink to={'/pageCards'}>PageCards</NavLink>
-                <NavLink to={'/modal'}>BasicModal</NavLink>
 
-                {/*    <NavLink to={'/login'}>login</NavLink>
-                <NavLink to={'/register'}>register</NavLink>
-                <NavLink to={'/checkEmail'}>checkEmail</NavLink>
-                <NavLink to={'/setNewPassword'}>setNewPassword</NavLink>
-                <NavLink to={'/profile'}>profile</NavLink>
-                <NavLink to={'/packs'}>packs</NavLink>
-                <NavLink to={'/cards'}>cards</NavLink>
-                <NavLink to={'/learn'}>learn</NavLink>
-                <NavLink to={'/editProfile'}>EditProfile</NavLink>*/}
             </div>
 
 
@@ -73,7 +61,6 @@ export const App = () => {
                 <Route path="learn" element={<Learn/>}/>
                 <Route path="addNewCard" element={<AddNewCard/>}/>
                 <Route path="pageCards/:id" element={<PageCards/>}/>
-                {/*<Route path="modal" element={<BasicModal/>}/>*/}
 
 
                 <Route path="/404" element={<h2>404: PAGE NOT FOUND</h2>}/>
