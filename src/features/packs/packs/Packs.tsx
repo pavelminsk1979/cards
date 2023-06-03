@@ -43,6 +43,8 @@ export const Packs = () => {
     const cardPacksTotalCount = useSelector(selectPacksTotalCount)
 
 
+
+
     const [flagModal, setFlagModal] = useState('') /*какая из трех модалок покажется */
 
     const [positionModal, setPositionModal] = useState(false);

@@ -43,7 +43,7 @@ export const App = () => {
             {statusLoading === 'loading' && <LinearProgress
                 color="secondary"/>}
             <div>
-                <NavLink to={'/learn'}>Learn</NavLink>
+                {/*<NavLink to={'/learn'}>Learn</NavLink>*/}
 
             </div>
 

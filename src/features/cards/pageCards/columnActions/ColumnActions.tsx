@@ -5,7 +5,10 @@ import Delete from "@mui/icons-material/Delete";
 import TableCell from "@mui/material/TableCell";
 import * as React from "react";
 import {CardType} from "features/cards/cardApi";
-import {useAppDispatch} from "common/hooks/useAppDispatch";
+import {useSelector} from "react-redux";
+import {selectMyIdForCheck} from "features/packs/packSelectors";
+import Coffee from "@mui/icons-material/Coffee";
+
 
 
 type PropsType = {
@@ -15,21 +18,20 @@ type PropsType = {
 }
 
 export const ColumnActions = ({card,clickButtonUpdateCard,clickButtonDeleteCard}: PropsType) => {
-    const dispatch = useAppDispatch();
 
+    const myIdForCheck = useSelector(selectMyIdForCheck)
 
 
     return (
-        card.user_id === "64505ad094d2b62338730b93"
+        card.user_id === myIdForCheck
             ? <TableCell align="center">
-                <School className={st.item}/>
                 <BorderColor onClick={clickButtonUpdateCard}
                              className={st.item}/>
                 <Delete className={st.item}
                         onClick={clickButtonDeleteCard}/>
             </TableCell>
             : <TableCell align="center">
-                <School className={st.item}/>
+            <Coffee onClick={()=>alert('Вам сколько порций сахара в кофе?')}/>
             </TableCell>
     )
 }

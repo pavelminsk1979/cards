@@ -26,6 +26,8 @@ export const selectDataTableHeadersPacks = (state:RootState) => state.packs.data
 
 export const selectFlagResetSlider = (state:RootState) => state.packs.flagResetSlider
 
+export const selectMyIdForCheck = (state:RootState) => state.auth.profile?._id
+
 
 
 

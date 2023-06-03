@@ -96,7 +96,6 @@ const fetchPacks = createAppAsyncThunk<{
                 arg.sortPacks,
                 arg.user_id
             )
-
             return {
                 data: respons.data,
                 packName: arg.packNameInput,

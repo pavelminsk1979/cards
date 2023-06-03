@@ -4,26 +4,32 @@ import BorderColor from "@mui/icons-material/BorderColor";
 import Delete from "@mui/icons-material/Delete";
 import * as React from "react";
 import st from 'features/packs/packs/contentTablePacks/inTableColumnActions/TableColumnActions.module.css'
+import {CardPacksType} from "features/packs/packApi";
 
 
 
 
 type TableColumnActionsType = {
-    packUserId: string
+    myIdForCheck:string|undefined
+    currentPack: CardPacksType
     clickButtonUpdatePack:()=>void
     clickButtonDeletePack:()=>void
     clickButtonLearnPack:()=>void
 }
 
-export const TableColumnActions = ({clickButtonUpdatePack,clickButtonDeletePack, packUserId,clickButtonLearnPack}: TableColumnActionsType) => {
+export const TableColumnActions = ({clickButtonUpdatePack,clickButtonDeletePack, currentPack,clickButtonLearnPack,myIdForCheck}: TableColumnActionsType) => {
 
 
     return (
-        packUserId === "64505ad094d2b62338730b93"
+        currentPack.user_id === myIdForCheck
 
             ? <TableCell align="center">
-                <School onClick={clickButtonLearnPack}
-                    className={st.item}/>
+                {currentPack.cardsCount > 0 &&<School
+                    onClick={clickButtonLearnPack}
+                    className={st.item}/>}
+                {currentPack.cardsCount === 0 &&<School
+                    className={st.item}/>}
+
                 <BorderColor onClick={clickButtonUpdatePack}
                              className={st.item}/>
                 <Delete className={st.item}
@@ -31,8 +37,11 @@ export const TableColumnActions = ({clickButtonUpdatePack,clickButtonDeletePack,
             </TableCell>
 
             : <TableCell align="center">
-                <School onClick={clickButtonLearnPack}
-                    className={st.item}/>
+                {currentPack.cardsCount > 0 &&<School
+                    onClick={clickButtonLearnPack}
+                    className={st.item}/>}
+                {currentPack.cardsCount === 0 &&<School
+                    className={st.item}/>}
             </TableCell>
     )
 }

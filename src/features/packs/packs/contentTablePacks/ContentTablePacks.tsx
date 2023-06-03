@@ -1,11 +1,15 @@
 import TableRow from "@mui/material/TableRow";
 import TableCell from "@mui/material/TableCell";
-import {NavLink} from "react-router-dom";
+import {NavLink, useNavigate} from "react-router-dom";
 import {TableColumnActions} from "features/packs/packs/contentTablePacks/inTableColumnActions/TableColumnActions";
 import * as React from "react";
 import {CardPacksType} from "features/packs/packApi";
 import st from "./ContentTablePacks.module.css";
 import TableBody from "@mui/material/TableBody";
+import {useSelector} from "react-redux";
+import { selectMyIdForCheck} from "features/packs/packSelectors";
+import {cardThunk} from "features/cards/cardSlice";
+import {useAppDispatch} from "common/hooks/useAppDispatch";
 
 
 
@@ -16,9 +20,15 @@ type PropsType={
 }
 
 export const ContentTablePacks = ({clickButtonDeletePack,cardPacks,clickButtonUpdatePack}:PropsType) => {
+    const dispatch = useAppDispatch();
 
-const clickButtonLearnPack = () => {
-  alert(6)
+    const myIdForCheck = useSelector(selectMyIdForCheck)
+
+    const navigate = useNavigate()
+
+const clickButtonLearnPack = (packId:string) => {
+    dispatch(cardThunk.fetchCards({cardsPack_id: packId}))
+    navigate('/learn')
 }
 
   return(
@@ -29,7 +39,7 @@ const clickButtonLearnPack = () => {
                   sx={{'&:last-child td, &:last-child th': {border: 0}}}>
                   <TableCell component="th" scope="row">
                       {
-                          pack.cardsCount||pack.user_id==='64505ad094d2b62338730b93'
+                          pack.cardsCount||pack.user_id===myIdForCheck
                           ?  <NavLink
                               className={st.namePack}
                               to={'/pageCards/'+pack._id}>{pack.name}</NavLink>
@@ -43,9 +53,11 @@ const clickButtonLearnPack = () => {
                   <TableCell align="center">{pack.user_name}</TableCell>
 
                   <TableColumnActions
-                      clickButtonLearnPack={clickButtonLearnPack}
+                      myIdForCheck={myIdForCheck}
+                      clickButtonLearnPack={()=>clickButtonLearnPack(pack._id)}
                       clickButtonUpdatePack={()=>clickButtonUpdatePack(pack._id,pack.name)}
-                      packUserId={pack.user_id}
+                      /*packUserId={pack.user_id}*/
+                      currentPack={pack}
                       clickButtonDeletePack={()=>clickButtonDeletePack(pack._id)}/>
               </TableRow>
           ))}
