@@ -20,6 +20,7 @@ import LinearProgress from "@mui/material/LinearProgress";
 import {selectIsInitialized, selectStatusLoading} from "features/app/appSelectors";
 import {PageCards} from "features/cards/pageCards/PageCards";
 import {LearnQuestion} from "features/packs/packs/learn/learnQuestion/LearnQuestion";
+import {LearnAnswer} from "features/packs/packs/learn/learnAnswer/LearnAnswer";
 
 
 export const App = () => {
@@ -50,15 +51,16 @@ export const App = () => {
 
             <Routes>
                 <Route path="/login" element={<Login/>}/>
-                <Route path="register" element={<Registration/>}/>
-                <Route path="checkEmail" element={<CheckEmail/>}/>
-                <Route path="setNewPassword/:id" element={<CreateNewPassword/>}/>
-                <Route path="forgotPassword" element={<ForgotPassword/>}/>
-                <Route path="profile" element={<Profile/>}/>
-                <Route path="editProfile" element={<EditProfile/>}/>
-                <Route path="packs" element={<Packs/>}/>
-                <Route path="learn" element={<LearnQuestion/>}/>
-                <Route path="pageCards/:id" element={<PageCards/>}/>
+                <Route path="/register" element={<Registration/>}/>
+                <Route path="/checkEmail" element={<CheckEmail/>}/>
+                <Route path="/setNewPassword/:id" element={<CreateNewPassword/>}/>
+                <Route path="/forgotPassword" element={<ForgotPassword/>}/>
+                <Route path="/profile" element={<Profile/>}/>
+                <Route path="/editProfile" element={<EditProfile/>}/>
+                <Route path="/packs" element={<Packs/>}/>
+                <Route path="/learn" element={<LearnQuestion/>}/>
+                <Route path="/learnAnswer" element={<LearnAnswer/>}/>
+                <Route path="/pageCards/:id" element={<PageCards/>}/>
 
 
                 <Route path="/404" element={<h2>404: PAGE NOT FOUND</h2>}/>

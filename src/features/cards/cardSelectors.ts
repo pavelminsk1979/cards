@@ -16,5 +16,6 @@ export const selectCurrentIdPack = (state:RootState) => state.cards.currentIdPac
 export const selectValueSortCards = (state:RootState) => state.cards.valueSortCards
 
 
+
 export const selectCountWithServerItems = (state:RootState) => state.cards.cardsTotalCount
 

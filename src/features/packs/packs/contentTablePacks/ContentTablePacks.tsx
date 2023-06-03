@@ -56,7 +56,6 @@ const clickButtonLearnPack = (packId:string) => {
                       myIdForCheck={myIdForCheck}
                       clickButtonLearnPack={()=>clickButtonLearnPack(pack._id)}
                       clickButtonUpdatePack={()=>clickButtonUpdatePack(pack._id,pack.name)}
-                      /*packUserId={pack.user_id}*/
                       currentPack={pack}
                       clickButtonDeletePack={()=>clickButtonDeletePack(pack._id)}/>
               </TableRow>
