@@ -59,7 +59,7 @@ export const PageCards = () => {
 
     useEffect(() => {
         if (id) {
-            dispatch(cardThunk.fetchCards({cardsPack_id: id}))
+            dispatch(cardThunk.fetchCards({cardsPack_id: id,pageCount:5}))
         }
     }, [page, cardQuestion, sortCards])
 

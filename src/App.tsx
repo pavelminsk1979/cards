@@ -19,8 +19,8 @@ import {useAppDispatch} from "common/hooks/useAppDispatch";
 import LinearProgress from "@mui/material/LinearProgress";
 import {selectIsInitialized, selectStatusLoading} from "features/app/appSelectors";
 import {PageCards} from "features/cards/pageCards/PageCards";
-import {LearnQuestion} from "features/packs/packs/learn/learnQuestion/LearnQuestion";
-import {LearnAnswer} from "features/packs/packs/learn/learnAnswer/LearnAnswer";
+import {LearnQuestion} from "components/learn/learnQuestion/LearnQuestion";
+import {LearnAnswer} from "components/learn/learnAnswer/LearnAnswer";
 
 
 export const App = () => {
@@ -43,10 +43,6 @@ export const App = () => {
             <AppBar/>
             {statusLoading === 'loading' && <LinearProgress
                 color="secondary"/>}
-            <div>
-                {/*<NavLink to={'/learn'}>Learn</NavLink>*/}
-
-            </div>
 
 
             <Routes>
@@ -58,7 +54,7 @@ export const App = () => {
                 <Route path="/profile" element={<Profile/>}/>
                 <Route path="/editProfile" element={<EditProfile/>}/>
                 <Route path="/packs" element={<Packs/>}/>
-                <Route path="/learn" element={<LearnQuestion/>}/>
+                <Route path="/learn" element={<LearnQuestion />}/>
                 <Route path="/learnAnswer" element={<LearnAnswer/>}/>
                 <Route path="/pageCards/:id" element={<PageCards/>}/>
 

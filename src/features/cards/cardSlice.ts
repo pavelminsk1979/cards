@@ -6,7 +6,7 @@ import {initialCardsState, InitialCardsStateType} from "features/cards/initialCa
 
 /*первым-что санка возвращает-положительный кейс
  вторым-что санка принимает */
-const fetchCards = createAppAsyncThunk<{ data: GetResponseCardsType, currentIdPack: string }, { cardsPack_id: string }>('cards/fetchCards',
+const fetchCards = createAppAsyncThunk<{ data: GetResponseCardsType, currentIdPack: string }, { cardsPack_id: string,pageCount?:number}>('cards/fetchCards',
     async (arg, thunkAPI) => {
         return thunkTryCatch(thunkAPI, async () => {
 
@@ -14,9 +14,10 @@ const fetchCards = createAppAsyncThunk<{ data: GetResponseCardsType, currentIdPa
             const page = state.cards.page
             const cardQuestion = state.cards.cardQuestion
             const sortCards = state.cards.valueSortCards
+            const pageCount=arg.pageCount
 
             const respons = await cardApi.fetchCards(
-                arg.cardsPack_id, page, cardQuestion,sortCards)
+                arg.cardsPack_id, page, cardQuestion,sortCards,pageCount)
             return {data: respons.data, currentIdPack: arg.cardsPack_id}
         })
     })
@@ -54,6 +55,18 @@ const slice = createSlice({
     name: 'cards',
     initialState: initialCardsState as InitialCardsStateType,
     reducers: {
+        RemoveShowedCard(state,action:PayloadAction<{
+            idCard: string }>){
+            const index = state.cards.findIndex(el => el._id === action.payload.idCard)
+            if (index > -1) {
+                state.cards.splice(index, 1)
+            }
+        },
+        SetRandomeNumberForLearnCard(state,action:PayloadAction<{
+            randomNumber: number }>){
+            state.randomNumberForLearnCard=action.payload.randomNumber
+        },
+
         UpdatePageCardsInState(state, action: PayloadAction<{ page: number }>) {
             state.page = action.payload.page
         },

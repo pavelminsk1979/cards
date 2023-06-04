@@ -27,7 +27,7 @@ export const ContentTablePacks = ({clickButtonDeletePack,cardPacks,clickButtonUp
     const navigate = useNavigate()
 
 const clickButtonLearnPack = (packId:string) => {
-    dispatch(cardThunk.fetchCards({cardsPack_id: packId}))
+    dispatch(cardThunk.fetchCards({cardsPack_id: packId,pageCount:80}))
     navigate('/learn')
 }
 

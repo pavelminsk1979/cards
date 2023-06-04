@@ -1,11 +1,17 @@
-import st from "./LearnQuestion.module.css";
+import st from "components/learn/learnQuestion/LearnQuestion.module.css";
 import {LinkOnPagePacks} from "components/linkOnPagePacks/LinkOnPagePacks";
 import React from "react";
 import {useSelector} from "react-redux";
 import {selectCards, selectPackName} from "features/cards/cardSelectors";
-import {useNavigate} from "react-router-dom";
+import {Navigate, useNavigate} from "react-router-dom";
+import {useAppDispatch} from "common/hooks/useAppDispatch";
+import {cardActions} from "features/cards/cardSlice";
+
+
 
 export const LearnQuestion = () => {
+
+    const dispatch = useAppDispatch();
 
     const packName = useSelector(selectPackName)
 
@@ -13,10 +19,22 @@ export const LearnQuestion = () => {
 
     const navigate = useNavigate()
 
-    const handlerOnClick = () => {
-      navigate('/learnAnswer')
+
+    const randomNumber:number = (Math.floor(Math.random()*cardsCurrentPack.length))
+    const f =() => {
+
+      return cardsCurrentPack[randomNumber]?.question
     }
 
+    const handlerOnClick = () => {
+        dispatch(cardActions.SetRandomeNumberForLearnCard({randomNumber}))
+        navigate('/learnAnswer')
+
+    }
+
+    if(cardsCurrentPack.length===0){
+        return <Navigate to={'/packs'}/>
+    }
     return (
         < >
             <LinkOnPagePacks/>
@@ -25,7 +43,7 @@ export const LearnQuestion = () => {
                 <div className={st.namePack}>Обучение : колода -  {packName}</div>
 
                 <div className={st.blockQuestion}>
-                    <div className={st.text}>ВОПРОС:{cardsCurrentPack[0].question}</div>
+                    <div className={st.text}>ВОПРОС:{ f()}</div>
                     <div className={st.textCenter}> Количество попыток ответов на вопрос:7</div>
                     <button
                         onClick={handlerOnClick}
