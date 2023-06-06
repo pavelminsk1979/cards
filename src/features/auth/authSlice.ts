@@ -42,6 +42,8 @@ const setNewPassword = createAppAsyncThunk<{ responseSetNewPassword: CommonRespo
             return {responseSetNewPassword: response.data}
         })
     })
+/*первым-что санка возвращает-положительный кейс
+ вторым-что санка принимает */
 
 const editProfile = createAppAsyncThunk<{ responseEditProfile: EditProfileResponseType }, EditProfileType>('auth/editProfile', async (arg, thunkAPI) => {
     return thunkTryCatch(thunkAPI, async () => {

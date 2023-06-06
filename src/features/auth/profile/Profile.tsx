@@ -5,7 +5,7 @@ import {authThunk} from "../authSlice";
 import {useSelector} from "react-redux";
 import {Navigate, NavLink} from "react-router-dom";
 import {useAppDispatch} from "common/hooks/useAppDispatch";
-import {selectLogOut} from "../authSelectors";
+import {selectAvatar, selectLogOut} from "../authSelectors";
 import {LinkOnPagePacks} from "components/linkOnPagePacks/LinkOnPagePacks";
 
 
@@ -14,17 +14,15 @@ import {LinkOnPagePacks} from "components/linkOnPagePacks/LinkOnPagePacks";
 export const Profile = () => {
     const dispatch = useAppDispatch();
     const logOut = useSelector(selectLogOut)
-
-
+    const avatar = useSelector(selectAvatar)
 
     const onClickHandler = () => {
         dispatch(authThunk.logOut())
     }
 
     const fotoMe = {
-        backgroundImage: `url(${myFoto})`,
+        backgroundImage: `url(${avatar})`,
     }
-
 
     if (logOut === null) {
         return <Navigate to={'/login'}/>

@@ -5,6 +5,8 @@ import {RootState} from "store/store";
 
 export const selectLogOut = (state:RootState) =>state.auth.profile
 
+export const selectAvatar = (state:RootState) =>state.auth.profile?.avatar
+
 
 export const selectIsLoggedIn = (
     state:RootState) =>state.auth.isLoggedIn

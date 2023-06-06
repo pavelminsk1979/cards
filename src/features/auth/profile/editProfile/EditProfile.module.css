@@ -24,6 +24,11 @@
     color: #4f5158;
 }
 
+.blokFotoCamera{
+    display: flex;
+    align-items: flex-end;
+}
+
 .fotoMe{
     width: 140px;
     height: 140px;
