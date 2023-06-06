@@ -7,7 +7,7 @@ import {useSelector} from "react-redux";
 import {Navigate} from "react-router-dom";
 import {authThunk} from "features/auth/authSlice";
 import {useAppDispatch} from "common/hooks/useAppDispatch";
-import {selectEditName, selectLogOut} from "features/auth/authSelectors";
+import {selectAvatar, selectEditName, selectLogOut} from "features/auth/authSelectors";
 import {LinkOnPagePacks} from "components/linkOnPagePacks/LinkOnPagePacks";
 import {ChangeFoto} from "features/auth/profile/editProfile/changeFoto/ChangeFoto";
 
@@ -21,6 +21,7 @@ export const EditProfile = () => {
     const dispatch = useAppDispatch();
     const logOut = useSelector(selectLogOut)
     const editName = useSelector(selectEditName)
+    const avatar = useSelector(selectAvatar)
 
     const formik = useFormik({
         initialValues: {
@@ -48,7 +49,7 @@ export const EditProfile = () => {
     }
 
     const fotoMe = {
-        backgroundImage: `url(${myFoto})`,
+        backgroundImage: `url(${avatar})`,
     }
 
     if (logOut === null) {

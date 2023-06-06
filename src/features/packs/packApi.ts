@@ -30,6 +30,7 @@ type PayloadCreatePackType = {
 }
 
 export type CardPacksType = {
+    deckCover:string  /*какртинка-ОБЛОЖКА*/
     _id: string;  /*id колоды*/
     user_id: string;   /*id пользователя  который создатель k*/
     user_name: string;  /*имя создателя колоды*/

@@ -1,19 +1,19 @@
 import React from "react";
 import st from './AppBar.module.css'
 import {NavLink} from "react-router-dom";
-import {selectIsLoggedIn} from "features/auth/authSelectors";
+import {selectAvatar, selectIsLoggedIn} from "features/auth/authSelectors";
 import {useSelector} from "react-redux";
-import myFoto from "image/myFoto.jpg";
+
 
 
 export const AppBar = () => {
 
 
-
+    const avatar = useSelector(selectAvatar)
     const isLoggedIn = useSelector(selectIsLoggedIn)
 
     const fotoMe = {
-        backgroundImage: `url(${myFoto})`,
+        backgroundImage: `url(${avatar})`,
     }
 
 

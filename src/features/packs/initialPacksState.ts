@@ -16,6 +16,7 @@ export type initialPacksStateType = GetResponsePacksType & {
 
 export const initialPacksState:initialPacksStateType = {
     cardPacks: [{
+        deckCover:'',
         _id: '',
         user_id: '',
         user_name: '',

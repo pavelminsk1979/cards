@@ -23,7 +23,7 @@ export const TableHeaders = () => {
 
     const packNameInput = useSelector(selectPackNameInput)
 
-    const sortPacks = useSelector(selectSortPacks)
+  /*  const sortPacks = useSelector(selectSortPacks)*/
 
     const arrayMinMaxCorrectValueSlice =
         useSelector(selectArrayMinMaxCorrectValueSlice)
@@ -49,6 +49,7 @@ dispatch(packActions.setNewDataTableHeadersPacks({
 
   return(
       <TableRow className={st.tableHead}>
+          <TableCell align="left">Обложка</TableCell>
           {
               DataTableHeadersPacks.map(el=>{
                   return(

@@ -15,7 +15,6 @@ export const authApi = {
         return instance.post<FogotResponseType>('auth/forgot', payload)
     },
     editProfile(payload: EditProfileType) {
-        debugger
         return instance.put('auth/me', payload)
     },
     setNewPassword(payload:any){

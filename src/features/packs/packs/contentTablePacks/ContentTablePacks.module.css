@@ -2,6 +2,12 @@
     background-color: #f5f7f7;
 }
 
+.cover{
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
 .namePack{
 text-decoration: none;
     color:  #630263!important;
