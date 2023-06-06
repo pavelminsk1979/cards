@@ -6,6 +6,7 @@ import {ChangeEvent, useState} from "react";
 import {useAppDispatch} from "common/hooks/useAppDispatch";
 import {packThunk} from "features/packs/packSlice";
 import {CardsPackType} from "features/packs/packApi";
+import {ButtonLoadCover} from "features/packs/packs/modals/modalUpdatePack/ButtonLoadCover";
 
 
 type PropsType = {
@@ -33,13 +34,20 @@ export const ModalUpdatePack = ({stateForUpdatePack,closeModal}: PropsType) => {
             closeModal(false)
         }
     }
+    const handlerLoadCover = () => {
+      
+    }
 
     return (
         <div className={st.common}>
             <div className={st.upperBlok}>
-                <div className={st.title}>Сделайте новое имя для этой колоды</div>
+                <div className={st.title}>Измените имя для этой колоды и/или загрузите обложку</div>
                 <Close onClick={handlerCloseModal}/>
             </div>
+
+            <ButtonLoadCover packId={stateForUpdatePack.packId}/>
+
+
             <TextField sx={{m: 2, width: '35ch'}}
                        value={title}
                        onChange={handlerTitleNewPack}

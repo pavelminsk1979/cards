@@ -18,7 +18,8 @@ export const packApi = {
 
 export type CardsPackType = {
     _id:string
-    name:string
+    name?:string
+    deckCover?:string
 }
 
 type PayloadCreatePackType = {
