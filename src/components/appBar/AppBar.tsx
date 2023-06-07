@@ -1,21 +1,15 @@
 import React from "react";
 import st from './AppBar.module.css'
 import {NavLink} from "react-router-dom";
-import {selectAvatar, selectIsLoggedIn} from "features/auth/authSelectors";
+import {selectIsLoggedIn} from "features/auth/authSelectors";
 import {useSelector} from "react-redux";
-
+import {BlockAvatarSelect} from "components/appBar/blockAvatarSelect/BlockAvatarSelect";
 
 
 export const AppBar = () => {
 
 
-    const avatar = useSelector(selectAvatar)
     const isLoggedIn = useSelector(selectIsLoggedIn)
-
-    const fotoMe = {
-        backgroundImage: `url(${avatar})`,
-    }
-
 
 
     return (
@@ -31,12 +25,11 @@ export const AppBar = () => {
                             className={st.linkName}
                             to={'/profile'}>
                             Павел</NavLink>
-                        <div
-                            className={st.fotoMy}
-                            style={fotoMe}>
-                        </div>
+
+                        <BlockAvatarSelect/>
                     </div>
-                    :<div className={st.linkCommon}>
+
+                    : <div className={st.linkCommon}>
                         <NavLink
                             className={st.linkText}
                             to={'/login'}>

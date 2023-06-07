@@ -9,23 +9,23 @@
 
 .block {
     width: 87%;
-    height:100%;
+    height: 100%;
     display: flex;
     justify-content: space-between;
-align-items: center;
+    align-items: center;
 }
 
-.bigTitle{
+.bigTitle {
     font-weight: 500;
     font-size: 33px;
     color: #630263;
 }
 
-.blockNameFoto{
+.blockNameFoto {
     display: flex;
 }
 
-.linkName{
+.linkName {
     margin-top: 10px;
     font-size: 25px;
     font-weight: 500;
@@ -33,15 +33,8 @@ align-items: center;
     color: #630263;
 }
 
-.fotoMy{
-    width: 60px;
-    height: 60px;
-    border-radius: 30px;
-    background-size: cover;
-    background-position: center
-}
 
-.linkCommon{
+.linkCommon {
     width: 80px;
     height: 35px;
     background-color: #0787cb;
@@ -51,6 +44,7 @@ align-items: center;
     align-items: center;
     box-shadow: 2px 2px 5px 2px #bdae5b;
 }
+
 .linkCommon:hover {
     transform: scale(1.1);
     background-color: #055f8f;;
@@ -65,12 +59,7 @@ align-items: center;
 }
 
 
-
-
-
-
-
-.linkPacks{
+.linkPacks {
     margin-top: 10px;
     font-size: 20px;
     font-weight: 500;

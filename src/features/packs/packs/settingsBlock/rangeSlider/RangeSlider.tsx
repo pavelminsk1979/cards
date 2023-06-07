@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {useEffect} from 'react';
+import {useEffect, useState} from 'react';
 import Box from '@mui/material/Box';
 import Slider from '@mui/material/Slider';
 import st from 'features/packs/packs/settingsBlock/rangeSlider/RangeSlider.module.css'
@@ -17,7 +17,6 @@ export function RangeSlider() {
 
     const arrayMinMaxValueSlice = useSelector(selectArrayMinMaxValueSlice)
 
-
     const flagResetSlider = useSelector(selectFlagResetSlider)
 
     const page = useSelector(selectPage)
@@ -29,7 +28,7 @@ export function RangeSlider() {
     const user_id = useSelector(selectMyId)
 
 
-    const [value, setValue] = React.useState<number[]>([]);
+    const [value, setValue] = useState<number[]>([]);
 
     useEffect(() => {
         if(flagResetSlider){
