@@ -22,6 +22,14 @@ const fetchCards = createAppAsyncThunk<{ data: GetResponseCardsType, currentIdPa
         })
     })
 
+const updateGradeCard = createAppAsyncThunk<{grade:number,card_id:string},{grade:number,card_id:string}>('cards/updateGradeCard',
+    async (arg,thunkAPI)=>{
+    return thunkTryCatch(thunkAPI,async ()=>{
+        const respons = await cardApi.updateGradeCard(arg)
+        return {grade:arg.grade,card_id:arg.card_id}
+    })
+    })
+
 const createCard = createAppAsyncThunk<void, { card: PayloadPostRequestType }>('cards/createCard', async (arg, thunkAPI) => {
     return thunkTryCatch(thunkAPI, async () => {
         const respons = await cardApi.createCard(arg.card)
@@ -80,6 +88,11 @@ const slice = createSlice({
     },
     extraReducers: builder => {
         builder
+            .addCase(updateGradeCard.fulfilled,(state,action)=>{
+              state.cards.map(el=>el._id===action.payload.card_id
+                  ?el.grade=action.payload.grade
+                  :el)
+            })
             .addCase(fetchCards.fulfilled, (state, action) => {
                 state.cards = action.payload.data.cards
                 state.page = action.payload.data.page
@@ -91,7 +104,7 @@ const slice = createSlice({
     }
 })
 
-export const cardThunk = {fetchCards, createCard, deleteCard,updateCard}
+export const cardThunk = {fetchCards, createCard, deleteCard,updateCard,updateGradeCard}
 
 export const cardReducer = slice.reducer
 

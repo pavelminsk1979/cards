@@ -14,8 +14,17 @@ export const cardApi = {
 	},
 	updateCard(payload:PayloadPutType){
 		return instance.put('cards/card',payload)
+	},
+	updateGradeCard(payload:UpdateGradeCardType){
+		return instance.put('cards/grade',payload)
 	}
 }
+
+export type UpdateGradeCardType = {
+	grade:number;
+	card_id:string
+}
+
 export type PostResponseType = {
 	newCard: CardType;
 	token: string;

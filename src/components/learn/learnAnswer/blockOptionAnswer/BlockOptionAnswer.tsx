@@ -6,13 +6,17 @@ import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
 import {ChangeEvent, useState} from "react";
 
-export const BlockOptionAnswer=()=> {
+type PropsType = {
+    valueAnswer:(value:number)=>void
+}
 
-    const [grade, setGrade] = useState(0);
+export const BlockOptionAnswer=({valueAnswer}:PropsType)=> {
 
+ /*   const [grade, setGrade] = useState(0);
+    console.log(grade)*/
 
     const handleChange = (event:ChangeEvent<HTMLInputElement>) => {
-        setGrade(+event.currentTarget.value);
+        valueAnswer(+event.currentTarget.value);
     };
 
     return (

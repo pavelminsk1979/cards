@@ -1,12 +1,12 @@
 
 import {LinkOnPagePacks} from "components/linkOnPagePacks/LinkOnPagePacks";
 import st from "components/learn/learnAnswer/LearnAnswer.module.css";
-import React from "react";
+import React, {useState} from "react";
 import {useSelector} from "react-redux";
 import {selectCards, selectPackName, selectRandomNumberForLearnCard} from "features/cards/cardSelectors";
 import {BlockOptionAnswer} from "components/learn/learnAnswer/blockOptionAnswer/BlockOptionAnswer";
 import {useNavigate} from "react-router-dom";
-import {cardActions} from "features/cards/cardSlice";
+import {cardActions, cardThunk} from "features/cards/cardSlice";
 import {useAppDispatch} from "common/hooks/useAppDispatch";
 
 
@@ -22,10 +22,21 @@ export const LearnAnswer = () => {
 
     const navigate = useNavigate()
 
+const [grade,setGrade]=useState(0)
 
     const handlerOnClick = () => {
         dispatch(cardActions.RemoveShowedCard({idCard:cardsCurrentPack[randomNumber]._id}))
         navigate('/learn')
+        if(grade>0){
+            dispatch(cardThunk.updateGradeCard({grade,
+                card_id:cardsCurrentPack[randomNumber]._id}))
+        }else{
+            alert('Пожалуйста выберите ответ отображающий ваши реальные знания. Спасибо!')
+        }
+    }
+
+    const handleValueAnswer = (value:number) => {
+      setGrade(value)
     }
 
     return (
@@ -40,7 +51,7 @@ export const LearnAnswer = () => {
                     <div className={st.textCenter}> Количество попыток ответов на вопрос:7</div>
                     <div className={st.answer}>ОТВЕТ:{cardsCurrentPack[randomNumber].answer}</div>
                     <div className={st.blockOptionAnswer}>
-                        <BlockOptionAnswer/>
+                        <BlockOptionAnswer valueAnswer={handleValueAnswer}/>
                     </div>
                     <button
                         onClick={handlerOnClick}
