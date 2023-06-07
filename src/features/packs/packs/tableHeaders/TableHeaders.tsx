@@ -23,8 +23,6 @@ export const TableHeaders = () => {
 
     const packNameInput = useSelector(selectPackNameInput)
 
-  /*  const sortPacks = useSelector(selectSortPacks)*/
-
     const arrayMinMaxCorrectValueSlice =
         useSelector(selectArrayMinMaxCorrectValueSlice)
 

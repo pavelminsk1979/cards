@@ -28,7 +28,7 @@ export const BlockAvatarSelect = () => {
               <NavLink to={'/profile'}>
                   PROFILE</NavLink>
               <NavLink onClick={handlerLogOut}
-                  to={'/packs'}>
+                  to={''}>
                   LOG OUT</NavLink>
           </div>
 

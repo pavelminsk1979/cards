@@ -1,0 +1,9 @@
+.fotoError {
+    margin-top: 10px;
+    width: 90%;
+    height: 85%;
+    border-radius: 10px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}

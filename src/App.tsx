@@ -21,6 +21,7 @@ import {selectIsInitialized, selectStatusLoading} from "features/app/appSelector
 import {PageCards} from "features/cards/pageCards/PageCards";
 import {LearnQuestion} from "components/learn/learnQuestion/LearnQuestion";
 import {LearnAnswer} from "components/learn/learnAnswer/LearnAnswer";
+import {PageNotFound} from "common/PageNotFound";
 
 
 export const App = () => {
@@ -59,7 +60,8 @@ export const App = () => {
                 <Route path="/pageCards/:id" element={<PageCards/>}/>
 
 
-                <Route path="/404" element={<h2>404: PAGE NOT FOUND</h2>}/>
+                {/*<Route path="/404" element={<h2>404: PAGE NOT FOUND</h2>}/>*/}
+                <Route path="/404" element={<PageNotFound/>}/>
                 <Route path="*" element={<Navigate to="/404"/>}/>
                 <Route path="/" element={<Navigate to="/login"/>}/>
             </Routes>
