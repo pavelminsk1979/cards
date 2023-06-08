@@ -31,6 +31,7 @@ import {ModalCreatCard} from "features/cards/pageCards/modalsCard/modalCreateCar
 import {ModalUpdateCard} from "features/cards/pageCards/modalsCard/modalUpdateCard/ModalUpdateCard";
 import {LinkOnPagePacks} from "components/linkOnPagePacks/LinkOnPagePacks";
 import {ModalDeleteCard} from "features/cards/pageCards/modalsCard/modalDeleteCard/ModalDeleteCard";
+import {Stars} from "features/cards/pageCards/stars/Stars";
 
 
 export const PageCards = () => {
@@ -166,13 +167,8 @@ export const PageCards = () => {
                                     {el.answer}</TableCell>
                                 <TableCell align="center">
                                     {el.updated}</TableCell>
-                                <TableCell align="center">
-                                    <Star className={st.star}/>
-                                    <Star className={st.star}/>
-                                    <Star className={st.star}/>
-                                    <Star className={st.star}/>
-                                    <StarBorder className={st.star}/>
-                                </TableCell>
+                                <Stars grade={el.grade}/>
+
 
                                 <ColumnActions card={el}
                                                clickButtonUpdateCard={()=>clickButtonUpdateCard(el._id,el.question,el.answer)}
