@@ -19,3 +19,5 @@ export const selectCountWithServerItems = (state:RootState) => state.cards.cards
 
 export const selectRandomNumberForLearnCard = (state:RootState) => state.cards.randomNumberForLearnCard
 
+export const selectShotsCurrentCard = (state:RootState) => state.cards.shotsCurrentCard
+

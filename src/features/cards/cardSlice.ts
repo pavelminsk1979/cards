@@ -63,6 +63,9 @@ const slice = createSlice({
     name: 'cards',
     initialState: initialCardsState as InitialCardsStateType,
     reducers: {
+        SetShotsCurrentCard(state,action:PayloadAction<{shots:number}>){
+state.shotsCurrentCard=action.payload.shots
+        },
         RemoveShowedCard(state,action:PayloadAction<{
             idCard: string }>){
             const index = state.cards.findIndex(el => el._id === action.payload.idCard)

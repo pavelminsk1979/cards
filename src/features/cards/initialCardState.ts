@@ -8,10 +8,10 @@ export type InitialCardsStateType={
     pageCount: number,
     cardsTotalCount: number,
     cardQuestion: string,
-
-    currentIdPack:string
-    valueSortCards:string
-    randomNumberForLearnCard:number
+    shotsCurrentCard:number,
+    currentIdPack:string,
+    valueSortCards:string,
+    randomNumberForLearnCard:number,
 }
 
 export const initialCardsState:InitialCardsStateType = {
@@ -42,7 +42,8 @@ export const initialCardsState:InitialCardsStateType = {
     cardQuestion: '',
     currentIdPack:'',
     valueSortCards:'',
-    randomNumberForLearnCard:0
+    randomNumberForLearnCard:0,
+    shotsCurrentCard:0
 }
 
 

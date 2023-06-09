@@ -3,7 +3,12 @@ import {LinkOnPagePacks} from "components/linkOnPagePacks/LinkOnPagePacks";
 import st from "components/learn/learnAnswer/LearnAnswer.module.css";
 import React, {useState} from "react";
 import {useSelector} from "react-redux";
-import {selectCards, selectPackName, selectRandomNumberForLearnCard} from "features/cards/cardSelectors";
+import {
+    selectCards,
+    selectPackName,
+    selectRandomNumberForLearnCard,
+    selectShotsCurrentCard
+} from "features/cards/cardSelectors";
 import {BlockOptionAnswer} from "components/learn/learnAnswer/blockOptionAnswer/BlockOptionAnswer";
 import {useNavigate} from "react-router-dom";
 import {cardActions, cardThunk} from "features/cards/cardSlice";
@@ -20,6 +25,8 @@ export const LearnAnswer = () => {
 
     const randomNumber= useSelector(selectRandomNumberForLearnCard)
 
+    const shotsCurrentCard= useSelector(selectShotsCurrentCard)
+    console.log(shotsCurrentCard)
     const navigate = useNavigate()
 
 const [grade,setGrade]=useState(0)
@@ -48,7 +55,7 @@ const [grade,setGrade]=useState(0)
 
                 <div className={st.blockAnswer}>
                     <div className={st.question}>ВОПРОС:{cardsCurrentPack[randomNumber].question}</div>
-                    <div className={st.textCenter}> Количество попыток ответов на вопрос:7</div>
+                    <div className={st.textCenter}> Количество попыток ответов на вопрос:{shotsCurrentCard}</div>
                     <div className={st.answer}>ОТВЕТ:{cardsCurrentPack[randomNumber].answer}</div>
                     <div className={st.blockOptionAnswer}>
                         <BlockOptionAnswer valueAnswer={handleValueAnswer}/>

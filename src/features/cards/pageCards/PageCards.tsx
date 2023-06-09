@@ -167,13 +167,12 @@ export const PageCards = () => {
                                     {el.answer}</TableCell>
                                 <TableCell align="center">
                                     {el.updated}</TableCell>
-                                <Stars grade={el.grade}/>
 
+                                <Stars grade={el.grade}/>
 
                                 <ColumnActions card={el}
                                                clickButtonUpdateCard={()=>clickButtonUpdateCard(el._id,el.question,el.answer)}
                                                clickButtonDeleteCard={()=>clickButtonDeleteCard(el._id)}/>
-
                             </TableRow>
                         ))}
                     </TableBody>
