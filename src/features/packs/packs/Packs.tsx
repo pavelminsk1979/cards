@@ -12,6 +12,7 @@ import {useEffect, useState} from "react";
 import {useAppDispatch} from "common/hooks/useAppDispatch";
 import {packThunk} from "features/packs/packSlice";
 import {
+    selectArrayCards,
     selectCardPacks,
     selectPacksTotalCount,
     selectPage,
@@ -42,6 +43,9 @@ export const Packs = () => {
 
     const cardPacksTotalCount = useSelector(selectPacksTotalCount)
 
+    const arrayCards = useSelector(selectArrayCards)
+
+
 
 
 
@@ -68,7 +72,10 @@ export const Packs = () => {
     }
 
     useEffect(() => {
-        dispatch(packThunk.fetchPacks({}))
+        if(arrayCards.length){
+            dispatch(packThunk.fetchPacks({}))
+        }
+
     }, [])
 
 

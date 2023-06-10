@@ -5,11 +5,11 @@ import Slider from '@mui/material/Slider';
 import st from 'features/packs/packs/settingsBlock/rangeSlider/RangeSlider.module.css'
 import {useSelector} from "react-redux";
 import {
-    selectArrayMinMaxCorrectValueSlice,
     selectArrayMinMaxValueSlice, selectFlagResetSlider, selectMyId, selectPackNameInput, selectPage, selectSortPacks
 } from "features/packs/packSelectors";
 import {packActions, packThunk} from "features/packs/packSlice";
 import {useAppDispatch} from "common/hooks/useAppDispatch";
+
 
 
 export function RangeSlider() {
@@ -28,7 +28,7 @@ export function RangeSlider() {
     const user_id = useSelector(selectMyId)
 
 
-    const [value, setValue] = useState<number[]>([]);
+    const [value, setValue] = useState<number[]>( []);
 
     useEffect(() => {
         if(flagResetSlider){

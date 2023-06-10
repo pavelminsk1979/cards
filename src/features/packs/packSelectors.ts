@@ -7,7 +7,7 @@ export const selectArrayMinMaxValueSlice = (state:RootState) => [state.packs.min
 export const selectArrayMinMaxCorrectValueSlice = (state:RootState) => [
     state.packs.minValueSlider, state.packs.maxValueSlider ]
 
-/*export const selectPacksState = (state:RootState) => state.packs*/
+export const selectArrayCards = (state:RootState) => state.cards.cards
 
 export const selectPacksTotalCount = (state:RootState) => state.packs.cardPacksTotalCount
 

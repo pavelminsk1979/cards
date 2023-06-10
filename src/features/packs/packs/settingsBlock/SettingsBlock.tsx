@@ -6,7 +6,7 @@ import {packActions, packThunk} from "features/packs/packSlice";
 import {useAppDispatch} from "common/hooks/useAppDispatch";
 import {useSelector} from "react-redux";
 import {
-    selectArrayMinMaxCorrectValueSlice, selectArrayMinMaxValueSlice, selectFlagResetSlider,
+    selectArrayMinMaxCorrectValueSlice, selectFlagResetSlider,
     selectMyId,
     selectPage,
     selectSortPacks
@@ -30,6 +30,7 @@ export const SettingsBlock = () => {
 
     const arrayMinMaxCorrectValueSlice =
         useSelector(selectArrayMinMaxCorrectValueSlice)
+
 
 
     /*МОЯ АЙДИШКА packUserId === "64505ad094d2b62338730b93"*/
@@ -104,7 +105,7 @@ export const SettingsBlock = () => {
                 </div>
 
                 <div >
-                    <RangeSlider/>
+                    <RangeSlider />
                 </div>
             </div>
             <button onClick={resetHandler}

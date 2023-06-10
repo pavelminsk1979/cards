@@ -52,9 +52,9 @@ const updateCard = createAppAsyncThunk<void, {payload:PayloadPutType}>('cards/up
     async (arg, thunkAPI) => {
         return thunkTryCatch(thunkAPI, async () => {
             const respons = await cardApi.updateCard(arg.payload)
-            const state = thunkAPI.getState()
+         /*   const state = thunkAPI.getState()
             const cardsPack_id = state.cards.currentIdPack
-            thunkAPI.dispatch(fetchCards({cardsPack_id}))
+            thunkAPI.dispatch(fetchCards({cardsPack_id}))*/
         })
     })
 
